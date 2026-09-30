@@ -1,168 +1,427 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#17131f" />
-  <title>GIS鲸 | 空间数据高级地理制图专家</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>GIS鲸 — Spatial Stories</title>
   <style>
-    :root{--ink:#17131f;--paper:#ffffff;--muted:#bdb5cd;--line:rgba(255,255,255,.18);--acid:#d1baff;--violet:#a78bfa;--max:1440px;--radius:18px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ink);color:var(--paper);font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.45;overflow-x:hidden}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer;border:0}
-    .video-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#080808}.video-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.7) 65%,rgba(0,0,0,.86));pointer-events:none}.bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:saturate(.76) contrast(1.06);transition:opacity .5s ease}.bg-video.active{opacity:1}.video-grain{position:absolute;inset:0;opacity:.08;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
-    .site-shell{position:relative;z-index:1}.nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,4vw,64px);background:linear-gradient(180deg,rgba(23,19,31,.88),transparent);transition:background .3s}.nav.scrolled{background:rgba(23,19,31,.84);backdrop-filter:blur(12px)}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em}.brand-mark{display:grid;place-items:center;width:34px;height:34px;border:1px solid var(--acid);color:var(--acid);font-size:12px;transform:rotate(45deg)}.brand-mark span{transform:rotate(-45deg)}.brand-name{font-size:18px}.nav-links{display:flex;gap:clamp(16px,2.3vw,38px);font-size:13px;color:rgba(255,255,255,.76)}.nav-links a{position:relative}.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--acid);transition:width .25s}.nav-links a:hover::after{width:100%}.nav-cta{padding:11px 18px;background:var(--paper);color:var(--ink);border-radius:999px;font-size:13px;font-weight:700}.nav-cta:hover{background:var(--acid)}
-    .phase-caption{position:fixed;left:50%;top:50%;z-index:2;width:min(760px,calc(100% - 40px));transform:translate(-50%,-50%);pointer-events:none;text-align:center;mix-blend-mode:screen;opacity:.9;transition:opacity .35s ease}.phase-caption.is-hidden{opacity:0!important;animation:none!important}.phase-caption .phase-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--acid);font-size:11px;letter-spacing:.2em;text-transform:uppercase}.phase-caption .phase-kicker::before{content:"";width:28px;height:1px;background:var(--acid)}.phase-caption h2{font-size:clamp(30px,5vw,76px);line-height:.98;letter-spacing:-.075em;margin:18px 0 0;font-weight:800}.phase-caption p{max-width:520px;margin:18px auto 0;color:rgba(255,255,255,.72);font-size:14px}.phase-caption.fade{animation:captionFade .5s ease both}@keyframes captionFade{from{opacity:0;transform:translate(-50%,-44%)}to{opacity:.9;transform:translate(-50%,-50%)}}
-    .hero{min-height:100svh;display:flex;align-items:flex-end;padding:150px clamp(20px,7vw,110px) 72px;position:relative}.hero-grid{width:100%;max-width:var(--max);margin:auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:48px;align-items:end}.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--acid);text-transform:uppercase}.hero h1{font-size:clamp(52px,9vw,150px);line-height:.86;letter-spacing:-.09em;margin:22px 0 26px;max-width:900px}.hero h1 em{font-style:normal;color:var(--acid)}.hero-copy{max-width:610px;color:rgba(255,255,255,.75);font-size:clamp(15px,1.6vw,19px)}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;padding:13px 20px;transition:transform .25s,background .25s,color .25s;border:1px solid transparent;font-weight:700;font-size:13px}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--paper);color:var(--ink)}.btn-primary:hover{background:var(--acid)}.btn-ghost{border-color:var(--line);color:var(--paper);background:rgba(23,19,31,.2)}.btn-ghost:hover{border-color:var(--acid);color:var(--acid)}.hero-meta{border-top:1px solid var(--line);padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:20px;color:rgba(255,255,255,.68);font-size:12px}.hero-meta strong{display:block;color:var(--paper);font-size:25px;letter-spacing:-.05em;margin-bottom:4px}.scroll-cue{position:absolute;right:clamp(20px,4vw,64px);bottom:34px;display:flex;gap:10px;align-items:center;writing-mode:vertical-rl;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.55)}.scroll-cue i{display:block;width:1px;height:48px;background:var(--acid)}
-    .section{padding:clamp(84px,12vw,170px) clamp(20px,7vw,110px);position:relative}.section-inner{max-width:var(--max);margin:auto}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:48px}.section-index{font-size:12px;color:var(--acid);letter-spacing:.18em}.section-title{font-size:clamp(40px,6vw,92px);line-height:.9;letter-spacing:-.08em;margin:10px 0 0;max-width:760px}.section-note{max-width:300px;color:var(--muted);font-size:13px}.rule{height:1px;background:var(--line);margin:20px 0 0}
-    .about-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(35px,8vw,140px);align-items:start}.about-lead{font-size:clamp(24px,3.2vw,46px);line-height:1.08;letter-spacing:-.06em;max-width:720px}.about-lead span{color:var(--acid)}.about-body{margin-top:34px;color:rgba(255,255,255,.68);font-size:15px;max-width:600px}.stat-list{border-top:1px solid var(--line)}.stat{display:flex;justify-content:space-between;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);font-size:13px}.stat b{color:var(--paper);font-size:16px}.skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:48px}.skill{min-height:130px;padding:20px;border:1px solid var(--line);border-radius:var(--radius);display:flex;flex-direction:column;justify-content:space-between;background:rgba(23,19,31,.24);transition:transform .25s,border-color .25s,background .25s}.skill:hover{transform:translateY(-5px);border-color:var(--acid);background:rgba(193,160,255,.08)}.skill small{color:var(--acid);font-size:11px;letter-spacing:.12em}.skill strong{font-size:18px;letter-spacing:-.04em}
-    .services{padding-top:40px}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.service-card{position:relative;min-height:370px;border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;background:linear-gradient(145deg,rgba(20,20,20,.8),rgba(23,19,31,.42));overflow:hidden;transition:transform .35s,border-color .35s}.service-card::before{content:"";position:absolute;inset:auto -30% -45% 25%;height:220px;background:radial-gradient(circle,rgba(193,160,255,.18),transparent 70%);opacity:0;transition:opacity .35s}.service-card:hover{transform:translateY(-10px) rotate(-.4deg);border-color:rgba(193,160,255,.7)}.service-card:hover::before{opacity:1}.service-no{font-size:12px;color:var(--acid);letter-spacing:.12em}.service-card h3{font-size:30px;line-height:1;letter-spacing:-.06em;margin:48px 0 16px;max-width:250px}.service-card p{font-size:13px;color:var(--muted);max-width:270px}.service-card .btn{margin-top:auto;align-self:flex-start;padding:11px 16px;font-size:12px}
-    .react-service-grid,.react-work-grid{display:grid;position:relative}.react-service-grid{grid-template-columns:1.16fr .84fr;grid-template-rows:repeat(2,minmax(240px,auto));gap:16px;min-height:650px}.react-service-card,.react-project-card{position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(255,255,255,.14);border-radius:26px;background:rgba(12,12,12,.68);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 26px 70px rgba(0,0,0,.16);will-change:transform}.react-service-card::after,.react-project-card::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 85% 15%,rgba(193,160,255,.14),transparent 42%);opacity:.72;pointer-events:none}.react-service-card--hero{grid-row:1 / span 2;padding:clamp(28px,4vw,56px);background:linear-gradient(145deg,rgba(66,45,91,.92),rgba(29,22,40,.88))}.react-service-card--top,.react-service-card--bottom{padding:28px;display:flex;flex-direction:column;justify-content:space-between}.react-service-card--top{background:linear-gradient(145deg,rgba(49,36,72,.88),rgba(26,20,37,.9))}.react-service-card--bottom{background:linear-gradient(145deg,rgba(66,43,79,.88),rgba(29,21,39,.9))}.react-service-no,.react-project-index{color:var(--acid);font-size:11px;letter-spacing:.16em;text-transform:uppercase}.react-service-card h3{font-size:clamp(30px,4.5vw,68px);line-height:.93;letter-spacing:-.07em;margin:70px 0 18px;max-width:520px}.react-service-card--top h3,.react-service-card--bottom h3{font-size:clamp(26px,2.7vw,40px);margin:36px 0 14px}.react-service-card p{max-width:480px;color:rgba(255,255,255,.66);font-size:14px}.react-service-card .btn{align-self:flex-start;margin-top:28px}.react-card-orbit{position:absolute;right:8%;top:18%;width:34%;aspect-ratio:1;border:1px solid rgba(193,160,255,.36);border-radius:50%;opacity:.7}.react-card-orbit::after{content:"";position:absolute;inset:15%;border:1px solid rgba(193,160,255,.2);border-radius:50%}.react-work-grid{grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:235px;gap:16px}.react-project-card{grid-column:span 5;grid-row:span 2;display:flex;flex-direction:column;min-height:0}.react-project-card:nth-child(2){grid-column:span 7;grid-row:span 2}.react-project-card:nth-child(3){grid-column:span 7;grid-row:span 2}.react-project-card:nth-child(4){grid-column:span 5;grid-row:span 2}.react-project-media{position:relative;flex:1;min-height:0;overflow:hidden;background-size:cover;background-position:center;transform:translateZ(0)}.react-project-media::before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#30213f,#9474b5 46%,#22182e)}.react-project-card:nth-child(2) .react-project-media::before{background:linear-gradient(145deg,#291e3d,#8f7bba 48%,#20172e)}.react-project-card:nth-child(3) .react-project-media::before{background:linear-gradient(145deg,#392342,#ad80b4 48%,#24172f)}.react-project-card:nth-child(4) .react-project-media::before{background:linear-gradient(145deg,#1b1834,#7455ad 48%,#0d0a15)}.react-project-media.has-image::before{display:none}.react-project-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,.8,.2,1)}.react-project-card:hover .react-project-media img{transform:scale(1.045)}.react-project-shade{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,7,7,.72);opacity:0;transition:opacity .45s cubic-bezier(.22,.8,.2,1)}.react-project-card:hover .react-project-shade,.react-project-card:focus-within .react-project-shade{opacity:1}.react-project-footer{display:flex;justify-content:space-between;gap:18px;padding:16px 18px 18px;background:rgba(8,8,8,.9)}.react-project-footer strong{font-size:15px}.react-project-footer span{color:var(--muted);font-size:11px}.react-upload{position:absolute;right:14px;top:14px;z-index:3;font-size:10px;padding:7px 10px;border:1px solid rgba(255,255,255,.28);border-radius:999px;color:var(--paper);background:rgba(23,19,31,.65)}.react-upload input{display:none}.react-work-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}.react-work-tab{padding:10px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:transparent;font-size:12px;transition:transform .3s cubic-bezier(.22,.8,.2,1),background .3s,color .3s}.react-work-tab.active,.react-work-tab:hover{background:var(--acid);color:var(--ink);border-color:var(--acid);transform:translateY(-2px)}.react-project-card.is-hidden{display:none}
-    .story-work-root{position:relative}.story-sequence{position:relative}.story-stage{height:min(820px,100svh);min-height:620px;position:relative;overflow:hidden;isolation:isolate;border:1px solid var(--line);border-radius:26px;background:rgba(26,20,37,.94);padding:clamp(20px,3vw,42px)}.story-stage__topline{display:flex;align-items:center;justify-content:space-between;gap:20px;color:var(--acid);font-size:11px;letter-spacing:.16em}.story-stage__topline strong{color:var(--paper);font-size:18px;letter-spacing:-.04em}.story-stage__progress{height:1px;background:var(--line);margin-top:15px}.story-stage__progress span{display:block;width:100%;height:2px;background:var(--acid);transform-origin:left;transition:transform .35s}.story-stage__cards{position:absolute;inset:90px 20% 56px;display:grid;place-items:center}.story-card{position:absolute;inset:0;display:grid;grid-template-columns:1.2fr .8fr;overflow:hidden;border:1px solid rgba(255,255,255,.3);border-radius:22px;background:#231b31;box-shadow:0 30px 70px rgba(0,0,0,.4);will-change:transform,opacity}.story-card__media{position:relative;min-width:0;overflow:hidden;aspect-ratio:1.15;background:linear-gradient(145deg,#30213f,#9474b5 46%,#22182e);background-size:cover;background-position:center}.story-card:nth-child(2) .story-card__media{background-image:linear-gradient(145deg,#291e3d,#8f7bba 48%,#20172e)}.story-card:nth-child(3) .story-card__media{background-image:linear-gradient(145deg,#392342,#ad80b4 48%,#24172f)}.story-card:nth-child(4) .story-card__media{background-image:linear-gradient(145deg,#1b1834,#7455ad 48%,#0d0a15)}.story-card__media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .2s}.story-card:hover .story-card__media img{transform:scale(1.035)}.story-card__upload{position:absolute;top:16px;right:16px;z-index:4;padding:9px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(8,8,8,.76);font-size:11px;cursor:pointer}.story-card__upload input{display:none}.story-card__watermark{position:absolute;left:18px;bottom:16px;font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.65)}.story-card__shade{position:absolute;inset:0;z-index:2;display:grid;place-items:center;background:rgba(6,7,7,.72);opacity:0;transition:opacity .2s;pointer-events:none}.story-card:hover .story-card__shade,.story-card:focus-within .story-card__shade{opacity:1;pointer-events:auto}.story-card__body{display:flex;flex-direction:column;min-width:0;padding:clamp(22px,3vw,48px)}.story-card__meta,.story-card__footer{display:flex;justify-content:space-between;gap:15px;color:var(--acid);font-size:11px;letter-spacing:.12em}.story-card h3{margin:auto 0 18px;font-size:clamp(32px,4vw,70px);letter-spacing:-.075em;line-height:.95}.story-card p{font-size:13px;color:var(--muted);max-width:30ch}.story-card__footer{margin-top:auto;padding-top:22px;border-top:1px solid var(--line);color:var(--muted)}.story-card__arrow{font-size:24px;color:var(--acid);line-height:.7}.story-peek{position:absolute;top:50%;width:22%;min-height:150px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(61,44,83,.85);transform:translateY(-50%) scale(.93);opacity:.75;display:flex;align-items:flex-end}.story-peek--prev{left:10px}.story-peek--next{right:10px}.story-peek span{display:block;font-size:10px;color:var(--acid);letter-spacing:.12em}.story-peek strong{display:block;font-size:18px;line-height:1.1;margin-top:8px}.story-peek.is-empty{opacity:.38}.story-stage__hint{position:absolute;bottom:20px;right:42px;color:var(--muted);font-size:10px;letter-spacing:.18em}.story-card.is-active{border-color:rgba(193,160,255,.65)}.react-work-tab:focus-visible,.story-card__upload:focus-within,.story-card button:focus-visible{outline:2px solid var(--acid);outline-offset:3px}.react-enhanced .service-grid,.react-enhanced .work-grid{display:none}
-    .story-card__footer .btn{padding:8px 12px;font-size:11px;letter-spacing:0;white-space:nowrap}
-    @media(max-width:900px){.story-stage{height:auto;min-height:0;padding:22px}.story-stage__cards{position:static;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;margin-top:24px}.story-card{position:relative;inset:auto;grid-column:span 6;min-height:360px;will-change:auto}.story-card__media{aspect-ratio:1.2}.story-peek,.story-stage__hint{display:none}.story-stage__topline{position:relative}.story-card h3{font-size:clamp(30px,5vw,52px)}}
-    @media(max-width:560px){.story-stage{padding:16px;border-radius:18px}.story-stage__cards{display:block}.story-card{display:block;min-height:0;margin-bottom:16px;border-radius:16px}.story-card__media{aspect-ratio:1.35}.story-card__body{padding:20px}.story-card h3{margin:28px 0 10px}.story-card__footer{margin-top:24px}}
-    @media(prefers-reduced-motion:reduce){.story-stage{height:auto;min-height:0}.story-stage__cards{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}.story-card{position:relative;inset:auto;display:block;will-change:auto}.story-card__media{aspect-ratio:1.3}.story-card__body{min-height:240px}.story-card h3{font-size:clamp(26px,3vw,42px);margin:22px 0}.story-peek,.story-stage__hint{display:none}}
-    @media(max-width:560px) and (prefers-reduced-motion:reduce){.story-stage__cards{grid-template-columns:1fr}}
-    .work-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.tab{padding:10px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:transparent;font-size:12px}.tab.active,.tab:hover{background:var(--acid);color:var(--ink);border-color:var(--acid)}.work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.project{grid-column:span 5;position:relative}.project:nth-child(2){grid-column:span 7}.project:nth-child(3){grid-column:span 7}.project:nth-child(4){grid-column:span 5}.project.hidden{display:none}.project-art{aspect-ratio:1.35/1;border-radius:var(--radius);position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#30213f,#9474b5 46%,#22182e);background-size:cover;background-position:center;transition:transform .4s}.project:nth-child(2) .project-art{background-image:linear-gradient(135deg,#291e3d,#8f7bba 48%,#20172e)}.project:nth-child(3) .project-art{background-image:linear-gradient(135deg,#392342,#ad80b4 50%,#24172f)}.project:nth-child(4) .project-art{background-image:linear-gradient(135deg,#171629,#6854a8 45%,#0a0a0f)}.project:hover .project-art{transform:scale(1.02)}.project-art::after{content:"GIS鲸 · SAMPLE / 2026";position:absolute;inset:auto 16px 14px;color:rgba(255,255,255,.56);font-size:10px;letter-spacing:.16em}.project-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(4,4,4,.75);opacity:0;transition:opacity .3s}.project:hover .project-overlay{opacity:1}.upload-label{position:absolute;top:12px;right:12px;z-index:2;font-size:11px;color:var(--paper);background:rgba(23,19,31,.72);padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.2)}.upload-label input{display:none}.project-info{display:flex;justify-content:space-between;gap:16px;padding-top:12px;font-size:13px}.project-info span{color:var(--muted)}
-    .knowledge{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(35px,8vw,150px);align-items:start}.resource-list{border-top:1px solid var(--line)}.resource{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}.resource div:first-child{display:flex;gap:14px;align-items:baseline}.resource b{font-size:11px;color:var(--acid);letter-spacing:.1em}.resource h3{font-size:20px;letter-spacing:-.04em;margin:0}.resource p{font-size:12px;color:var(--muted);margin:5px 0 0}.arrow{font-size:24px;transition:transform .25s;color:var(--acid)}.resource:hover .arrow{transform:translateX(6px)}
-    .footer{min-height:100svh;padding:120px clamp(20px,7vw,110px) 45px;display:flex;align-items:center}.footer-grid{width:100%;max-width:var(--max);margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.footer h2{font-size:clamp(52px,9vw,140px);line-height:.82;letter-spacing:-.095em;margin:16px 0 30px}.footer h2 span{color:var(--acid)}.footer-copy{max-width:500px;color:var(--muted);font-size:15px}.footer-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.qr-stage{display:grid;place-items:center;min-height:420px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(23,19,31,.42);position:relative}.qr-art{width:min(270px,70%);aspect-ratio:1;background-color:#fff;background-image:repeating-conic-gradient(#101010 0 9deg,#fff 9deg 18deg);border:16px solid #fff;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 20px 80px rgba(0,0,0,.4);position:relative}.qr-art::before{content:"WECHAT\A GIS鲸";white-space:pre;text-align:center;display:grid;place-items:center;position:absolute;inset:30%;background:#fff;color:#111;font-weight:800;font-size:12px;line-height:1.15}.qr-tag{position:absolute;bottom:18px;left:18px;color:var(--muted);font-size:11px;letter-spacing:.1em}.footer-bottom{max-width:var(--max);margin:80px auto 0;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:11px;grid-column:1/-1}
-    .float-wechat{position:fixed;right:22px;bottom:24px;z-index:12}.wechat-trigger{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--acid);color:var(--ink);font-size:22px;box-shadow:0 12px 30px rgba(0,0,0,.35)}.wechat-panel{position:absolute;right:64px;bottom:0;width:190px;padding:14px;background:rgba(37,28,52,.95);border:1px solid var(--line);border-radius:14px;opacity:0;pointer-events:none;transform:translateX(10px);transition:opacity .25s,transform .25s}.float-wechat:hover .wechat-panel,.float-wechat:focus-within .wechat-panel,.float-wechat.open .wechat-panel{opacity:1;pointer-events:auto;transform:translateX(0)}.wechat-panel .qr-art{width:120px;border-width:8px;margin:0 auto 10px}.wechat-panel p{font-size:11px;color:var(--muted);text-align:center;margin:0}.modal{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .25s}.modal.open{opacity:1;pointer-events:auto}.modal-card{width:min(420px,100%);padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:#251c34;text-align:center;transform:translateY(12px);transition:transform .25s}.modal.open .modal-card{transform:translateY(0)}.modal-card h3{font-size:28px;letter-spacing:-.06em;margin:0 0 8px}.modal-card p{font-size:13px;color:var(--muted);margin:0 0 20px}.modal-card .qr-art{width:220px;margin:0 auto 22px}.modal-close{position:absolute;top:18px;right:22px;color:var(--paper);background:transparent;font-size:28px}.copy-status{font-size:11px;color:var(--acid);min-height:16px;margin-top:10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    @media (max-width:900px){.nav-links{display:none}.hero-grid,.about-layout,.knowledge,.footer-grid{grid-template-columns:1fr}.hero{padding-top:130px}.hero-meta{max-width:420px}.phase-caption{top:auto;bottom:42px;text-align:left}.phase-caption p{margin-left:0}.phase-caption h2{font-size:clamp(30px,8vw,52px)}.service-grid{grid-template-columns:1fr}.service-card{min-height:300px}.react-service-grid{grid-template-columns:1fr;grid-template-rows:auto;min-height:0}.react-service-card--hero{grid-row:auto;min-height:430px}.react-service-card--top,.react-service-card--bottom{min-height:300px}.skill-grid{grid-template-columns:repeat(2,1fr)}.work-grid{grid-template-columns:1fr}.project,.project:nth-child(2),.project:nth-child(3),.project:nth-child(4){grid-column:auto}.react-work-grid{grid-template-columns:1fr;grid-auto-rows:auto}.react-project-card,.react-project-card:nth-child(2),.react-project-card:nth-child(3),.react-project-card:nth-child(4){grid-column:auto;grid-row:auto;min-height:390px}.footer{padding-top:100px}.footer-bottom{margin-top:40px}}
-    @media (max-width:560px){.nav{padding:16px 18px}.brand-name{font-size:15px}.nav-cta{padding:9px 13px;font-size:11px}.hero{padding:118px 18px 54px}.hero h1{font-size:clamp(48px,16vw,84px)}.hero-copy{font-size:14px}.section{padding:86px 18px}.section-head{display:block;margin-bottom:32px}.section-note{margin-top:18px}.skill-grid{grid-template-columns:1fr}.resource{align-items:flex-start}.resource div:first-child{display:block}.resource b{display:block;margin-bottom:5px}.footer{padding:90px 18px 30px}.qr-stage{min-height:330px}.float-wechat{right:16px;bottom:16px}}
-    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+    :root{--bg:#0a0a0a;--surface:rgba(18,18,18,.66);--white:#f7f7f5;--muted:rgba(247,247,245,.62);--faint:rgba(247,247,245,.16);--blue:#b8dcff;--max:1440px;--ease:cubic-bezier(.16,1,.3,1)}
+    *{box-sizing:border-box}html{background:var(--bg);color:var(--white);font-family:"Plus Jakarta Sans","Avenir Next","PingFang SC","Microsoft YaHei",sans-serif;scroll-behavior:auto}body{margin:0;overflow-x:hidden;background:var(--bg)}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;border:0}button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:5px}
+    .scene{position:fixed;inset:0;z-index:0;background:#0a0a0a;overflow:hidden}.scene canvas,.scene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.scene canvas{opacity:0;transition:opacity .6s var(--ease)}.scene canvas.is-ready{opacity:1}.scene video{opacity:0;filter:saturate(.92) contrast(1.05) brightness(1.08)}.scene video.is-visible{opacity:1}.scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.18) 48%,rgba(0,0,0,.5));pointer-events:none}.scene__grain{position:absolute;inset:0;opacity:.055;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+    .chrome{position:fixed;top:0;left:0;right:0;z-index:20;padding:24px clamp(22px,4vw,64px);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(10,10,10,.66),transparent);transition:background .4s var(--ease)}.chrome.is-scrolled{background:rgba(10,10,10,.58);backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:750;letter-spacing:-.04em}.brand-mark{width:31px;height:31px;border:1px solid var(--blue);display:grid;place-items:center;transform:rotate(45deg);color:var(--blue);font-size:11px}.brand-mark span{transform:rotate(-45deg)}.nav{display:flex;gap:clamp(18px,2.8vw,42px);font-size:12px;color:var(--muted)}.nav a{transition:color .2s}.nav a:hover{color:var(--blue)}.nav-cta{padding:11px 17px;border:1px solid var(--faint);border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;transition:background .2s,border-color .2s}.nav-cta:hover{background:var(--white);border-color:var(--white);color:var(--bg)}
+    main{position:relative;z-index:1}.hero{min-height:112svh;max-width:var(--max);margin:auto;padding:clamp(150px,22vh,250px) clamp(22px,7vw,112px) 80px;display:flex;align-items:flex-end}.hero__grid{width:100%;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(220px,.52fr);gap:8vw;align-items:end}.eyebrow,.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}h1{font-size:clamp(52px,10.2vw,154px);line-height:.88;letter-spacing:-.075em;font-weight:720;margin:22px 0 30px;max-width:1000px}h1 em{font-style:normal;color:var(--blue)}.hero__english{font-size:clamp(15px,1.5vw,22px);letter-spacing:-.025em;color:var(--white);max-width:570px;margin:0 0 20px}.hero__english small{display:block;color:var(--blue);font-size:10px;letter-spacing:.22em;margin-bottom:7px}.hero__copy{max-width:560px;color:var(--muted);font-size:15px;line-height:1.8}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.button{display:inline-flex;align-items:center;gap:9px;padding:13px 19px;border-radius:999px;background:var(--white);color:var(--bg);font-size:12px;font-weight:700;transition:transform .25s var(--ease),background .25s}.button:hover{transform:translateY(-3px);background:var(--blue)}.button--ghost{background:rgba(10,10,10,.18);border:1px solid var(--faint);color:var(--white)}.button--ghost:hover{background:rgba(184,220,255,.14);border-color:var(--blue);color:var(--white)}.hero__meta{border-top:1px solid var(--faint);padding-top:17px;display:grid;grid-template-columns:1fr 1fr;gap:20px;color:var(--muted);font-size:11px}.hero__meta strong{display:block;color:var(--white);font-size:26px;letter-spacing:-.06em;margin-bottom:4px}.scroll-hint{position:absolute;right:clamp(22px,4vw,64px);bottom:30px;display:flex;align-items:center;gap:9px;writing-mode:vertical-rl;color:rgba(247,247,245,.54);font-size:10px;letter-spacing:.18em}.scroll-hint i{display:block;width:1px;height:48px;background:var(--blue)}
+    .stage-copy{position:fixed;left:50%;top:50%;z-index:2;width:min(680px,calc(100% - 44px));transform:translate(-50%,-50%);text-align:center;pointer-events:none;opacity:0;transition:opacity .5s var(--ease)}.stage-copy.is-visible{opacity:.94}.stage-copy h2{font-size:clamp(34px,5vw,76px);line-height:.95;letter-spacing:-.075em;margin:14px 0}.stage-copy h2 em{font-style:normal;color:var(--blue)}.stage-copy p{max-width:480px;margin:0 auto;color:var(--muted);font-size:13px;line-height:1.7}
+    .section{max-width:var(--max);margin:auto;padding:clamp(150px,23vw,340px) clamp(22px,7vw,112px)}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:80px}.section-title{font-size:clamp(44px,7.4vw,112px);line-height:.93;letter-spacing:-.075em;margin:18px 0 0;max-width:800px}.section-note{max-width:300px;color:var(--muted);font-size:13px;line-height:1.75}.hairline{height:1px;background:var(--faint);margin:0 0 58px}.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}.reveal.is-in{opacity:1;transform:none}
+    .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:10vw}.lead{font-size:clamp(28px,4.2vw,62px);line-height:1;letter-spacing:-.065em;margin:0;max-width:740px}.lead span{color:var(--blue)}.body-copy{color:var(--muted);line-height:1.8;max-width:580px;margin-top:34px}.facts{border-top:1px solid var(--faint)}.fact{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid var(--faint);font-size:12px}.fact span{color:var(--muted)}.fact strong{font-weight:600}
+    .services-grid{display:grid;grid-template-columns:1.18fr .82fr;grid-template-rows:repeat(2,minmax(250px,auto));gap:14px}.service{padding:clamp(26px,4vw,54px);background:rgba(18,18,18,.6);backdrop-filter:blur(14px);border:1px solid var(--faint);min-height:260px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .5s var(--ease),background .3s}.service:hover{transform:translateY(-8px);background:rgba(25,25,25,.78)}.service--hero{grid-row:1/span 2;min-height:530px}.service__title{font-size:clamp(34px,4.5vw,70px);line-height:.94;letter-spacing:-.075em;margin:70px 0 16px}.service:not(.service--hero) .service__title{font-size:clamp(28px,3vw,46px);margin:42px 0 14px}.service p{max-width:420px;color:var(--muted);font-size:13px;line-height:1.7;margin:0}.service .button{align-self:flex-start;margin-top:28px}
+    .knowledge{display:grid;grid-template-columns:.8fr 1.2fr;gap:12vw}.resources{border-top:1px solid var(--faint)}.resource{display:flex;justify-content:space-between;gap:20px;padding:24px 0;border-bottom:1px solid var(--faint);transition:color .2s,transform .25s}.resource:hover{color:var(--blue);transform:translateX(8px)}.resource__main{display:flex;gap:22px}.resource__number{color:var(--blue);font-size:11px}.resource h3{margin:0;font-size:17px;letter-spacing:-.03em}.resource p{margin:7px 0 0;color:var(--muted);font-size:12px}.resource__arrow{font-size:22px}
+    .footer{max-width:var(--max);margin:auto;padding:clamp(170px,25vw,360px) clamp(22px,7vw,112px) 50px}.footer-grid{display:grid;grid-template-columns:1fr .8fr;gap:10vw;align-items:center}.footer h2{font-size:clamp(56px,9vw,136px);line-height:.86;letter-spacing:-.085em;margin:18px 0 30px}.footer h2 span{color:var(--blue)}.footer-copy{max-width:500px;color:var(--muted);line-height:1.8}.qr-stage{display:grid;place-items:center;min-height:400px;border:1px solid var(--faint);background:rgba(18,18,18,.52);backdrop-filter:blur(12px)}.qr-art{width:min(240px,65%);aspect-ratio:1;background:#fff repeating-conic-gradient(#111 0 9deg,#fff 9deg 18deg);border:15px solid #fff;display:grid;place-items:center;color:#111;box-shadow:0 24px 80px rgba(0,0,0,.3)}.qr-art span{background:#fff;padding:18px 8px;font-weight:800;font-size:12px;text-align:center}.footer-bottom{grid-column:1/-1;padding-top:18px;border-top:1px solid var(--faint);display:flex;justify-content:space-between;color:var(--muted);font-size:10px;letter-spacing:.08em}.float-qr{position:fixed;right:24px;bottom:24px;z-index:30}.float-qr>button{width:52px;height:52px;border-radius:50%;background:var(--white);color:var(--bg);font-size:20px;box-shadow:0 14px 40px rgba(0,0,0,.35)}.float-panel{position:absolute;right:65px;bottom:0;width:180px;padding:14px;background:rgba(17,17,17,.94);border:1px solid var(--faint);opacity:0;pointer-events:none;transform:translateX(10px);transition:.25s var(--ease)}.float-qr:hover .float-panel,.float-qr.is-open .float-panel{opacity:1;pointer-events:auto;transform:none}.float-panel .qr-art{width:125px;border-width:8px;margin:auto}.float-panel p{font-size:10px;text-align:center;color:var(--muted);line-height:1.5;margin:10px 0 0}
+    .modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:22px;background:rgba(0,0,0,.76);backdrop-filter:blur(20px);opacity:0;pointer-events:none;transition:opacity .3s}.modal.is-open{opacity:1;pointer-events:auto}.modal__card{width:min(420px,100%);padding:30px;background:#121212;border:1px solid var(--faint);text-align:center}.modal__card h2{font-size:27px;letter-spacing:-.06em;margin:0 0 8px}.modal__card p{font-size:12px;color:var(--muted);margin:0 0 22px}.modal__card .qr-art{margin:0 auto 22px}.modal__close{position:absolute;right:24px;top:18px;background:none;font-size:28px}.copy-status{height:18px;margin-top:10px;color:var(--blue);font-size:11px}
+    @media(max-width:900px){.nav{display:none}.hero{padding-top:150px}.hero__grid,.about-grid,.knowledge,.footer-grid{grid-template-columns:1fr;gap:46px}.section-head{display:block;margin-bottom:56px}.section-note{margin-top:22px}.services-grid{grid-template-columns:1fr;grid-template-rows:auto}.service--hero{grid-row:auto;min-height:440px}.footer{padding-bottom:34px}.qr-stage{min-height:320px}}
+    @media(max-width:560px){.hero{min-height:100svh;padding:128px 18px 56px}.hero h1{font-size:clamp(48px,15vw,78px)}.section{padding:150px 18px}.section-title{font-size:clamp(42px,13vw,68px)}.footer{padding:150px 18px 30px}.footer h2{font-size:clamp(58px,17vw,88px)}.footer-bottom{display:block;line-height:2}.footer-bottom span{display:block}.float-qr{right:16px;bottom:16px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.scene canvas,.scene video{transition:none}.service,.resource,.button{transition:none}.stage-copy{transition:none}}
+    @media(prefers-reduced-transparency:reduce){.chrome,.service,.qr-stage,.modal__card,.float-panel{backdrop-filter:none;background:#121212}}
 
-    /* Purple / white: dark surfaces dominate; white is reserved for reading and actions. */
-    .video-bg::after{background:linear-gradient(90deg,rgba(25,16,39,.85),rgba(34,20,52,.24) 72%),linear-gradient(180deg,rgba(28,18,41,.3),rgba(23,19,31,.86))}
-    .hero{padding-top:110px;padding-bottom:44px;align-items:center}
-    .hero-grid{grid-template-columns:minmax(0,1.65fr) minmax(220px,.65fr);gap:40px}
-    .hero h1{font-size:clamp(42px,5vw,78px);line-height:1.08;letter-spacing:-.055em;margin:18px 0 18px;font-weight:700}
-    .hero-translation{max-width:580px;font-size:clamp(16px,1.5vw,23px);font-weight:400;line-height:1.4;letter-spacing:-.02em;margin:0 0 23px;color:#fff}
-    .hero-translation span{display:block;font-size:10px;letter-spacing:.22em;color:var(--acid);margin-bottom:6px}
-    .hero-copy{font-size:clamp(14px,1.1vw,16px);line-height:1.8;margin:0;max-width:560px}.hero-actions{margin-top:22px}
-    .skill,.qr-stage{background:rgba(40,29,55,.64);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-    .react-service-card{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:rgba(255,255,255,.14)}
-    .react-service-card::after{background:radial-gradient(circle at 85% 15%,rgba(193,160,255,.2),transparent 62%)}
-    .story-card__body{background:#fff;color:#312043}.story-card__body p,.story-card__footer{color:#6e607c}.story-card__meta{color:#704397}.story-card__footer{border-color:rgba(67,43,89,.15)}
-    .story-card__body .btn{background:#56317d;color:#fff}.story-card__body .btn:hover{background:#704397}
-    .story-card{border-color:transparent}.story-card.is-active{border-color:rgba(219,201,255,.65)}
-    .wechat-trigger{background:#fff;color:#56317d;box-shadow:0 10px 35px rgba(66,28,107,.3)}
-    @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}.hero-meta{max-width:420px}.hero h1{font-size:clamp(40px,7vw,64px)}}
-    @media(max-width:560px){.hero{padding:112px 20px 42px}.hero h1{font-size:clamp(32px,8.3vw,46px);letter-spacing:-.05em}.hero-translation{font-size:16px;max-width:330px}.hero-meta strong{font-size:20px}}
-    @media(prefers-reduced-transparency:reduce){.skill,.qr-stage,.react-service-card{backdrop-filter:none;background:#2a2038}}
-    /* readability pass: brighter video, calmer editorial headings, cool-blue micro accents */
-    :root{--ice:#b9ddff;--ice-soft:rgba(185,221,255,.78)}
-    .video-bg::after{background:linear-gradient(90deg,rgba(24,14,38,.42),rgba(34,20,52,.08) 72%),linear-gradient(180deg,rgba(20,12,32,.12),rgba(23,19,31,.48))}
-    .bg-video{filter:saturate(.9) contrast(1.04) brightness(1.16)}
-    .section-head{margin-bottom:58px}
-    .section-title{font-size:clamp(34px,4.6vw,68px);line-height:1.02;letter-spacing:-.065em;max-width:640px}
-    .section-index,.service-no,.react-service-no,.react-project-index{color:var(--ice)}
-    .section-note,.about-body,.footer-copy{color:var(--ice-soft)}
-    .phase-caption h2{font-size:clamp(28px,4vw,58px);line-height:1.04;letter-spacing:-.06em}
-    .phase-caption p{color:rgba(255,255,255,.82)}
-    .hero-copy,.hero-meta,.scroll-cue{color:var(--ice-soft)}
-    .resource p,.resource-list .resource>div>div p,.project-info span,.qr-tag,.footer-bottom{color:var(--ice-soft)}
-    .skill small,.story-stage__topline,.story-card__meta,.story-card__arrow{color:var(--ice)}
-    .footer h2{font-size:clamp(44px,6vw,94px);line-height:.92;letter-spacing:-.075em;margin:18px 0 34px;max-width:620px}
-    .footer h2 span{color:var(--ice)}
-    @media(max-width:560px){.section-head{margin-bottom:38px}.section-title{font-size:clamp(32px,9.5vw,48px);line-height:1.06}.footer h2{font-size:clamp(42px,13vw,66px);line-height:.96;margin-bottom:26px}.bg-video{filter:saturate(.9) contrast(1.03) brightness(1.1)}}
+    /* Motion language: the services rail compares two speeds; the work wall uses depth and focus. */
+    .services-section{overflow:hidden}
+    .service-rail{position:relative;margin-inline:calc(-1 * clamp(22px,7vw,112px));padding:18px 0 30px;overflow:visible;perspective:1400px}
+    .service-track{display:flex;width:max-content;gap:18px;padding:0 clamp(22px,7vw,112px);will-change:transform;transform:translate3d(var(--track-x,0px),0,0);transform-style:preserve-3d}
+    .service-track--reverse{margin-top:18px}
+    .service-tile{position:relative;width:clamp(270px,31vw,430px);min-height:510px;padding:16px;border-radius:32px;background:linear-gradient(145deg,rgba(37,31,77,.84),rgba(13,14,32,.84));border:1px solid rgba(184,220,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 26px 80px rgba(9,7,31,.3);transform:translate3d(0,0,0) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) rotateZ(var(--tilt-z,0deg));transform-style:preserve-3d;will-change:transform;transition:box-shadow .7s var(--ease),border-color .7s var(--ease)}
+    .service-tile:hover{border-color:rgba(184,220,255,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 38px 100px rgba(48,28,130,.38)}
+    .service-tile__visual{position:relative;height:245px;margin-bottom:25px;border-radius:24px;overflow:visible;isolation:isolate}
+    .service-tile__layer{position:absolute;inset:13px;border-radius:24px;transform-origin:50% 82%;transition:transform .72s var(--ease),filter .72s var(--ease);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 18px 35px rgba(0,0,0,.2)}
+    .service-tile__layer--back{inset:30px 24px 2px;background:linear-gradient(135deg,#24204a,#7761d0 56%,#283c82);transform:translate3d(-9px,11px,-24px) rotate(-7deg);filter:saturate(.8)}
+    .service-tile__layer--mid{inset:18px 18px 8px;background:linear-gradient(145deg,#191d43,#6f84dc 50%,#7356b3);transform:translate3d(5px,5px,-10px) rotate(4deg);filter:saturate(.9)}
+    .service-tile__layer--front{background:linear-gradient(145deg,#365b99,#7560d5 52%,#b891ed);transform:translate3d(0,0,0);overflow:hidden}
+    .service-tile__layer--front::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 25%,rgba(255,255,255,.44),transparent 22%),linear-gradient(135deg,transparent 35%,rgba(255,255,255,.16) 36%,transparent 38%);mix-blend-mode:screen}
+    .service-tile:hover .service-tile__layer--back{transform:translate3d(-34px,18px,-24px) rotate(-14deg)}
+    .service-tile:hover .service-tile__layer--mid{transform:translate3d(28px,8px,-10px) rotate(10deg)}
+    .service-tile:hover .service-tile__layer--front{transform:translate3d(0,-10px,18px) rotate(1deg)}
+    .service-tile__index{position:absolute;z-index:4;top:21px;left:22px;color:#e2eeff;font-size:10px;letter-spacing:.17em}
+    .service-tile__copy{position:relative;z-index:5;padding:0 12px 12px}
+    .service-tile__copy h3{font-size:clamp(31px,3.6vw,56px);line-height:.93;letter-spacing:-.075em;margin:0 0 17px}
+    .service-tile__copy p{min-height:45px;color:var(--muted);font-size:12px;line-height:1.7;margin:0}
+    .service-tile__copy .button{margin-top:22px}
+    .service-tile--education{background:linear-gradient(145deg,rgba(29,41,82,.88),rgba(11,18,35,.88))}
+    .service-tile--education .service-tile__layer--back{background:linear-gradient(135deg,#1d355f,#6f94db 52%,#2e6e9f)}
+    .service-tile--education .service-tile__layer--mid{background:linear-gradient(145deg,#263f83,#70a4dd 55%,#7464c9)}
+    .service-tile--education .service-tile__layer--front{background:linear-gradient(145deg,#4b78c6,#88b9ec 52%,#7c66d8)}
+    .service-tile--ai{background:linear-gradient(145deg,rgba(53,26,83,.88),rgba(23,12,42,.9))}
+    .service-tile--ai .service-tile__layer--back{background:linear-gradient(135deg,#382060,#8557bb 52%,#364d9c)}
+    .service-tile--ai .service-tile__layer--mid{background:linear-gradient(145deg,#4d2a84,#9266dc 55%,#4450ad)}
+    .service-tile--ai .service-tile__layer--front{background:linear-gradient(145deg,#774fc0,#ae84ef 52%,#5c75d2)}
+
+    @media(max-width:900px){.service-rail{margin-inline:-18px}.service-track{padding-inline:18px}.service-tile{width:min(76vw,390px);min-height:470px}.service-tile__visual{height:215px}}
+    @media(max-width:560px){.service-track{gap:12px}.service-track--reverse{margin-top:12px}.service-tile{width:82vw;min-height:430px;padding:13px;border-radius:25px}.service-tile__visual{height:185px;margin-bottom:20px}.service-tile__layer{border-radius:19px}.service-tile__copy h3{font-size:36px}.service-tile__copy p{min-height:0}.service-tile__copy .button{margin-top:17px}}
+    @media(prefers-reduced-motion:reduce){.service-track{transform:none!important}.service-tile{transform:none!important;transition:none}.service-tile__layer{transform:none!important;transition:none}}
+    /* Shared typography. */
+    h1{font-size:clamp(46px,7.2vw,108px);line-height:.92;max-width:820px;margin-top:18px}
+    .section-title{font-size:clamp(36px,5.5vw,82px);line-height:.98;max-width:670px}
+    .footer h2{font-size:clamp(50px,6.8vw,104px);line-height:.9;max-width:560px}
+    @media(max-width:900px){h1{font-size:clamp(44px,8vw,82px)}.section-title{font-size:clamp(36px,7vw,62px)}}
+    @media(max-width:560px){h1{font-size:clamp(42px,12.2vw,66px);line-height:.96}.section-title{font-size:clamp(34px,10.5vw,52px)}.footer h2{font-size:clamp(48px,14vw,72px)}}
+    /* 03 — static gallery first; the motion stage is a progressive enhancement. */
+    .folio{--folio-ink:#f8f7ff;--folio-dim:#a6a6bd;position:relative;color:var(--folio-ink);max-width:1440px;width:calc(100% - 32px);margin:50px auto 0;padding:86px clamp(24px,5vw,76px) 36px;background:#101118;border-radius:40px;scroll-margin-top:90px}
+    .folio [hidden]{display:none!important}.folio button,.folio a,.folio label{touch-action:manipulation}.folio button:focus-visible,.folio a:focus-visible,.folio label:focus-within{outline:2px solid #c9ccff;outline-offset:5px}
+    .folio-heading{display:grid;grid-template-columns:1.2fr 1fr;align-items:end;gap:70px;margin-bottom:48px}.folio-heading h2{font-size:clamp(34px,4.6vw,66px);line-height:1.23;letter-spacing:-.055em;font-weight:600;margin:26px 0 0}.folio-heading h2>span{color:#9d94ff}.folio-heading .kicker{margin:0;color:#aca9ef;font-size:10px;letter-spacing:.2em}.folio-intro{justify-self:end;max-width:320px}.folio-edition{font-size:9px;letter-spacing:.15em;color:#adaacc}.folio-intro p{font-size:17px;line-height:1.85;margin:16px 0}.folio-intro small{font-size:11px;line-height:1.7;color:var(--folio-dim)}
+    .folio-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}.folio-filters button{background:#1d1e2a;border:1px solid transparent;border-radius:99px;font-size:11px;color:#c3c2d2;padding:12px 16px;transition:background .18s,color .18s}.folio-filters button span{font-size:9px;opacity:.65;margin-left:8px}.folio-filters button[aria-pressed="true"]{background:#dddcff;color:#292249}.folio-filters button:hover{border-color:#767092}
+    .folio-stage{position:relative}.folio-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:9px;letter-spacing:.12em;color:#b8b6cb;padding:24px 0}.folio-top>span:first-child{display:flex;gap:8px;align-items:center}.folio-top i{width:5px;height:5px;border-radius:100%;background:#aaa2ff}.folio-phase{display:none}.folio-skip{letter-spacing:.03em;color:#d8d8ee}.folio-skip:hover{color:#fff}
+    .folio-scene{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 30px}.folio-card{min-width:0;margin:0;position:relative}.folio-card:nth-of-type(even){padding-top:70px}.folio-pick{position:relative;display:block;width:100%;aspect-ratio:.83;padding:0;background:#252531;border-radius:22px;overflow:hidden;text-align:left}.folio-pick img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .22s ease}.folio-pick:hover img,.folio-pick:focus-visible img{transform:scale(1.035)}.folio-pick:active{transform:scale(.987)}.folio-pick::after{content:"";position:absolute;inset:0;border:1px solid #ffffff17;border-radius:inherit;pointer-events:none}.folio-watermark{position:absolute;left:16px;bottom:14px;font-size:8px;letter-spacing:.12em;color:#ffffffbd;text-shadow:0 1px 8px #000}.folio-pick__arrow{position:absolute;right:14px;bottom:12px;background:#1a192aa6;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;color:#fff}
+    .folio-card__meta{padding-top:18px}.folio-card__meta>span{font-size:9px;color:#aca7dc;letter-spacing:.14em}.folio-card__meta h3{font-size:23px;font-weight:500;letter-spacing:-.04em;margin:10px 0}.folio-card__meta p{font-size:11px;color:var(--folio-dim);margin:0}.folio-card__actions{display:flex;gap:18px;align-items:center;margin-top:20px}.folio-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;padding:13px 20px;border-radius:99px;background:linear-gradient(110deg,#728dfb,#a185ed);font-size:12px;color:#fff;transition:transform .18s,opacity .18s}.folio-cta:hover{transform:translateY(-2px);opacity:.9}.folio-cta:active{transform:scale(.97)}.folio-upload{position:relative;display:inline-flex;align-items:center;min-height:40px;font-size:11px;color:#b4b2c7;cursor:pointer;border-radius:6px}.folio-upload:hover{color:#fff}.folio-upload input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+    .folio-orbits,.folio-feature,.folio-controls,.folio-progress{display:none}.folio-end{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #ffffff12;margin-top:48px;padding-top:23px;font-size:11px;color:#b3b0c3}.folio-end span:last-child{font-size:8px;letter-spacing:.16em}.folio-feedback{font-size:11px;color:#c8c7f6;margin:12px 0 0;min-height:16px}
+    .folio.is-animated .folio-story{height:calc(100svh + 260vh);position:relative}
+    .folio.is-animated .folio-stage{position:sticky;top:84px;height:calc(100svh - 104px);min-height:470px;max-height:900px;overflow:clip;border-radius:28px;background:radial-gradient(ellipse at 45% 38%,#32274680,transparent 60%),#151620}
+    .folio.is-animated .folio-top{position:absolute;inset:0 26px auto;z-index:5}.folio.is-animated .folio-phase{display:block;color:#c8c1ef}.folio.is-animated .folio-scene{position:absolute;inset:52px 0 154px;display:block;perspective:1800px}
+    .folio.is-animated .folio-card{position:absolute;left:50%;top:46%;width:var(--card-w,224px);height:var(--card-h,298px);padding:0;transform:translate(-50%,-50%);opacity:0;pointer-events:none}
+    .folio.is-animated .folio-pick{width:100%;height:100%;aspect-ratio:auto;border-radius:16px;box-shadow:0 16px 36px #0003;pointer-events:auto}.folio.is-animated .folio-card__meta{display:none}.folio.is-animated .folio-watermark{font-size:6px;bottom:10px;left:10px}.folio.is-animated .folio-pick__arrow{width:24px;height:24px;font-size:12px}
+    .folio.is-animated .folio-orbits{display:block;position:absolute;inset:0;pointer-events:none}.folio-orbit{position:absolute;left:50%;top:46%;width:var(--card-w,224px);height:var(--card-h,298px);object-fit:cover;border-radius:14px;opacity:0}
+    .folio.is-animated.is-near .folio-card,.folio.is-animated.is-near .folio-orbit{will-change:transform,opacity}
+    .folio.is-animated .folio-feature{display:block;position:absolute;left:7%;top:50%;width:30%;transform:translateY(-50%);opacity:0;pointer-events:none}.folio-feature>span{font-size:9px;letter-spacing:.2em;color:#b4a7eb}.folio-feature h3{font-size:clamp(28px,3.1vw,48px);line-height:1.3;font-weight:500;letter-spacing:-.055em;margin:20px 0}.folio-feature p{font-size:12px;line-height:1.9;color:#b5b1c6}
+    .folio.is-animated .folio-controls{display:block;position:absolute;left:28px;right:28px;bottom:24px;z-index:6}.folio-thumbs{display:flex;gap:7px;justify-content:center;margin-bottom:14px}.folio-thumb{padding:3px;flex:none;width:29px;height:37px;border-radius:7px;background:transparent;opacity:.5;transition:opacity .18s,transform .18s;border:1px solid transparent}.folio-thumb img{width:100%;height:100%;object-fit:cover;border-radius:4px}.folio-thumb[aria-pressed="true"]{opacity:1;border-color:#b8acff;transform:translateY(-3px)}.folio-thumb:hover{opacity:1;transform:translateY(-3px)}
+    .folio-inspector{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #ffffff12;padding-top:17px}.folio-inspector>div:first-child{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:baseline}.folio-count{font-size:10px;color:#b2a8dc;font-variant-numeric:tabular-nums}.folio-current-title{font-size:20px;font-weight:500;letter-spacing:-.04em;margin:0}.folio-current-label{grid-column:2;font-size:10px;color:#aba7bb;margin:0}.folio-control-actions{display:flex;align-items:center;gap:22px}.folio.is-animated .folio-progress{display:block;position:absolute;bottom:0;left:0;right:0;height:2px;background:#ffffff08}.folio-progress>span{display:block;height:100%;background:linear-gradient(90deg,#7897ff,#b39aff);transform-origin:left;transform:scaleX(0)}
+    .folio-card.has-image-error .folio-pick::before{content:"图片暂不可用 · 可重新替换";position:absolute;inset:0;display:grid;place-items:center;color:#c7c4da;font-size:12px}
+    @media(max-width:899px){.folio{width:calc(100% - 24px);border-radius:28px;padding:58px 24px 25px}.folio-heading{gap:28px;grid-template-columns:1fr 1fr}.folio-intro p{font-size:14px}.folio-intro small{font-size:10px}.folio-heading h2{font-size:clamp(30px,4.8vw,44px)}.folio-card:nth-of-type(even){padding-top:32px}}
+    @media(max-width:600px){.folio{padding:42px 20px 24px}.folio-heading{grid-template-columns:1fr;gap:24px;margin-bottom:30px}.folio-heading h2{font-size:34px;margin-top:20px}.folio-intro{justify-self:start;max-width:none}.folio-intro p{display:none}.folio-edition{display:none}.folio-intro small{font-size:11px}.folio-filters{gap:6px}.folio-filters button{font-size:10px;padding:10px 12px}.folio-top{font-size:8px;letter-spacing:.06em;padding-top:0}.folio-scene{grid-template-columns:1fr;gap:38px}.folio-card:nth-of-type(even){padding-top:0}.folio-pick{aspect-ratio:.82;border-radius:18px}.folio-card__meta h3{font-size:22px}.folio-end span:last-child{display:none}.folio-end{margin-top:34px}}
+    @media(prefers-reduced-motion:reduce){.folio *, .folio *::before,.folio *::after{transition:none!important;scroll-behavior:auto!important}}
+
   </style>
 </head>
 <body>
-  <div class="video-bg" aria-hidden="true">
-    <video id="videoA" class="bg-video active" src="video-a.mp4" muted playsinline webkit-playsinline preload="auto"></video>
-    <video id="videoB" class="bg-video" src="video-b.mp4" muted playsinline webkit-playsinline preload="auto"></video>
-    <div class="video-grain"></div>
+  <!-- Canvas is the preferred path. Generate frames with:
+       ffmpeg -i A.mp4 -vf "fps=24,scale=1920:-2" -q:v 3 frames/a/frame-%04d.webp
+       ffmpeg -i B.mp4 -vf "fps=24,scale=1920:-2" -q:v 3 frames/b/frame-%04d.webp
+       Then set frameCountA/B below and keep the folder structure. -->
+  <div class="scene" aria-hidden="true">
+    <canvas id="canvasA"></canvas><canvas id="canvasB"></canvas>
+    <video id="fallbackA" src="video-a.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <video id="fallbackB" src="video-b.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <div class="scene__grain"></div>
   </div>
 
-  <header class="nav" id="nav">
-    <a class="brand" href="#top" aria-label="GIS鲸首页"><span class="brand-mark"><span>G</span></span><span class="brand-name">GIS鲸 / STUDIO</span></a>
-    <nav class="nav-links" aria-label="主导航"><a href="#about">关于我</a><a href="#services">核心业务</a><a href="#work">作品展示</a><a href="#knowledge">知识库</a><a href="#contact">联系我</a></nav>
-    <button class="nav-cta qr-trigger" type="button">立即咨询 ↗</button>
-  </header>
+  <header class="chrome" id="chrome"><a class="brand" href="#top"><span class="brand-mark"><span>G</span></span><span>GIS鲸 / STUDIO</span></a><nav class="nav"><a href="#about">关于我</a><a href="#services">核心业务</a><a href="#work">作品展示</a><a href="#knowledge">知识库</a><a href="#contact">联系我</a></nav><button class="nav-cta qr-trigger" type="button">立即咨询 ↗</button></header>
+  <div class="stage-copy" id="stageCopy"><div class="kicker" id="stageKicker">SCROLL / 01</div><h2 id="stageTitle">让空间数据，<br><em>拥有叙事。</em></h2><p id="stageText">从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。</p></div>
 
-  <div class="phase-caption" id="phaseCaption"><div class="phase-kicker" id="phaseKicker">SCROLL / 01</div><h2 id="phaseTitle">让空间数据，<br><em style="color:var(--acid);font-style:normal">拥有叙事。</em></h2><p id="phaseText">从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。</p></div>
+  <main id="top">
+    <section class="hero"><div class="hero__grid"><div class="reveal"><div class="eyebrow">Spatial data / Cartography / AI workflow</div><h1>GIS鲸 |<br><em>空间数据</em><br>高级地理制图专家</h1><p class="hero__english"><small>GIS WHALE</small>Spatial Data &amp; Advanced Cartography Specialist</p><p class="hero__copy">教学 GIS 遥感专业知识 · 高级定制制图 · 探索 AI 前沿，为您提供三位一体的 GIS 解决方案。</p><div class="actions"><a class="button" href="#work">浏览作品 ↘</a><button class="button button--ghost qr-trigger" type="button">立即定制 / 咨询 ↗</button></div></div><div class="hero__meta reveal"><div><strong>3S</strong><span>遥感 · GIS · GPS</span></div><div><strong>01—∞</strong><span>从数据到故事</span></div></div></div><div class="scroll-hint"><i></i>SCROLL TO EXPLORE</div></section>
 
-  <main class="site-shell" id="top">
-    <section class="hero" aria-labelledby="hero-title"><div class="hero-grid"><div><div class="eyebrow">Spatial data / Cartography / AI workflow</div><h1 id="hero-title">GIS鲸 |<br><em>空间数据</em><br>高级地理制图专家</h1><p class="hero-translation" lang="en"><span>GIS WHALE</span>Spatial Data &amp; Advanced Cartography Specialist</p><p class="hero-copy">教学 GIS 遥感专业知识 · 高级定制制图 · 探索 AI 前沿，为您提供三位一体的 GIS 解决方案。</p><div class="hero-actions"><a class="btn btn-primary" href="#work">浏览作品 ↘</a><button class="btn btn-ghost qr-trigger" type="button">立即定制 / 咨询 ↗</button></div></div><div class="hero-meta"><div><strong>3S</strong><span>遥感 · GIS · GPS</span></div><div><strong>01—∞</strong><span>从数据到故事</span></div></div></div><div class="scroll-cue"><i></i>SCROLL TO EXPLORE</div></section>
+    <section class="section" id="about"><div class="section-head reveal"><div><div class="kicker">01 / ABOUT</div><h2 class="section-title">把复杂的空间，<br>讲得更清楚。</h2></div><p class="section-note">高校 GIS 专业背景，专注于 3S 技术、遥感与空间数据的视觉表达。</p></div><div class="hairline"></div><div class="about-grid"><div class="reveal"><p class="lead">我是 <span>GIS鲸</span>，让地图成为思考的入口，让数据拥有被看见的方式。</p><p class="body-copy">从研究区概况到空间自相关，从基础地理要素到 Fragstats 景观格局计算，我把严谨的空间分析转译成直观、克制、可以被使用的设计。</p></div><div class="facts reveal"><div class="fact"><span>专业方向</span><strong>GIS / RS / 空间分析</strong></div><div class="fact"><span>工作方式</span><strong>研究 · 设计 · 自动化</strong></div><div class="fact"><span>服务对象</span><strong>高校 / 研究者 / 品牌团队</strong></div></div></div></section>
 
-    <section class="section" id="about"><div class="section-inner"><div class="section-head"><div><div class="section-index">01 / ABOUT</div><h2 class="section-title">把复杂的空间，<br>讲得更清楚。</h2></div><p class="section-note">高校 GIS 专业背景，专注于 3S 技术、遥感与空间数据的视觉表达。</p></div><div class="rule"></div><div class="about-layout"><div><p class="about-lead">我是 <span>GIS鲸</span>，让地图成为思考的入口，让数据拥有被看见的方式。</p><p class="about-body">从研究区概况到空间自相关，从基础地理要素到 Fragstats 景观格局计算，我把严谨的空间分析转译成直观、克制、可以被使用的设计。</p></div><div class="stat-list"><div class="stat"><span>专业方向</span><b>GIS / RS / 空间分析</b></div><div class="stat"><span>工作方式</span><b>研究 · 设计 · 自动化</b></div><div class="stat"><span>服务对象</span><b>高校 / 研究者 / 品牌团队</b></div></div></div><div class="skill-grid"><div class="skill"><small>01 / TOOLKIT</small><strong>ArcGIS Pro<br>ArcMap</strong></div><div class="skill"><small>02 / TOOLKIT</small><strong>QGIS<br>Photoshop</strong></div><div class="skill"><small>03 / AUTOMATION</small><strong>Python 脚本<br>机器学习模型</strong></div></div></div></section>
+        <section class="section services-section" id="services"><div class="section-head reveal"><div><div class="kicker">02 / SERVICES</div><h2 class="section-title">三种方式，<br>让想法落地。</h2></div><p class="section-note">两条反向移动的卡片带形成速度差。靠近一张卡片时，叠放的视觉层会打开，让服务从平面变成空间。</p></div><div class="service-rail" data-service-rail><div class="service-track service-track--forward" data-service-track data-speed=".3"><article class="service-tile service-tile--map reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">01 / MAP DESIGN</span></div><div class="service-tile__copy"><h3>高级<br>地理制图</h3><p>研究区概况、基础地理要素与 GIS 空间分析，建立有层次的视觉秩序。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article><article class="service-tile service-tile--education reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">02 / EDUCATION</span></div><div class="service-tile__copy"><h3>GIS 与<br>空间分析教学</h3><p>精通 ArcGIS / Pro，提供免费数据底图及获取方法，进阶 Python 与基础 CAD。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article><article class="service-tile service-tile--ai reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">03 / AI WORKFLOW</span></div><div class="service-tile__copy"><h3>AI 与<br>自动化辅助</h3><p>把 AI 应用到制图、清洗、分析与汇报中，让重复工作交给流程。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article></div><div class="service-track service-track--reverse" data-service-track data-speed="1" aria-hidden="true"><article class="service-tile service-tile--ai" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">03 / AI WORKFLOW</span></div><div class="service-tile__copy"><h3>AI 与<br>自动化辅助</h3><p>把 AI 应用到制图、清洗、分析与汇报中，让重复工作交给流程。</p></div></article><article class="service-tile service-tile--map" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">01 / MAP DESIGN</span></div><div class="service-tile__copy"><h3>高级<br>地理制图</h3><p>让空间数据拥有清晰的叙事路径。</p></div></article><article class="service-tile service-tile--education" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">02 / EDUCATION</span></div><div class="service-tile__copy"><h3>GIS 与<br>空间分析教学</h3><p>让学习进入可复用的工作流。</p></div></article></div></div></section>
 
-    <section class="section services" id="services"><div class="section-inner"><div class="section-head"><div><div class="section-index">02 / SERVICES</div><h2 class="section-title">三种方式，<br>让想法落地。</h2></div><p class="section-note">从一张图、一门课，到一套可复用的工作流，选择适合你的进入方式。</p></div><div id="servicesApp"><div class="service-grid"><article class="service-card"><div class="service-no">01 / MAP DESIGN</div><h3>高级<br>地理制图</h3><p>研究区概况、基础地理要素与 GIS 空间分析，建立有层次的视觉秩序。</p><button class="btn btn-primary qr-trigger" type="button">选择此模块下单 ↗</button></article><article class="service-card"><div class="service-no">02 / EDUCATION</div><h3>GIS 与<br>空间分析教学</h3><p>精通 ArcGIS / Pro，提供免费数据底图及获取方法，进阶 Python 与基础 CAD。</p><button class="btn btn-primary qr-trigger" type="button">选择此模块下单 ↗</button></article><article class="service-card"><div class="service-no">03 / AI WORKFLOW</div><h3>AI 与<br>自动化辅助</h3><p>把 AI 应用到制图、清洗、分析与汇报中，让重复工作交给流程。</p><button class="btn btn-primary qr-trigger" type="button">选择此模块下单 ↗</button></article></div></div></div></section>
+                <section class="folio" id="work" aria-labelledby="folio-heading">
+      <div class="folio-heading reveal">
+        <div><p class="kicker">03 / SELECTED WORK</p><h2 id="folio-heading">作品，<br>是方法的回声<span>。</span></h2></div>
+        <div class="folio-intro"><span class="folio-edition">THE VISUAL ARCHIVE / 01—07</span><p>让信息拥有秩序，<br>让每一种表达，都值得停留。</p><small>当前为素材包视觉示例，可替换为你的制图作品。</small></div>
+      </div>
+      <div class="folio-filters" role="group" aria-label="作品分类">
+        <button type="button" data-filter="all" aria-pressed="true">全部作品 <span>07</span></button>
+        <button type="button" data-filter="overview" aria-pressed="false">概况与路线图</button>
+        <button type="button" data-filter="elements" aria-pressed="false">基础地理要素</button>
+        <button type="button" data-filter="analysis" aria-pressed="false">GIS 空间分析</button>
+        <button type="button" data-filter="fragstats" aria-pressed="false">Fragstats 景观</button>
+      </div>
+      <div class="folio-story">
+        <div class="folio-stage">
+          <div class="folio-top"><span><i></i> GIS WHALE / VISUAL EXPLORATIONS</span><span class="folio-phase" aria-hidden="true">01 / 汇聚</span><a href="#knowledge" class="folio-skip">继续浏览 ↓</a></div>
+          <div class="folio-scene">
+            <div class="folio-orbits" aria-hidden="true">
+            <img class="folio-orbit" src="assets/works/4f1a66a9d95d83315887af71c8b8a2e7.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/8a91003ccd3e6116166c89ec314723b1.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/9f1b931cc3271db0b405b2f329d7e89f.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/974cd7f19d214d6febc761ea4aebccc5.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/ab3d8e3a5bdfb4071ec572f1d5a29479.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/f533654872a9ad43464cf63eacc68df6.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
+            </div>
+            <div class="folio-feature" aria-hidden="true"><span>IN THE DETAILS</span><h3>让细节，<br>被看见。</h3><p>从整体到局部，<br>每一处留白都有意义。</p></div>
+            <article class="folio-card" data-category="overview" data-title="静默的轮廓" data-label="概况与路线图" id="folio-card-1">
+              <button class="folio-pick" type="button" aria-label="查看静默的轮廓"><img src="assets/works/0b2fb36f46e4792dd533c839fb40522d.jpg" alt="逆光中的黑色人物侧影" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>视觉示例 / 01</span><h3>静默的轮廓</h3><p>概况与路线图</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换静默的轮廓的图片"></label></div></div>
+            </article>
+            <article class="folio-card" data-category="elements" data-title="构图的重心" data-label="基础地理要素" id="folio-card-2">
+              <button class="folio-pick" type="button" aria-label="查看构图的重心"><img src="assets/works/8c39242f2a8e172655ca7a6d7bce9c36.jpg" alt="橙色圆形与蓝色方形衬托的人物海报" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>视觉示例 / 02</span><h3>构图的重心</h3><p>基础地理要素</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换构图的重心的图片"></label></div></div>
+            </article>
+            <article class="folio-card" data-category="fragstats" data-title="流动的色彩" data-label="Fragstats 景观" id="folio-card-3">
+              <button class="folio-pick" type="button" aria-label="查看流动的色彩"><img src="assets/works/f9f81e59b9371e45f8b751a279ef73d6.jpg" alt="Porte 艺术海报，蓝紫与橙色花形交叠" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>视觉示例 / 03</span><h3>流动的色彩</h3><p>Fragstats 景观</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换流动的色彩的图片"></label></div></div>
+            </article>
+            <article class="folio-card" data-category="analysis" data-title="向前的张力" data-label="GIS 空间分析" id="folio-card-4">
+              <button class="folio-pick" type="button" aria-label="查看向前的张力"><img src="assets/works/39f74daf93c80c42b3dcc50e7db12e5e.jpg" alt="橙色背景中的运动鞋与动态光线" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>视觉示例 / 04</span><h3>向前的张力</h3><p>GIS 空间分析</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换向前的张力的图片"></label></div></div>
+            </article>
+            <article class="folio-card" data-category="overview" data-title="山水之间" data-label="概况与路线图" id="folio-card-5">
+              <button class="folio-pick" type="button" aria-label="查看山水之间"><img src="assets/works/39c46d9254d411ac6e4db84d47b3f5cb.jpg" alt="青绿色山水与悬浮展示台的概念视觉" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>视觉示例 / 05</span><h3>山水之间</h3><p>概况与路线图</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换山水之间的图片"></label></div></div>
+            </article>
+            <article class="folio-card" data-category="elements" data-title="光的切面" data-label="基础地理要素" id="folio-card-6">
+              <button class="folio-pick" type="button" aria-label="查看光的切面"><img src="assets/works/e51aa87e017e93815a46fe648577a039.jpg" alt="黄色背景与佩戴圆形眼镜的人物剪影" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>视觉示例 / 06</span><h3>光的切面</h3><p>基础地理要素</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换光的切面的图片"></label></div></div>
+            </article>
+            <article class="folio-card" data-category="analysis" data-title="风的形状" data-label="GIS 空间分析" id="folio-card-7">
+              <button class="folio-pick" type="button" aria-label="查看风的形状"><img src="assets/works/d92d71dd4135e4ee57afdd3fd6bcc35a.jpg" alt="橙色织物掠过人物侧脸的时尚视觉" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>视觉示例 / 07</span><h3>风的形状</h3><p>GIS 空间分析</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换风的形状的图片"></label></div></div>
+            </article>
+          </div>
+          <div class="folio-controls">
+            <div class="folio-thumbs" role="group" aria-label="选择重点作品"></div>
+            <div class="folio-inspector"><div><span class="folio-count">01 / 07</span><h3 class="folio-current-title">静默的轮廓</h3><p class="folio-current-label">视觉示例 / 概况与路线图</p></div><div class="folio-control-actions"><label class="folio-upload">替换当前图片<input type="file" accept="image/*" aria-label="替换当前作品图片"></label><button class="folio-cta qr-trigger" type="button">定制同款 <span>↗</span></button></div></div>
+          </div>
+          <div class="folio-progress" aria-hidden="true"><span></span></div>
+        </div>
+      </div>
+      <div class="folio-end"><span>从看见，到理解。</span><span>SPATIAL THINKING. VISUAL EXPRESSION.</span></div>
+      <p class="folio-feedback" role="status" aria-live="polite"></p>
+    </section>
 
-    <section class="section" id="work"><div class="section-inner"><div class="section-head"><div><div class="section-index">03 / SELECTED WORK</div><h2 class="section-title">作品，<br>是方法的回声。</h2></div><p class="section-note">上传你的图片即可替换占位符。每张作品都保留水印层，适合作为案例目录。</p></div><div id="workApp"><div class="work-tabs" role="tablist"><button class="tab active" data-filter="all" type="button">全部</button><button class="tab" data-filter="overview" type="button">概况与路线图</button><button class="tab" data-filter="elements" type="button">基础地理要素</button><button class="tab" data-filter="analysis" type="button">GIS 空间分析</button><button class="tab" data-filter="fragstats" type="button">Fragstats 景观</button></div><div class="work-grid"><article class="project" data-category="overview"><div class="project-art"><label class="upload-label">替换图片 <input type="file" accept="image/*"></label><div class="project-overlay"><button class="btn btn-primary qr-trigger" type="button">定制同款 ↗</button></div></div><div class="project-info"><strong>城市更新研究区 · 路线图</strong><span>概况 / 01</span></div></article><article class="project" data-category="elements"><div class="project-art"><label class="upload-label">替换图片 <input type="file" accept="image/*"></label><div class="project-overlay"><button class="btn btn-primary qr-trigger" type="button">定制同款 ↗</button></div></div><div class="project-info"><strong>水系与人口分布图</strong><span>要素 / 02</span></div></article><article class="project" data-category="analysis"><div class="project-art"><label class="upload-label">替换图片 <input type="file" accept="image/*"></label><div class="project-overlay"><button class="btn btn-primary qr-trigger" type="button">定制同款 ↗</button></div></div><div class="project-info"><strong>空间自相关 · 冷热点分析</strong><span>分析 / 03</span></div></article><article class="project" data-category="fragstats"><div class="project-art"><label class="upload-label">替换图片 <input type="file" accept="image/*"></label><div class="project-overlay"><button class="btn btn-primary qr-trigger" type="button">定制同款 ↗</button></div></div><div class="project-info"><strong>Fragstats 景观格局计算</strong><span>景观 / 04</span></div></article></div></div></div></section>
+    <section class="section" id="knowledge"><div class="knowledge"><div class="reveal"><div class="kicker">04 / KNOWLEDGE BASE</div><h2 class="section-title">把经验，<br>分享出去。</h2><p class="section-note" style="margin-top:28px">持续整理 GIS、遥感与空间数据工作中的方法与工具，给每一次学习一个可以打开的入口。</p><button class="button qr-trigger" style="margin-top:30px" type="button">扫码免费获取资源包 ↗</button></div><div class="resources reveal"><a class="resource" href="#"><div class="resource__main"><span class="resource__number">01</span><div><h3>ArcMap / GIS Pro 零基础教程</h3><p>从界面、数据加载到第一张专题图</p></div></div><span class="resource__arrow">↗</span></a><a class="resource" href="#"><div class="resource__main"><span class="resource__number">02</span><div><h3>数据源获取指南</h3><p>公开底图、遥感影像与边界数据索引</p></div></div><span class="resource__arrow">↗</span></a><a class="resource" href="#"><div class="resource__main"><span class="resource__number">03</span><div><h3>Python 进阶脚本分享</h3><p>批处理、空间连接与自动化出图</p></div></div><span class="resource__arrow">↗</span></a></div></div></section>
 
-    <section class="section" id="knowledge"><div class="section-inner"><div class="knowledge"><div><div class="section-index">04 / KNOWLEDGE BASE</div><h2 class="section-title">把经验，<br>分享出去。</h2><p class="section-note" style="margin-top:24px">持续整理 GIS、遥感与空间数据工作中的方法与工具，给每一次学习一个可以打开的入口。</p><button class="btn btn-primary qr-trigger" style="margin-top:30px" type="button">扫码免费获取资源包 ↗</button></div><div class="resource-list"><a class="resource" href="#"><div><b>01</b><div><h3>ArcMap / GIS Pro 零基础教程</h3><p>从界面、数据加载到第一张专题图</p></div></div><span class="arrow">↗</span></a><a class="resource" href="#"><div><b>02</b><div><h3>数据源获取指南</h3><p>公开底图、遥感影像与边界数据索引</p></div></div><span class="arrow">↗</span></a><a class="resource" href="#"><div><b>03</b><div><h3>Python 进阶脚本分享</h3><p>批处理、空间连接与自动化出图</p></div></div><span class="arrow">↗</span></a></div></div></div></section>
-
-    <footer class="footer" id="contact"><div class="footer-grid"><div><div class="section-index">05 / CONTACT</div><h2>一起把<br><span>地图做好。</span></h2><p class="footer-copy">如果你正在寻找一张更准确、更有叙事力的地图，或者想把 GIS 工作流变得更高效，欢迎扫码添加微信。</p><div class="footer-actions"><button class="btn btn-primary qr-trigger" type="button">扫码添加微信下单 ↗</button><button class="btn btn-ghost" id="copyWechat" type="button">一键复制微信号</button></div><div class="copy-status" id="copyStatus" aria-live="polite"></div></div><div class="qr-stage"><div class="qr-art" aria-label="微信二维码占位符"></div><span class="qr-tag">WECHAT QR / PLACEHOLDER</span></div><div class="footer-bottom"><span>© 2026 GIS鲸 Spatial Studio</span><span>Made for spatial stories</span></div></div></footer>
+    <footer class="footer" id="contact"><div class="footer-grid"><div class="reveal"><div class="kicker">05 / CONTACT</div><h2>一起把<br><span>地图做好。</span></h2><p class="footer-copy">如果你正在寻找一张更准确、更有叙事力的地图，或者想把 GIS 工作流变得更高效，欢迎扫码添加微信。</p><div class="actions"><button class="button qr-trigger" type="button">扫码添加微信下单 ↗</button><button class="button button--ghost" id="copyWechat" type="button">一键复制微信号</button></div><div class="copy-status" id="copyStatus"></div></div><div class="qr-stage reveal"><div class="qr-art"><span>WECHAT<br>GIS鲸</span></div></div><div class="footer-bottom"><span>© 2026 GIS鲸 Spatial Studio</span><span>Made for spatial stories</span></div></div></footer>
   </main>
 
-  <div class="float-wechat"><button class="wechat-trigger" type="button" aria-label="打开微信二维码">✦</button><div class="wechat-panel"><div class="qr-art" aria-hidden="true"></div><p>悬停查看二维码<br>点击即可咨询定制</p></div></div>
-  <div class="modal" id="qrModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" type="button" aria-label="关闭">×</button><div class="modal-card"><h3 id="modalTitle">添加 GIS鲸 微信</h3><p>扫码沟通项目需求，获取定制报价与资源包。</p><div class="qr-art" aria-label="微信二维码占位符"></div><button class="btn btn-primary modal-close-action" type="button">我知道了</button></div></div>
-
-  <script src="portfolio-bundle.js" defer></script>
+  <div class="float-qr"><button type="button" aria-label="打开微信二维码">✦</button><div class="float-panel"><div class="qr-art"><span>WECHAT<br>GIS鲸</span></div><p>悬停查看二维码<br>点击即可咨询定制</p></div></div>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal__close" type="button" aria-label="关闭">×</button><div class="modal__card"><h2 id="modalTitle">添加 GIS鲸 微信</h2><p>扫码沟通项目需求，获取定制报价与资源包。</p><div class="qr-art"><span>WECHAT<br>GIS鲸</span></div><button class="button modal-close" type="button">我知道了</button></div></div>
 
   <script>
-    (() => {
-      const videoA = document.getElementById('videoA');
-      const videoB = document.getElementById('videoB');
-      const nav = document.getElementById('nav');
-      const caption = document.getElementById('phaseCaption');
-      const phaseKicker = document.getElementById('phaseKicker');
-      const phaseTitle = document.getElementById('phaseTitle');
-      const phaseText = document.getElementById('phaseText');
-      const modal = document.getElementById('qrModal');
-      const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let targetProgress = 0, renderedProgress = 0, raf = 0, intro = true, lastPhase = -1;
-
-      const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
-      const ease = (t) => t * t * (3 - 2 * t);
-      const durationA = () => Number.isFinite(videoA.duration) ? videoA.duration : 1;
-      const durationB = () => Number.isFinite(videoB.duration) ? videoB.duration : 1;
-      function setVideoTime(video, time) { if (Number.isFinite(video.duration) && Math.abs(video.currentTime - time) > .025) { try { video.currentTime = time; } catch (_) {} } }
-      function getProgress() { const max = document.documentElement.scrollHeight - innerHeight; return max > 0 ? clamp(scrollY / max, 0, 1) : 0; }
-      function updateCaption(progress) {
-        const phase = progress < .5 ? 0 : 1;
-        if (phase === lastPhase) return;
-        lastPhase = phase;
-        caption.classList.remove('fade'); void caption.offsetWidth; caption.classList.add('fade');
-        if (phase === 0) { phaseKicker.textContent = 'SCROLL / 01'; phaseTitle.innerHTML = '让空间数据，<br><em style="color:var(--acid);font-style:normal">拥有叙事。</em>'; phaseText.textContent = '从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。'; }
-        else { phaseKicker.textContent = 'SCROLL / 02'; phaseTitle.innerHTML = '让创意，<br><em style="color:var(--acid);font-style:normal">真正落地。</em>'; phaseText.textContent = '继续向下，查看服务、案例与可复用的 GIS 知识库。'; }
+    (()=>{
+      const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+      const lerp=(a,b,t)=>a+(b-a)*t;
+      const canvasA=document.querySelector('#canvasA'),canvasB=document.querySelector('#canvasB'),ctxA=canvasA.getContext('2d',{alpha:false}),ctxB=canvasB.getContext('2d',{alpha:false});
+      const videoA=document.querySelector('#fallbackA'),videoB=document.querySelector('#fallbackB');
+      const config={frameCountA:0,frameCountB:0,framePathA:'frames/a/frame-',framePathB:'frames/b/frame-',extension:'.webp',pad:4};
+      const sequences=[];
+      class FrameSequence{constructor(canvas,ctx,count,path){this.canvas=canvas;this.ctx=ctx;this.count=count;this.path=path;this.frames=new Map();this.loading=new Map();this.ready=false}
+        url(i){return this.path+String(i+1).padStart(config.pad,'0')+config.extension}
+        load(i){if(this.frames.has(i))return Promise.resolve(this.frames.get(i));if(this.loading.has(i))return this.loading.get(i);const p=new Promise((resolve,reject)=>{const img=new Image();img.decoding='async';img.onload=()=>{this.frames.set(i,img);this.loading.delete(i);resolve(img)};img.onerror=()=>{this.loading.delete(i);reject(new Error('missing frame'))};img.src=this.url(i)});this.loading.set(i,p);return p}
+        draw(i){const img=this.frames.get(clamp(i,0,this.count-1));if(!img)return false;const cw=this.canvas.width=innerWidth*devicePixelRatio,ch=this.canvas.height=innerHeight*devicePixelRatio,scale=Math.max(cw/img.naturalWidth,ch/img.naturalHeight),w=img.naturalWidth*scale,h=img.naturalHeight*scale;this.ctx.clearRect(0,0,cw,ch);this.ctx.drawImage(img,(cw-w)/2,(ch-h)/2,w,h);this.canvas.classList.add('is-ready');return true}
+        async warm(){if(!this.count)return false;try{await Promise.all([this.load(0),this.load(this.count-1),this.load(Math.floor(this.count/2))]);this.ready=true;this.draw(0);return true}catch(_){return false}}
       }
-      function render() {
-        renderedProgress += (targetProgress - renderedProgress) * (prefersReduced ? 1 : .14);
-        const p = renderedProgress;
-        if (p > .012 && intro) { intro = false; videoA.pause(); videoA.loop = false; }
-        const cross = clamp((p - .46) / .08, 0, 1);
-        const crossEase = ease(cross);
-        videoA.style.opacity = String(1 - crossEase);
-        videoB.style.opacity = String(crossEase);
-        videoA.classList.toggle('active', crossEase < .5);
-        videoB.classList.toggle('active', crossEase >= .5);
-        if (p < .5) setVideoTime(videoA, p * 2 * Math.max(.01, durationA() - .04));
-        else setVideoTime(videoB, (p - .5) * 2 * Math.max(.01, durationB() - .04));
-        updateCaption(p); caption.classList.toggle('is-hidden', p < .04); nav.classList.toggle('scrolled', p > .02);
-        if (Math.abs(targetProgress - renderedProgress) > .001) raf = requestAnimationFrame(render); else raf = 0;
-      }
-      function requestRender() { targetProgress = getProgress(); if (!raf) raf = requestAnimationFrame(render); }
-      addEventListener('scroll', requestRender, { passive: true }); addEventListener('resize', requestRender, { passive: true });
-      videoA.addEventListener('loadedmetadata', requestRender); videoB.addEventListener('loadedmetadata', requestRender);
-      videoA.addEventListener('timeupdate', () => { if (intro && videoA.currentTime >= Math.min(1, durationA())) { videoA.currentTime = 0; } });
-      videoA.addEventListener('canplay', () => { if (intro) videoA.play().catch(() => {}); }, { once: true });
-      requestRender();
-
-      const openModal = () => { modal.classList.add('open'); document.body.style.overflow = 'hidden'; };
-      const closeModal = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
-      document.querySelectorAll('.qr-trigger').forEach(btn => btn.addEventListener('click', openModal));
-      document.addEventListener('click', e => { if (e.target.closest('.qr-trigger')) openModal(); });
-      document.querySelectorAll('.modal-close,.modal-close-action').forEach(btn => btn.addEventListener('click', closeModal));
-      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-      document.querySelector('.wechat-trigger').addEventListener('click', e => e.currentTarget.parentElement.classList.toggle('open'));
-
-      document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => { document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); tab.classList.add('active'); const filter = tab.dataset.filter; document.querySelectorAll('.project').forEach(project => project.classList.toggle('hidden', filter !== 'all' && project.dataset.category !== filter)); }));
-      document.querySelectorAll('.project-art input[type=file]').forEach(input => input.addEventListener('change', e => { const file = e.target.files[0]; if (!file) return; const art = e.target.closest('.project-art'); const reader = new FileReader(); reader.onload = event => { art.style.backgroundImage = `url("${event.target.result}")`; }; reader.readAsDataURL(file); }));
-      const wechatId = 'YOUR_WECHAT_ID';
-      document.getElementById('copyWechat').addEventListener('click', async () => { const status = document.getElementById('copyStatus'); if (wechatId === 'YOUR_WECHAT_ID') { status.textContent = '请先在代码中替换真实微信号'; return; } try { await navigator.clipboard.writeText(wechatId); status.textContent = `微信号已复制：${wechatId}`; } catch (_) { status.textContent = `请手动添加微信：${wechatId}`; } });
+      if(config.frameCountA)sequences.push(new FrameSequence(canvasA,ctxA,config.frameCountA,config.framePathA));
+      if(config.frameCountB)sequences.push(new FrameSequence(canvasB,ctxB,config.frameCountB,config.framePathB));
+      let framesAvailable=false;
+      Promise.all(sequences.map(s=>s.warm())).then(results=>{framesAvailable=results.length===2&&results.every(Boolean);if(!framesAvailable){videoA.classList.add('is-visible');videoA.play().catch(()=>{});}});
+      const setVideo=(video,t)=>{if(!Number.isFinite(video.duration))return;const target=clamp(t,0,video.duration-.03);if(Math.abs(video.currentTime-target)>.045){try{video.currentTime=target}catch(_){}}};
+      function drawScene(progress){const cross=clamp((progress-.47)/.08),a=clamp(progress/.5),b=clamp((progress-.5)/.5);if(framesAvailable){const sa=sequences[0],sb=sequences[1];sa.draw(Math.round(a*(sa.count-1)));sb.draw(Math.round(b*(sb.count-1)));canvasA.style.opacity=String(1-cross);canvasB.style.opacity=String(cross);videoA.classList.remove('is-visible');videoB.classList.remove('is-visible')}else{setVideo(videoA,a*(videoA.duration||1));setVideo(videoB,b*(videoB.duration||1));videoA.style.opacity=String(1-cross);videoB.style.opacity=String(cross);if(progress>.02){videoA.pause();videoB.pause()}}}
+      let target=0,current=0,raf=0;const getProgress=()=>clamp(scrollY/(document.documentElement.scrollHeight-innerHeight));function render(){current=reduced?target:lerp(current,target,.13);drawScene(current);document.querySelector('#chrome').classList.toggle('is-scrolled',current>.02);document.querySelector('#stageCopy').classList.toggle('is-visible',current>.035 && current<.105);const second=current>=.5;document.querySelector('#stageKicker').textContent=second?'SCROLL / 02':'SCROLL / 01';document.querySelector('#stageTitle').innerHTML=second?'让创意，<br><em>真正落地。</em>':'让空间数据，<br><em>拥有叙事。</em>';document.querySelector('#stageText').textContent=second?'继续向下，查看服务、案例与可复用的 GIS 知识库。':'从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。';if(Math.abs(target-current)>.001)raf=requestAnimationFrame(render);else raf=0}addEventListener('scroll',()=>{target=getProgress();if(!raf)raf=requestAnimationFrame(render)},{passive:true});addEventListener('resize',()=>{sequences.forEach(s=>s.draw(0));target=getProgress();if(!raf)raf=requestAnimationFrame(render)},{passive:true});target=getProgress();raf=requestAnimationFrame(render);
+      const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-in')}),{threshold:.12,rootMargin:'0px 0px -8%'});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      const modal=document.querySelector('#modal'),open=()=>{modal.classList.add('is-open');document.body.style.overflow='hidden'},close=()=>{modal.classList.remove('is-open');document.body.style.overflow=''};document.querySelectorAll('.qr-trigger').forEach(b=>b.addEventListener('click',open));document.querySelectorAll('.modal__close,.modal-close').forEach(b=>b.addEventListener('click',close));modal.addEventListener('click',e=>{if(e.target===modal)close()});addEventListener('keydown',e=>{if(e.key==='Escape')close()});document.querySelector('.float-qr>button').addEventListener('click',e=>e.currentTarget.parentElement.classList.toggle('is-open'));
+      const id='YOUR_WECHAT_ID';document.querySelector('#copyWechat').addEventListener('click',async()=>{const status=document.querySelector('#copyStatus');if(id==='YOUR_WECHAT_ID'){status.textContent='请先在代码中替换真实微信号';return}try{await navigator.clipboard.writeText(id);status.textContent='微信号已复制：'+id}catch(_){status.textContent='请手动添加微信：'+id}});
     })();
   </script>
+    <script>
+    /* Preserve the service rails; motion runs only while a value is changing. */
+    (() => {
+      const rail = document.querySelector('[data-service-rail]');
+      const tracks = [...document.querySelectorAll('[data-service-track]')];
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+      const pointer = matchMedia('(hover:hover) and (pointer:fine)');
+      let frame = 0, scrollDirty = true;
+      const states = [...document.querySelectorAll('[data-tilt="service"]')].map(element => ({element,x:0,y:0,z:0,tx:0,ty:0,tz:0}));
+      const request = () => { if (!frame && !document.hidden && !reduced.matches) frame = requestAnimationFrame(draw); };
+      function draw() {
+        frame = 0;
+        if (scrollDirty && rail) {
+          const rect = rail.getBoundingClientRect();
+          const progress = Math.min(1,Math.max(0,(innerHeight-rect.top)/(innerHeight+rect.height)));
+          tracks.forEach(track => track.style.setProperty('--track-x', `${(progress-.5)*360*Number(track.dataset.speed)*(track.classList.contains('service-track--reverse')?1:-1)}px`));
+          scrollDirty = false;
+        }
+        let moving = false;
+        states.forEach(s => {
+          ['x','y','z'].forEach(key => { s[key] += (s['t'+key]-s[key])*.16; moving ||= Math.abs(s['t'+key]-s[key])>.01; });
+          s.element.style.setProperty('--tilt-x',s.x.toFixed(3)+'deg');
+          s.element.style.setProperty('--tilt-y',s.y.toFixed(3)+'deg');
+          s.element.style.setProperty('--tilt-z',s.z.toFixed(3)+'deg');
+        });
+        if (moving) request();
+      }
+      states.forEach(s => {
+        s.element.addEventListener('pointermove',e => {
+          if (!pointer.matches || reduced.matches) return;
+          const r=s.element.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+          s.tx=-y*8;s.ty=x*8;s.tz=x*2.2;request();
+        });
+        s.element.addEventListener('pointerleave',()=>{s.tx=s.ty=s.tz=0;request();});
+      });
+      const update=()=>{scrollDirty=true;request();};
+      addEventListener('scroll',update,{passive:true});addEventListener('resize',update,{passive:true});
+      reduced.addEventListener('change',update);
+      addEventListener('pagehide',()=>{cancelAnimationFrame(frame);frame=0;});
+      addEventListener('pageshow',update);
+      document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else update();});
+      request();
+    })();
+
+    (() => {
+      const root = document.querySelector('#work');
+      const story = root.querySelector('.folio-story'), stage = root.querySelector('.folio-stage');
+      const scene = root.querySelector('.folio-scene'), feature = root.querySelector('.folio-feature');
+      const cards = [...root.querySelectorAll('.folio-card')], orbits = [...root.querySelectorAll('.folio-orbit')];
+      const filters = [...root.querySelectorAll('[data-filter]')], thumbnails = root.querySelector('.folio-thumbs');
+      const counter = root.querySelector('.folio-count'), title = root.querySelector('.folio-current-title'), label = root.querySelector('.folio-current-label');
+      const phase = root.querySelector('.folio-phase'), progressBar = root.querySelector('.folio-progress>span');
+      const feedback = root.querySelector('.folio-feedback');
+      const media = matchMedia('(min-width:900px) and (min-height:600px) and (prefers-reduced-motion:no-preference)');
+      const reduced = matchMedia('(prefers-reduced-motion:reduce)');
+      const events = new AbortController(), signal = events.signal;
+      const clamp = v => Math.min(1,Math.max(0,v));
+      const smooth = v => {const t=clamp(v);return t*t*(3-2*t);};
+      const mix = (a,b,t) => a.map((v,i)=>v+(b[i]-v)*t);
+      let visible = cards.slice(), selected = cards[0], animated = false, near = false, disposed = false;
+      let frame = 0, previousTime = 0, needsMeasure = true, start = 0, distance = 1, width = 1, height = 1;
+      let progress = 0, featureOpacity = 0;
+      const positions = new Map(), objectUrls = new Set();
+
+      const thumbs = cards.map((card,i) => {
+        const button = document.createElement('button');
+        button.type='button';button.className='folio-thumb';button.setAttribute('aria-label',`查看作品 ${i+1}：${card.dataset.title}`);
+        const image=document.createElement('img');image.src=card.querySelector('img').getAttribute('src');image.alt='';image.decoding='async';
+        button.append(image);thumbnails.append(button);
+        button.addEventListener('click',()=>select(card,true),{signal});
+        card.querySelector('.folio-pick').addEventListener('click',()=>{if(animated) select(card,true);},{signal});
+        return button;
+      });
+      function updateSelection() {
+        counter.textContent=`${String(visible.indexOf(selected)+1).padStart(2,'0')} / ${String(visible.length).padStart(2,'0')}`;
+        title.textContent=selected.dataset.title;
+        label.textContent=`视觉示例 / ${selected.dataset.label}`;
+        cards.forEach((card,i)=>{thumbs[i].hidden=card.hidden;thumbs[i].setAttribute('aria-pressed',String(card===selected));card.style.zIndex=card===selected?'20':String(i+1);});
+      }
+      function select(card,showDetail=false) {
+        selected=card;updateSelection();
+        if (showDetail && animated) {
+          measure();
+          // Explicit navigation only. Wheel and touch scrolling always remain native.
+          window.scrollTo({top:start+distance*.96,behavior:'smooth'});
+        }
+        request();
+      }
+      function measure() {
+        const r=story.getBoundingClientRect();
+        width=stage.clientWidth;height=scene.clientHeight;
+        start=r.top+scrollY-84;distance=Math.max(1,story.offsetHeight-stage.offsetHeight);
+        const cardHeight=Math.min(400,Math.max(210,height*.81));
+        stage.style.setProperty('--card-h',cardHeight+'px');stage.style.setProperty('--card-w',cardHeight*.76+'px');
+        needsMeasure=false;
+      }
+      // Every boundary shares the same pose. Reversing scroll traces exactly the same path.
+      function cardPose(card,i,p) {
+        const c=visible.length===1?.5:i/(visible.length-1), d=c-.5, chosen=card===selected;
+        const stack=[(i-visible.indexOf(selected))*5,Math.abs(i-visible.indexOf(selected))*3,.77,(i-visible.indexOf(selected))*2,0,chosen?1:.12];
+        const fan=[d*width*.71,d*d*height*.35,.82,d*32,-d*12,1];
+        const cascade=[d*width*.64,d*height*.38,.77,d*22,0,1];
+        const end=[width*.235+(chosen?0:(i-visible.indexOf(selected))*8),chosen?0:12,chosen?1.09:.76,chosen?0:d*10,0,chosen?1:0];
+        if(p<.12)return stack;
+        if(p<.36)return mix(stack,fan,smooth((p-.12)/.24));
+        if(p<.44)return fan;
+        if(p<.55)return mix(fan,stack,smooth((p-.44)/.11));
+        if(p<.74)return mix(stack,cascade,smooth((p-.55)/.19));
+        if(p<.94)return mix(cascade,end,smooth((p-.74)/.2));
+        return end;
+      }
+      function paint(element,pose,alpha) {
+        const old=positions.get(element)||pose;
+        const next=mix(old,pose,alpha);
+        let moving=false;
+        next.forEach((v,i)=>{if(Math.abs(pose[i]-v)>.008)moving=true;else next[i]=pose[i];});
+        positions.set(element,next);
+        const [x,y,scale,rotate,rotateY,opacity]=next;
+        element.style.transform=`translate(-50%,-50%) translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(${rotate.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
+        element.style.opacity=opacity.toFixed(3);
+        element.style.visibility=opacity<.005?'hidden':'visible';
+        return moving;
+      }
+      function draw(time) {
+        frame=0;if(disposed||!animated||!near||document.hidden)return;
+        if(needsMeasure)measure();
+        const alpha=1-Math.exp(-Math.min(48,previousTime?time-previousTime:16.7)/85);
+        previousTime=time;
+        progress=clamp((scrollY-start)/distance);
+        let moving=false;
+        visible.forEach((card,i)=>{moving=paint(card,cardPose(card,i,progress),alpha)||moving;});
+        orbits.forEach((image,i)=>{
+          const side=i%2===0?-1:1,pair=Math.floor(i/2),travel=smooth(progress/.25);
+          const x=side*width*(.13+pair*.115+travel*.21),y=(pair-1)*height*.06;
+          const opacity=(1-smooth((progress-.10)/.18))*.76;
+          moving=paint(image,[x,y,.32+pair*.14+travel*.35,side*(8+pair*4),side*24,opacity],alpha)||moving;
+        });
+        const targetOpacity=smooth((progress-.82)/.12);
+        featureOpacity+=(targetOpacity-featureOpacity)*alpha;
+        if(Math.abs(targetOpacity-featureOpacity)>.002)moving=true;else featureOpacity=targetOpacity;
+        feature.style.opacity=featureOpacity;feature.style.transform=`translateY(calc(-50% + ${(1-featureOpacity)*14}px))`;
+        progressBar.style.transform=`scaleX(${progress})`;
+        const phaseText=progress<.25?'01 / 汇聚':progress<.55?'02 / 展开':progress<.84?'03 / 重组':'04 / 细看';
+        if(phase.textContent!==phaseText)phase.textContent=phaseText;
+        if(moving)request();else previousTime=0;
+      }
+      function request() {if(!frame&&animated&&near&&!document.hidden&&!disposed)frame=requestAnimationFrame(draw);}
+      function configure() {
+        cancelAnimationFrame(frame);frame=0;previousTime=0;positions.clear();
+        animated=media.matches;root.classList.toggle('is-animated',animated);
+        scene.setAttribute('aria-hidden',String(animated));
+        cards.forEach(card=>{
+          card.removeAttribute('style');
+          const button=card.querySelector('.folio-pick');button.tabIndex=animated?-1:0;
+          button.setAttribute('aria-label',animated?`查看${card.dataset.title}`:`${card.dataset.title}，视觉示例`);
+        });
+        if(!animated)scene.removeAttribute('aria-hidden');
+        needsMeasure=true;updateSelection();request();
+      }
+      const observer=new IntersectionObserver(entries=>{
+        near=entries[0].isIntersecting;root.classList.toggle('is-near',near);
+        if(near){
+          root.querySelectorAll('img[loading="lazy"]').forEach(img=>{img.loading='eager';img.decode?.().catch(()=>{});});
+          request();
+        }else{cancelAnimationFrame(frame);frame=0;previousTime=0;}
+      },{rootMargin:'250px'});
+      observer.observe(story);
+      const resizeObserver=new ResizeObserver(()=>{needsMeasure=true;request();});
+      resizeObserver.observe(root);resizeObserver.observe(stage);
+      addEventListener('scroll',request,{passive:true,signal});
+      addEventListener('resize',()=>{needsMeasure=true;request();},{passive:true,signal});
+      media.addEventListener('change',configure,{signal});
+      document.fonts?.ready.then(()=>{needsMeasure=true;request();});
+      document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else{needsMeasure=true;request();}},{signal});
+      filters.forEach(button=>button.addEventListener('click',()=>{
+        const filter=button.dataset.filter;
+        filters.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+        cards.forEach(card=>card.hidden=filter!=='all'&&card.dataset.category!==filter);
+        visible=cards.filter(card=>!card.hidden);
+        if(!visible.includes(selected))selected=visible[0];
+        positions.clear();needsMeasure=true;updateSelection();request();
+        feedback.textContent=`${button.textContent.trim()}：${visible.length} 件视觉示例`;
+      },{signal}));
+      root.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>img.closest('.folio-card')?.classList.add('has-image-error'),{signal}));
+      root.querySelectorAll('input[type="file"]').forEach(input=>input.addEventListener('change',async()=>{
+        const file=input.files?.[0];if(!file)return;
+        const card=input.closest('.folio-card')||selected, image=card.querySelector('img');
+        const url=URL.createObjectURL(file);objectUrls.add(url);
+        const candidate=new Image();candidate.src=url;
+        try{await candidate.decode();}catch(_){URL.revokeObjectURL(url);objectUrls.delete(url);feedback.textContent='这张图片暂时无法读取，请选择 JPG、PNG 或 WebP 图片。';input.value='';return;}
+        if(disposed){URL.revokeObjectURL(url);return;}
+        const old=image.dataset.objectUrl;
+        image.src=url;image.dataset.objectUrl=url;image.alt=`${card.dataset.title}，用户替换的图片`;
+        thumbs[cards.indexOf(card)].querySelector('img').src=url;
+        card.classList.remove('has-image-error');
+        if(old){URL.revokeObjectURL(old);objectUrls.delete(old);}
+        feedback.textContent='图片已在本次预览中替换；永久保存请替换 assets/works 中的对应文件。';input.value='';request();
+      },{signal}));
+      function destroy() {
+        disposed=true;cancelAnimationFrame(frame);events.abort();observer.disconnect();resizeObserver.disconnect();
+        objectUrls.forEach(url=>URL.revokeObjectURL(url));
+        root.classList.remove('is-animated','is-near');scene.removeAttribute('aria-hidden');
+        cards.forEach(card=>{card.removeAttribute('style');card.querySelector('.folio-pick').tabIndex=0;});
+      }
+      // For embedding in another app: root.dispatchEvent(new Event('folio:destroy')).
+      root.addEventListener('folio:destroy',destroy,{once:true,signal});
+      addEventListener('pagehide',event=>{if(!event.persisted)destroy();else{cancelAnimationFrame(frame);frame=0;}},{signal});
+      addEventListener('pageshow',()=>{needsMeasure=true;configure();},{signal});
+      configure();
+    })();
+  </script>
+
 </body>
 </html>
+
