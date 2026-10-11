@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#0a0a0a">
   <meta name="description" content="GIS鲸：高级地理制图、GIS与空间分析教学、AI Agent自动化服务与精选作品。">
   <link rel="preconnect" href="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com">
+  <link rel="preload" as="image" href="assets/scene/poster-a.webp" fetchpriority="high">
   <title>GIS鲸 — Spatial Stories</title>
   <style>
     :root{--bg:#0a0a0a;--surface:rgba(18,18,18,.66);--white:#f7f7f5;--muted:rgba(247,247,245,.62);--faint:rgba(247,247,245,.16);--blue:#b8dcff;--max:1440px;--ease:cubic-bezier(.16,1,.3,1)}
@@ -72,14 +73,13 @@
     .folio-stage{position:relative}.folio-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:9px;letter-spacing:.12em;color:#b8b6cb;padding:24px 0}.folio-top>span:first-child{display:flex;gap:8px;align-items:center}.folio-top i{width:5px;height:5px;border-radius:100%;background:#aaa2ff}.folio-phase{display:none}.folio-skip{letter-spacing:.03em;color:#d8d8ee}.folio-skip:hover{color:#fff}
     .folio-scene{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 30px}.folio-card{min-width:0;margin:0;position:relative}.folio-card:nth-of-type(even){padding-top:70px}.folio-pick{position:relative;display:block;width:100%;aspect-ratio:.83;padding:0;background:#252531;border-radius:22px;overflow:hidden;text-align:left}.folio-pick img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .22s ease}.folio-pick:hover img,.folio-pick:focus-visible img{transform:scale(1.035)}.folio-pick:active{transform:scale(.987)}.folio-pick::after{content:"";position:absolute;inset:0;border:1px solid #ffffff17;border-radius:inherit;pointer-events:none}.folio-watermark{position:absolute;left:16px;bottom:14px;font-size:8px;letter-spacing:.12em;color:#ffffffbd;text-shadow:0 1px 8px #000}.folio-pick__arrow{position:absolute;right:14px;bottom:12px;background:#1a192aa6;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;color:#fff}
     .folio-card__meta{padding-top:18px}.folio-card__meta>span{font-size:9px;color:#aca7dc;letter-spacing:.14em}.folio-card__meta h3{font-size:23px;font-weight:500;letter-spacing:-.04em;margin:10px 0}.folio-card__meta p{font-size:11px;color:var(--folio-dim);margin:0}.folio-card__actions{display:flex;gap:18px;align-items:center;margin-top:20px}.folio-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;padding:13px 20px;border-radius:99px;background:linear-gradient(110deg,#728dfb,#a185ed);font-size:12px;color:#fff;transition:transform .18s,opacity .18s}.folio-cta:hover{transform:translateY(-2px);opacity:.9}.folio-cta:active{transform:scale(.97)}.folio-upload{position:relative;display:inline-flex;align-items:center;min-height:40px;font-size:11px;color:#b4b2c7;cursor:pointer;border-radius:6px}.folio-upload:hover{color:#fff}.folio-upload input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
-    .folio-orbits,.folio-feature,.folio-controls,.folio-progress{display:none}.folio-end{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #ffffff12;margin-top:48px;padding-top:23px;font-size:11px;color:#b3b0c3}.folio-end span:last-child{font-size:8px;letter-spacing:.16em}.folio-feedback{font-size:11px;color:#c8c7f6;margin:12px 0 0;min-height:16px}
+    .folio-feature,.folio-controls,.folio-progress{display:none}.folio-end{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #ffffff12;margin-top:48px;padding-top:23px;font-size:11px;color:#b3b0c3}.folio-end span:last-child{font-size:8px;letter-spacing:.16em}.folio-end{position:relative;z-index:1}.folio-feedback{font-size:11px;color:#c8c7f6;margin:12px 0 0;min-height:16px}
     .folio.is-animated .folio-story{height:calc(100svh + 260vh);position:relative}
     .folio.is-animated .folio-stage{position:sticky;top:84px;height:calc(100svh - 104px);min-height:470px;max-height:900px;overflow:clip;border-radius:28px;background:radial-gradient(ellipse at 45% 38%,#32274680,transparent 60%),#151620}
     .folio.is-animated .folio-top{position:absolute;inset:0 26px auto;z-index:5}.folio.is-animated .folio-phase{display:block;color:#c8c1ef}.folio.is-animated .folio-scene{position:absolute;inset:52px 0 154px;display:block;perspective:1800px}
     .folio.is-animated .folio-card{position:absolute;left:50%;top:46%;width:var(--card-w,224px);height:var(--card-h,298px);padding:0;transform:translate(-50%,-50%);opacity:0;pointer-events:none}
     .folio.is-animated .folio-pick{width:100%;height:100%;aspect-ratio:auto;border-radius:16px;box-shadow:0 16px 36px #0003;pointer-events:auto}.folio.is-animated .folio-card__meta{display:none}.folio.is-animated .folio-watermark{font-size:6px;bottom:10px;left:10px}.folio.is-animated .folio-pick__arrow{width:24px;height:24px;font-size:12px}
-    .folio.is-animated .folio-orbits{display:block;position:absolute;inset:0;pointer-events:none}.folio-orbit{position:absolute;left:50%;top:46%;width:var(--card-w,224px);height:var(--card-h,298px);object-fit:cover;border-radius:14px;opacity:0}
-    .folio.is-animated.is-near .folio-card,.folio.is-animated.is-near .folio-orbit{will-change:transform,opacity}
+    .folio.is-animated.is-near .folio-card{will-change:transform,opacity}
     .folio.is-animated .folio-feature{display:block;position:absolute;left:7%;top:50%;width:30%;transform:translateY(-50%);opacity:0;pointer-events:none}.folio-feature>span{font-size:9px;letter-spacing:.2em;color:#b4a7eb}.folio-feature h3{font-size:clamp(28px,3.1vw,48px);line-height:1.3;font-weight:500;letter-spacing:-.055em;margin:20px 0}.folio-feature p{font-size:12px;line-height:1.9;color:#b5b1c6}
     .folio.is-animated .folio-controls{display:block;position:absolute;left:28px;right:28px;bottom:24px;z-index:6}.folio-thumbs{display:flex;gap:7px;justify-content:center;margin-bottom:14px}.folio-thumb{padding:3px;flex:none;width:29px;height:37px;border-radius:7px;background:transparent;opacity:.5;transition:opacity .18s,transform .18s;border:1px solid transparent}.folio-thumb img{width:100%;height:100%;object-fit:cover;border-radius:4px}.folio-thumb[aria-pressed="true"]{opacity:1;border-color:#b8acff;transform:translateY(-3px)}.folio-thumb:hover{opacity:1;transform:translateY(-3px)}
     .folio-inspector{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #ffffff12;padding-top:17px}.folio-inspector>div:first-child{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:baseline}.folio-count{font-size:10px;color:#b2a8dc;font-variant-numeric:tabular-nums}.folio-current-title{font-size:20px;font-weight:500;letter-spacing:-.04em;margin:0}.folio-current-label{grid-column:2;font-size:10px;color:#aba7bb;margin:0}.folio-control-actions{display:flex;align-items:center;gap:22px}.folio.is-animated .folio-progress{display:block;position:absolute;bottom:0;left:0;right:0;height:2px;background:#ffffff08}.folio-progress>span{display:block;height:100%;background:linear-gradient(90deg,#7897ff,#b39aff);transform-origin:left;transform:scaleX(0)}
@@ -111,7 +111,7 @@
     .service-tile--ai .service-tile__layer--front{background-image:url('assets/services/ai/ai-foreground.webp');background-size:cover;background-position:center}
     /* Portfolio originals retain their map legends and full compositions. */
     .folio .folio-pick{aspect-ratio:var(--art-ratio,1.5);background:#f6f5f2}
-    .folio .folio-pick img,.folio .folio-orbit{object-fit:contain}
+    .folio .folio-pick img{object-fit:contain}
     .folio .folio-pick:hover img,.folio .folio-pick:focus-visible img{transform:none}
     .folio .folio-pick:hover::after,.folio .folio-pick:focus-visible::after{border-color:#aaa2ff}
     .folio .folio-watermark{background:#141425b3;padding:4px 7px;border-radius:4px}
@@ -127,15 +127,70 @@
 
     .modal__card{max-height:calc(100dvh - 44px);overflow-y:auto}
     .button,.qr-trigger{touch-action:manipulation}
+    .service-track{touch-action:pan-y pinch-zoom;cursor:grab;will-change:auto}
+    .service-rail.is-near .service-track{will-change:transform}
+    .service-tile{will-change:auto}
+    .service-track.is-dragging{cursor:grabbing}
+    .service-tile.is-open .service-tile__layer--back{transform:translate3d(-34px,18px,-24px) rotate(-14deg)}
+    .service-tile.is-open .service-tile__layer--mid{transform:translate3d(28px,8px,-10px) rotate(10deg)}
+    .service-tile.is-open .service-tile__layer--front{transform:translate3d(0,-10px,18px) rotate(1deg)}
+    .folio-thumbs{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;padding:5px 2px;touch-action:pan-x;margin-inline:auto;max-width:max-content}
+    .folio-thumbs::-webkit-scrollbar{display:none}
+    .folio-detail{padding:0;background:none;color:#c9c5ff;font-size:11px;min-height:40px}
+    .folio.is-animated .folio-card{top:50%}
+    .art-viewer{position:fixed;inset:0;z-index:60;margin:0;padding:20px;background:#0c0d14;color:#fff;border:0;width:100%;height:100dvh;max-width:none;max-height:none}
+    .art-viewer::backdrop{background:#0c0d14}
+    .art-viewer:not([open]){display:none}
+    .art-viewer[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px}
+    .art-viewer__top,.art-viewer__bottom{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .art-viewer__top h2{font-size:18px;margin:0;font-weight:500}
+    .art-viewer__close{background:#ffffff12;border-radius:50%;width:44px;height:44px;font-size:24px;flex:none}
+    .art-viewer__image{min-height:0;overflow:auto;display:flex;align-items:center;justify-content:center;touch-action:pan-x pan-y pinch-zoom}
+    .art-viewer__image img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+    .art-viewer__image.is-zoomed{display:block}
+    .art-viewer__image.is-zoomed img{max-width:none;max-height:none;width:180%;height:auto}
+    .art-viewer__bottom>button{min-height:44px;border-radius:99px;padding:10px 16px;background:#ffffff12;font-size:12px}
     @media(max-width:900px){
-      .service-track{width:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;transform:none!important;will-change:auto;padding-block:28px;-webkit-overflow-scrolling:touch}
-      .service-tile{flex:none;scroll-snap-align:center;will-change:auto}
+      .service-track{padding-block:28px}
+      .service-tile{flex:none;will-change:auto}
       .service-tile__layer{background-size:cover}
       .scene video{filter:none}
       .modal{backdrop-filter:none}
       .modal__card{border-radius:20px}
+      .folio.is-animated{padding-inline:12px}
+      .folio.is-animated .folio-stage{top:76px;height:calc(100svh - 92px);min-height:0;border-radius:22px}
+      .folio.is-animated .folio-story{height:calc(100svh + 280svh)}
+      .folio.is-animated .folio-top{inset:0 14px auto;padding:18px 0;font-size:8px}
+      .folio.is-animated .folio-top>span:first-child{display:none}
+      .folio.is-animated .folio-phase{margin-right:auto;font-size:11px;letter-spacing:.1em}
+      .folio.is-animated .folio-scene{inset:52px 0 184px;perspective:900px}
+      .folio.is-animated .folio-pick{border-radius:10px;box-shadow:0 8px 18px #0003}
+      .folio.is-animated .folio-watermark,.folio.is-animated .folio-pick__arrow{display:none}
+      .folio.is-animated .folio-controls{left:14px;right:14px;bottom:20px}
+      .folio-inspector{display:block;padding-top:12px}
+      .folio-current-title{font-size:19px}
+      .folio-current-label{font-size:10px}
+      .folio-control-actions{margin-top:10px;justify-content:space-between;gap:12px;padding-right:52px}
+      .folio-control-actions .folio-upload{display:none}
+      .folio-control-actions .folio-cta{padding:11px 15px;font-size:11px}
+      .folio.is-animated .folio-feature{left:0;right:0;top:auto;bottom:3px;width:auto;text-align:center;transform:none!important}
+      .folio-feature>span{font-size:8px}
+      .folio-feature h3,.folio-feature p{display:none}
+      .art-viewer{padding:18px 14px max(18px,env(safe-area-inset-bottom))}
     }
-    @media(prefers-reduced-motion:reduce){.scene video{filter:none}}
+    @media(max-height:600px){
+      .folio.is-animated .folio-stage{top:64px;height:calc(100svh - 76px);min-height:0}
+      .folio.is-animated .folio-scene{inset:42px 0 128px}
+      .folio.is-animated .folio-controls{bottom:12px}
+      .folio-thumbs{margin-bottom:6px}
+      .folio .folio-thumb{height:24px;width:34px}
+      .folio-inspector{padding-top:8px}
+      .folio-current-label{display:none}
+      .folio-current-title{font-size:16px}
+      .folio-control-actions{margin-top:4px}
+      .folio.is-animated .folio-feature{display:none}
+    }
+    @media(prefers-reduced-motion:reduce){.scene video{filter:none}.service-track{width:100%;overflow-x:auto;transform:none!important;touch-action:pan-x pan-y}.service-tile[data-rail-copy]{display:none}}
   </style>
 </head>
 <body>
@@ -145,8 +200,8 @@
        Then set frameCountA/B below and keep the folder structure. -->
   <div class="scene" aria-hidden="true">
     <canvas id="canvasA"></canvas><canvas id="canvasB"></canvas>
-    <video id="fallbackA" poster="assets/works/personal/overview.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/A.mp4" muted playsinline webkit-playsinline preload="auto"></video>
-    <video id="fallbackB" poster="assets/works/personal/land-use.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/B.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <video id="fallbackA" poster="assets/scene/poster-a.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/A.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <video id="fallbackB" poster="assets/scene/poster-b.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/B.mp4" muted playsinline webkit-playsinline preload="auto"></video>
     <div class="scene__grain"></div>
   </div>
 
@@ -163,10 +218,10 @@
                 <section class="folio" id="work" aria-labelledby="folio-heading">
       <div class="folio-heading reveal">
         <div><p class="kicker">03 / SELECTED WORK</p><h2 id="folio-heading">作品，<br>是方法的回声<span>。</span></h2></div>
-        <div class="folio-intro"><span class="folio-edition">THE VISUAL ARCHIVE / 01—04</span><p>让信息拥有秩序，<br>让每一种表达，都值得停留。</p></div>
+        <div class="folio-intro"><span class="folio-edition">THE VISUAL ARCHIVE / 01—10</span><p>让信息拥有秩序，<br>让每一种表达，都值得停留。</p></div>
       </div>
       <div class="folio-filters" role="group" aria-label="作品分类">
-        <button type="button" data-filter="all" aria-pressed="true">全部作品 <span>04</span></button>
+        <button type="button" data-filter="all" aria-pressed="true">全部作品 <span>10</span></button>
         <button type="button" data-filter="overview" aria-pressed="false">概况与路线图</button>
         <button type="button" data-filter="elements" aria-pressed="false">基础地理要素</button>
         <button type="button" data-filter="analysis" aria-pressed="false">GIS 空间分析</button>
@@ -176,14 +231,6 @@
         <div class="folio-stage">
           <div class="folio-top"><span><i></i> GIS WHALE / VISUAL EXPLORATIONS</span><span class="folio-phase" aria-hidden="true">01 / 汇聚</span><a href="#knowledge" class="folio-skip">继续浏览 ↓</a></div>
           <div class="folio-scene">
-            <div class="folio-orbits" aria-hidden="true">
-            <img class="folio-orbit" src="assets/works/personal/pearl-river.webp" alt="" width="1000" height="687" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/personal/study-01.webp" alt="" width="1000" height="833" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/personal/study-02.webp" alt="" width="1000" height="833" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/personal/study-03.webp" alt="" width="1000" height="833" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/personal/land-use.webp" alt="" width="1000" height="700" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/personal/knowledge.webp" alt="" width="485" height="1000" loading="lazy" decoding="async">
-            </div>
             <div class="folio-feature" aria-hidden="true"><span>IN THE DETAILS</span><h3>让细节，<br>被看见。</h3><p>从整体到局部，<br>每一处留白都有意义。</p></div>
             <article class="folio-card" data-category="overview" data-title="概况与路线图" data-label="韶关市经济发展情况与区位展示" id="folio-card-1">
               <button class="folio-pick" style="--art-ratio:2000/1333" type="button" aria-label="查看概况与路线图"><img src="assets/works/personal/overview.webp" alt="韶关市经济发展情况与区位展示" width="2000" height="1333" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
@@ -201,10 +248,34 @@
               <button class="folio-pick" style="--art-ratio:1376/768" type="button" aria-label="查看Agent自动化"><img src="assets/works/personal/agent.webp" alt="AI Agent 驱动的 GIS 数据处理工作流" width="1376" height="768" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
               <div class="folio-card__meta"><span>精选作品 / 04</span><h3>Agent自动化</h3><p>AI Agent 驱动的 GIS 数据处理工作流</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换Agent自动化的图片"></label></div></div>
             </article>
+            <article class="folio-card" data-category="overview" data-title="珠三角区位图" data-label="区域区位、行政边界与地理背景" id="folio-card-5">
+              <button class="folio-pick" style="--art-ratio:1000/687" type="button" aria-label="查看珠三角区位图"><img src="assets/works/personal/pearl-river.webp" alt="珠三角区位与行政边界展示" width="1000" height="687" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 05</span><h3>珠三角区位图</h3><p>区域区位、行政边界与地理背景</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button></div></div>
+            </article>
+            <article class="folio-card" data-category="analysis" data-title="空间分布对比 · 01" data-label="2019 / 2023 年空间分布与变化" id="folio-card-6">
+              <button class="folio-pick" style="--art-ratio:1000/833" type="button" aria-label="查看空间分布对比01"><img src="assets/works/personal/study-01.webp" alt="2019与2023年空间分布专题图对比" width="1000" height="833" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 06</span><h3>空间分布对比 · 01</h3><p>2019 / 2023 年空间分布与变化</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button></div></div>
+            </article>
+            <article class="folio-card" data-category="analysis" data-title="空间分布对比 · 02" data-label="双时相空间格局与分布差异" id="folio-card-7">
+              <button class="folio-pick" style="--art-ratio:1000/833" type="button" aria-label="查看空间分布对比02"><img src="assets/works/personal/study-02.webp" alt="双时相空间格局与分布差异专题图" width="1000" height="833" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 07</span><h3>空间分布对比 · 02</h3><p>双时相空间格局与分布差异</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button></div></div>
+            </article>
+            <article class="folio-card" data-category="analysis" data-title="空间分布对比 · 03" data-label="区域分布、等级表达与时序对比" id="folio-card-8">
+              <button class="folio-pick" style="--art-ratio:1000/833" type="button" aria-label="查看空间分布对比03"><img src="assets/works/personal/study-03.webp" alt="区域空间分布与时序对比专题图" width="1000" height="833" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 08</span><h3>空间分布对比 · 03</h3><p>区域分布、等级表达与时序对比</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button></div></div>
+            </article>
+            <article class="folio-card" data-category="elements" data-title="韶关土地利用分析" data-label="地形背景、土地利用类型与变化" id="folio-card-9">
+              <button class="folio-pick" style="--art-ratio:1000/700" type="button" aria-label="查看韶关土地利用分析"><img src="assets/works/personal/land-use.webp" alt="韶关市土地利用类型与变化分析" width="1000" height="700" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 09</span><h3>韶关土地利用分析</h3><p>地形背景、土地利用类型与变化</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button></div></div>
+            </article>
+            <article class="folio-card" data-category="agent" data-title="GIS 知识库与工作流" data-label="GIS 学习资源与可复用工作方法" id="folio-card-10">
+              <button class="folio-pick" style="--art-ratio:485/1000" type="button" aria-label="查看GIS知识库与工作流"><img src="assets/works/personal/knowledge.webp" alt="GIS 教学知识库与资源分享" width="485" height="1000" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 10</span><h3>GIS 知识库与工作流</h3><p>GIS 学习资源与可复用工作方法</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button></div></div>
+            </article>
           </div>
           <div class="folio-controls">
-            <div class="folio-thumbs" role="group" aria-label="选择重点作品"></div>
-            <div class="folio-inspector"><div><span class="folio-count">01 / 04</span><h3 class="folio-current-title">概况与路线图</h3><p class="folio-current-label">韶关市经济发展情况与区位展示</p></div><div class="folio-control-actions"><label class="folio-upload">替换当前图片<input type="file" accept="image/*" aria-label="替换当前作品图片"></label><button class="folio-cta qr-trigger" type="button">定制同款 <span>↗</span></button></div></div>
+            <div class="folio-thumbs" role="group" aria-label="横滑选择全部作品"></div>
+            <div class="folio-inspector"><div><span class="folio-count">01 / 10</span><h3 class="folio-current-title">概况与路线图</h3><p class="folio-current-label">韶关市经济发展情况与区位展示</p></div><div class="folio-control-actions"><label class="folio-upload">替换当前图片<input type="file" accept="image/*" aria-label="替换当前作品图片"></label><button class="folio-detail" type="button">放大细看 ＋</button><button class="folio-cta qr-trigger" type="button">定制同款 <span>↗</span></button></div></div>
           </div>
           <div class="folio-progress" aria-hidden="true"><span></span></div>
         </div>
@@ -220,6 +291,7 @@
 
   <div class="float-qr"><button type="button" aria-label="打开微信二维码">✦</button><div class="float-panel"><div class="qr-art"><img src="assets/contact/wechat-qr.webp" alt="GIS鲸个人微信二维码" width="1083" height="1464" loading="eager" decoding="async"></div><p>悬停查看二维码<br>点击即可咨询定制</p></div></div>
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal__close" type="button" aria-label="关闭">×</button><div class="modal__card"><h2 id="modalTitle">添加 GIS鲸 微信</h2><p>扫码沟通项目需求，获取定制报价与资源包。</p><div class="qr-art"><img src="assets/contact/wechat-qr.webp" alt="GIS鲸个人微信二维码" width="1083" height="1464" loading="eager" decoding="async"></div><button class="button modal-close" type="button">我知道了</button></div></div>
+  <dialog class="art-viewer" aria-labelledby="artTitle"><div class="art-viewer__top"><h2 id="artTitle"></h2><button class="art-viewer__close" type="button" aria-label="关闭作品大图">×</button></div><div class="art-viewer__image"><img alt=""></div><div class="art-viewer__bottom"><button class="art-viewer__prev" type="button" aria-label="上一张作品">← 上一张</button><button class="art-viewer__zoom" type="button" aria-pressed="false">放大 ＋</button><button class="art-viewer__next" type="button" aria-label="下一张作品">下一张 →</button></div></dialog>
 
   <script>
     (()=>{
@@ -255,7 +327,7 @@
         video.addEventListener('loadeddata',()=>{flushSeek(video);if(!raf)raf=requestAnimationFrame(render);});
       });
       if(reduced){[videoA,videoB].forEach(video=>{video.pause();video.removeAttribute('src');video.load();});}
-      else if(mobileVideo){videoA.preload='metadata';videoB.preload='none';}
+      else if(mobileVideo){videoA.preload='auto';videoB.preload='none';}
       let mobilePhase=-1;
       const playMobile=progress=>{
         const next=progress<=.002?0:progress<.5?1:progress<.998?2:3;
@@ -267,6 +339,21 @@
         else if(next===0)setVideo(videoA,0);
         else setVideo(videoB,videoB.duration-.03);
       };
+      // Decode the opening frame before the first scroll; the poster is that same video frame.
+      const primeFirstFrame=()=>{
+        if(reduced||getProgress()>.002)return;
+        videoA.muted=true;
+        videoA.play().then(()=>{
+          const hold=()=>{if(getProgress()<=.002){videoA.pause();setVideo(videoA,.001);}};
+          if(videoA.requestVideoFrameCallback)videoA.requestVideoFrameCallback(hold);
+          else hold();
+        }).catch(()=>{});
+      };
+      if(mobileVideo)requestAnimationFrame(primeFirstFrame);
+      document.addEventListener('pointerdown',()=>{
+        if(mobileVideo&&!reduced){mobilePhase=-1;playMobile(getProgress());primeFirstFrame();}
+      },{once:true,passive:true});
+      videoB.addEventListener('loadedmetadata',()=>{if(mobileVideo&&!reduced&&getProgress()>=.998){mobilePhase=-1;playMobile(getProgress());}});
       document.addEventListener('visibilitychange',()=>{
         if(document.hidden){videoA.pause();videoB.pause();}
         else if(mobileVideo&&!reduced){mobilePhase=-1;playMobile(getProgress());}
@@ -310,59 +397,115 @@
     })();
   </script>
     <script>
-    /* Preserve the service rails; motion runs only while a value is changing. */
+    /* Seamless opposite rails; stop work when the section leaves the viewport. */
     (() => {
-      const rail = document.querySelector('[data-service-rail]');
-      const tracks = [...document.querySelectorAll('[data-service-track]')];
-      const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-      const pointer = matchMedia('(hover:hover) and (pointer:fine)');
-      let frame = 0, scrollDirty = true;
-      const states = [...document.querySelectorAll('[data-tilt="service"]')].map(element => ({element,x:0,y:0,z:0,tx:0,ty:0,tz:0}));
-      const request = () => { if (!frame && !document.hidden && !reduced.matches) frame = requestAnimationFrame(draw); };
-      function draw() {
-        frame = 0;
-        if (scrollDirty && rail && innerWidth>900) {
-          const rect = rail.getBoundingClientRect();
-          const progress = Math.min(1,Math.max(0,(innerHeight-rect.top)/(innerHeight+rect.height)));
-          tracks.forEach(track => track.style.setProperty('--track-x', `${(progress-.5)*360*Number(track.dataset.speed)*(track.classList.contains('service-track--reverse')?1:-1)}px`));
-          scrollDirty = false;
+      const rail=document.querySelector('[data-service-rail]');
+      const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+      const pointer=matchMedia('(hover:hover) and (pointer:fine)');
+      const events=new AbortController(),signal=events.signal;
+      let frame=0,lastTime=0,near=false,needsMeasure=true,scrollDirty=true,drag=null;
+      const tracks=[...rail.querySelectorAll('[data-service-track]')].map(element=>{
+        const originals=[...element.children];
+        originals.forEach(original=>{
+          const copy=original.cloneNode(true);
+          copy.dataset.railCopy='';copy.classList.remove('reveal','is-in');copy.setAttribute('aria-hidden','true');
+          copy.querySelector('.service-uploaders')?.remove();
+          copy.querySelectorAll('button').forEach(button=>{
+            button.tabIndex=-1;
+            button.addEventListener('click',()=>document.querySelector('.nav-cta').click(),{signal});
+          });
+          element.append(copy);
+        });
+        return {element,originals,cycle:1,offset:0,scroll:0,paused:false,resumeAt:0,direction:element.classList.contains('service-track--reverse')?-1:1,speed:45*Number(element.dataset.speed)};
+      });
+      const tilts=[...rail.querySelectorAll('[data-tilt="service"]')].map(element=>({element,x:0,y:0,z:0,tx:0,ty:0,tz:0}));
+      function request(){if(!frame&&near&&!document.hidden&&!reduced.matches)frame=requestAnimationFrame(draw);}
+      function draw(time){
+        frame=0;if(!near||document.hidden||reduced.matches)return;
+        const dt=lastTime?Math.min(48,time-lastTime)/1000:0;lastTime=time;
+        if(needsMeasure){
+          const sizes=tracks.map(t=>t.element.children[t.originals.length].offsetLeft-t.originals[0].offsetLeft);
+          tracks.forEach((t,i)=>{t.cycle=Math.max(1,sizes[i]);if(!t.offset&&t.direction<0)t.offset=t.cycle*.4;});
+          needsMeasure=false;
         }
-        let moving = false;
-        states.forEach(s => {
-          ['x','y','z'].forEach(key => { s[key] += (s['t'+key]-s[key])*.16; moving ||= Math.abs(s['t'+key]-s[key])>.01; });
+        if(scrollDirty){
+          const rect=rail.getBoundingClientRect();
+          const p=Math.min(1,Math.max(0,(innerHeight-rect.top)/(innerHeight+rect.height)));
+          tracks.forEach(t=>t.scroll=(p-.5)*180*Number(t.element.dataset.speed)*t.direction);
+          scrollDirty=false;
+        }
+        tracks.forEach(t=>{
+          if(!t.paused&&time>=t.resumeAt)t.offset+=dt*t.speed*t.direction;
+          const x=-((t.offset+t.scroll)%t.cycle+t.cycle)%t.cycle;
+          t.element.style.setProperty('--track-x',x.toFixed(2)+'px');
+        });
+        if(pointer.matches)tilts.forEach(s=>{
+          ['x','y','z'].forEach(key=>s[key]+=(s['t'+key]-s[key])*.16);
           s.element.style.setProperty('--tilt-x',s.x.toFixed(3)+'deg');
           s.element.style.setProperty('--tilt-y',s.y.toFixed(3)+'deg');
           s.element.style.setProperty('--tilt-z',s.z.toFixed(3)+'deg');
         });
-        if (moving) request();
+        request();
       }
-      states.forEach(s => {
-        s.element.addEventListener('pointermove',e => {
-          if (!pointer.matches || reduced.matches) return;
-          const r=s.element.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-          s.tx=-y*8;s.ty=x*8;s.tz=x*2.2;request();
-        });
-        s.element.addEventListener('pointerleave',()=>{s.tx=s.ty=s.tz=0;request();});
+      tracks.forEach(t=>{
+        t.element.addEventListener('pointerenter',()=>{if(pointer.matches)t.paused=true;},{signal});
+        t.element.addEventListener('pointerleave',()=>{if(!drag)t.paused=false;},{signal});
+        t.element.addEventListener('pointerdown',e=>{
+          if(reduced.matches||e.button!==0)return;
+          t.paused=true;drag={track:t,id:e.pointerId,x:e.clientX,y:e.clientY,offset:t.offset,moved:false};
+        },{signal});
+        t.element.addEventListener('pointermove',e=>{
+          if(!drag||drag.track!==t||drag.id!==e.pointerId)return;
+          const dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+          if(!drag.moved&&Math.abs(dx)>10&&Math.abs(dx)>Math.abs(dy)){
+            drag.moved=true;t.element.setPointerCapture(e.pointerId);t.element.classList.add('is-dragging');
+          }
+          if(drag.moved){t.offset=drag.offset-dx;request();}
+        },{signal});
+        const finish=()=>{
+          if(!drag||drag.track!==t)return;
+          t.suppressClick=drag.moved;t.resumeAt=performance.now()+1800;t.paused=false;
+          t.element.classList.remove('is-dragging');drag=null;request();
+        };
+        t.element.addEventListener('pointerup',finish,{signal});
+        t.element.addEventListener('pointercancel',finish,{signal});
+        t.element.addEventListener('click',e=>{
+          if(t.suppressClick){e.preventDefault();e.stopImmediatePropagation();t.suppressClick=false;return;}
+          if(!pointer.matches&&!e.target.closest('button,label,input'))e.target.closest('.service-tile')?.classList.toggle('is-open');
+        },{capture:true,signal});
       });
+      tilts.forEach(s=>{
+        s.element.addEventListener('pointermove',e=>{
+          if(!pointer.matches||reduced.matches||drag?.moved)return;
+          const r=s.element.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+          s.tx=-y*8;s.ty=x*8;s.tz=x*2.2;
+        },{signal});
+        s.element.addEventListener('pointerleave',()=>{s.tx=s.ty=s.tz=0;},{signal});
+      });
+      const observer=new IntersectionObserver(entries=>{
+        near=entries[0].isIntersecting;rail.classList.toggle('is-near',near);lastTime=0;
+        if(near)request();else{cancelAnimationFrame(frame);frame=0;}
+      },{rootMargin:'80px'});
+      observer.observe(rail);
       const update=()=>{scrollDirty=true;request();};
-      addEventListener('scroll',update,{passive:true});addEventListener('resize',update,{passive:true});
-      reduced.addEventListener('change',update);
-      addEventListener('pagehide',()=>{cancelAnimationFrame(frame);frame=0;});
-      addEventListener('pageshow',update);
-      document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else update();});
-      request();
+      addEventListener('scroll',update,{passive:true,signal});
+      addEventListener('resize',()=>{needsMeasure=true;update();},{passive:true,signal});
+      reduced.addEventListener('change',()=>{cancelAnimationFrame(frame);frame=0;lastTime=0;needsMeasure=true;update();},{signal});
+      document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(frame);frame=0;lastTime=0;if(!document.hidden)request();},{signal});
+      addEventListener('pageshow',()=>{lastTime=0;needsMeasure=true;request();},{signal});
+      addEventListener('pagehide',e=>{cancelAnimationFrame(frame);frame=0;lastTime=0;if(!e.persisted){events.abort();observer.disconnect();}},{signal});
     })();
 
     (() => {
       const root = document.querySelector('#work');
       const story = root.querySelector('.folio-story'), stage = root.querySelector('.folio-stage');
       const scene = root.querySelector('.folio-scene'), feature = root.querySelector('.folio-feature');
-      const cards = [...root.querySelectorAll('.folio-card')], orbits = [...root.querySelectorAll('.folio-orbit')];
+      const cards = [...root.querySelectorAll('.folio-card')];
       const filters = [...root.querySelectorAll('[data-filter]')], thumbnails = root.querySelector('.folio-thumbs');
       const counter = root.querySelector('.folio-count'), title = root.querySelector('.folio-current-title'), label = root.querySelector('.folio-current-label');
       const phase = root.querySelector('.folio-phase'), progressBar = root.querySelector('.folio-progress>span');
       const feedback = root.querySelector('.folio-feedback');
-      const media = matchMedia('(min-width:900px) and (min-height:600px) and (prefers-reduced-motion:no-preference)');
+      const media = matchMedia('(prefers-reduced-motion:no-preference)');
       const reduced = matchMedia('(prefers-reduced-motion:reduce)');
       const events = new AbortController(), signal = events.signal;
       const clamp = v => Math.min(1,Math.max(0,v));
@@ -371,7 +514,26 @@
       let visible = cards.slice(), selected = cards[0], animated = false, near = false, disposed = false;
       let frame = 0, previousTime = 0, needsMeasure = true, start = 0, distance = 1, width = 1, height = 1;
       let progress = 0, featureOpacity = 0;
-      const positions = new Map(), objectUrls = new Set();
+      const positions = new Map(), sizes = new Map(), objectUrls = new Set();
+      const viewer=document.querySelector('.art-viewer'), viewerImage=viewer.querySelector('img'), viewerTitle=viewer.querySelector('h2');
+      const viewerCanvas=viewer.querySelector('.art-viewer__image'), zoomButton=viewer.querySelector('.art-viewer__zoom');
+      let viewerFocus=null;
+      function showArtwork(){
+        const image=selected.querySelector('img');
+        viewerImage.src=image.src;viewerImage.alt=image.alt;viewerTitle.textContent=selected.dataset.title;
+        viewerCanvas.classList.remove('is-zoomed');zoomButton.textContent='放大 ＋';zoomButton.setAttribute('aria-pressed','false');
+        if(!viewer.open){viewerFocus=document.activeElement;viewer.showModal();document.body.style.overflow='hidden';}
+      }
+      viewer.querySelector('.art-viewer__close').addEventListener('click',()=>viewer.close(),{signal});
+      viewer.addEventListener('close',()=>{document.body.style.overflow='';viewerFocus?.focus({preventScroll:true});},{signal});
+      zoomButton.addEventListener('click',()=>{
+        const zoomed=viewerCanvas.classList.toggle('is-zoomed');
+        zoomButton.textContent=zoomed?'缩小 −':'放大 ＋';zoomButton.setAttribute('aria-pressed',String(zoomed));
+      },{signal});
+      function stepArtwork(direction){selected=visible[(visible.indexOf(selected)+direction+visible.length)%visible.length];updateSelection();showArtwork();request();}
+      viewer.querySelector('.art-viewer__prev').addEventListener('click',()=>stepArtwork(-1),{signal});
+      viewer.querySelector('.art-viewer__next').addEventListener('click',()=>stepArtwork(1),{signal});
+      root.querySelector('.folio-detail').addEventListener('click',showArtwork,{signal});
 
       const thumbs = cards.map((card,i) => {
         const button = document.createElement('button');
@@ -379,7 +541,9 @@
         const image=document.createElement('img');image.src=card.querySelector('img').getAttribute('src');image.alt='';image.decoding='async';
         button.append(image);thumbnails.append(button);
         button.addEventListener('click',()=>select(card,true),{signal});
-        card.querySelector('.folio-pick').addEventListener('click',()=>{if(animated) select(card,true);},{signal});
+        card.querySelector('.folio-pick').addEventListener('click',()=>{
+          if(animated&&progress<.9)select(card,true);else{select(card);showArtwork();}
+        },{signal});
         return button;
       });
       function updateSelection() {
@@ -400,23 +564,33 @@
       function measure() {
         const r=story.getBoundingClientRect();
         width=stage.clientWidth;height=scene.clientHeight;
-        start=r.top+scrollY-84;distance=Math.max(1,story.offsetHeight-stage.offsetHeight);
-        [...cards,...orbits].forEach(element=>{
-          const image=element.matches('img')?element:element.querySelector('img');
+        const mobile=innerWidth<=900,columns=Math.min(mobile?3:5,visible.length),rows=Math.ceil(visible.length/columns);
+        start=r.top+scrollY-parseFloat(getComputedStyle(stage).top);distance=Math.max(1,story.offsetHeight-stage.offsetHeight);
+        const dimensions=cards.map(element=>{
+          const image=element.querySelector('img');
           const ratio=(image.naturalWidth||Number(image.getAttribute('width')))/(image.naturalHeight||Number(image.getAttribute('height')));
-          const cardHeight=Math.min(height*.76,360,width*.42/ratio);
+          const cardHeight=Math.min(height/rows*.78,300,width*(mobile?.27:.18)/ratio);
+          return {element,cardHeight,cardWidth:cardHeight*ratio};
+        });
+        dimensions.forEach(({element,cardHeight,cardWidth})=>{
           element.style.setProperty('--card-h',cardHeight+'px');
-          element.style.setProperty('--card-w',cardHeight*ratio+'px');
+          element.style.setProperty('--card-w',cardWidth+'px');
+          sizes.set(element,{width:cardWidth,height:cardHeight});
         });
         needsMeasure=false;
       }
       // Every boundary shares the same pose. Reversing scroll traces exactly the same path.
       function cardPose(card,i,p) {
-        const c=visible.length===1?.5:i/(visible.length-1), d=c-.5, chosen=card===selected;
-        const stack=[(i-visible.indexOf(selected))*5,Math.abs(i-visible.indexOf(selected))*3,.77,(i-visible.indexOf(selected))*2,0,chosen?1:.12];
-        const fan=[d*width*.71,d*d*height*.35,.82,d*32,-d*12,1];
-        const cascade=[d*width*.64,d*height*.38,.77,d*22,0,1];
-        const end=[width*.235+(chosen?0:(i-visible.indexOf(selected))*8),chosen?0:12,chosen?1.09:.76,chosen?0:d*10,0,chosen?1:0];
+        const c=visible.length===1?.5:i/(visible.length-1),d=c-.5,chosen=card===selected,mobile=innerWidth<=900;
+        const columns=Math.min(mobile?3:5,visible.length),rows=Math.ceil(visible.length/columns);
+        const column=i%columns-(columns-1)/2,row=Math.floor(i/columns)-(rows-1)/2;
+        const angle=i*2.4,relative=i-visible.indexOf(selected);
+        const stack=[chosen?0:Math.sin(angle)*width*.19,chosen?0:Math.cos(angle)*height*.19,chosen?1.5:.78,chosen?0:relative*3,0,chosen?1:.62];
+        const fan=[column*width/(columns+.35),row*height/(rows+.4),.93,column*2.5,0,1];
+        const cascade=[column*width/(columns+.5),row*height/(rows+.6)+column*height*.045,.88,column*7,0,1];
+        const size=sizes.get(card)||{width:1,height:1};
+        const detailScale=Math.min(width*(mobile?.88:.45)/size.width,height*.82/size.height);
+        const end=[mobile?0:width*.235,0,chosen?detailScale:.7,0,0,chosen?1:0];
         if(p<.12)return stack;
         if(p<.36)return mix(stack,fan,smooth((p-.12)/.24));
         if(p<.44)return fan;
@@ -445,12 +619,6 @@
         progress=clamp((scrollY-start)/distance);
         let moving=false;
         visible.forEach((card,i)=>{moving=paint(card,cardPose(card,i,progress),alpha)||moving;});
-        orbits.forEach((image,i)=>{
-          const side=i%2===0?-1:1,pair=Math.floor(i/2),travel=smooth(progress/.25);
-          const x=side*width*(.13+pair*.115+travel*.21),y=(pair-1)*height*.06;
-          const opacity=(1-smooth((progress-.10)/.18))*.76;
-          moving=paint(image,[x,y,.32+pair*.14+travel*.35,side*(8+pair*4),side*24,opacity],alpha)||moving;
-        });
         const targetOpacity=smooth((progress-.82)/.12);
         featureOpacity+=(targetOpacity-featureOpacity)*alpha;
         if(Math.abs(targetOpacity-featureOpacity)>.002)moving=true;else featureOpacity=targetOpacity;
@@ -464,13 +632,12 @@
       function configure() {
         cancelAnimationFrame(frame);frame=0;previousTime=0;positions.clear();
         animated=media.matches;root.classList.toggle('is-animated',animated);
-        scene.setAttribute('aria-hidden',String(animated));
+        scene.removeAttribute('aria-hidden');
         cards.forEach(card=>{
           card.removeAttribute('style');
-          const button=card.querySelector('.folio-pick');button.tabIndex=animated?-1:0;
+          const button=card.querySelector('.folio-pick');button.tabIndex=0;
           button.setAttribute('aria-label',animated?`查看${card.dataset.title}`:`${card.dataset.title}，作品展示`);
         });
-        if(!animated)scene.removeAttribute('aria-hidden');
         needsMeasure=true;updateSelection();request();
       }
       const observer=new IntersectionObserver(entries=>{
@@ -517,6 +684,7 @@
       },{signal}));
       function destroy() {
         disposed=true;cancelAnimationFrame(frame);events.abort();observer.disconnect();resizeObserver.disconnect();
+        if(viewer.open){viewer.close();document.body.style.overflow='';}
         objectUrls.forEach(url=>URL.revokeObjectURL(url));
         root.classList.remove('is-animated','is-near');scene.removeAttribute('aria-hidden');
         cards.forEach(card=>{card.removeAttribute('style');card.querySelector('.folio-pick').tabIndex=0;});

@@ -34,3 +34,7 @@ artifacts/
 # Published contact assets
 !assets/contact/
 !assets/contact/*.webp
+
+# Opening video frames used while the OSS video loads
+!assets/scene/
+!assets/scene/*.webp
