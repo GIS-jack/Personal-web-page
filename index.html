@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="GIS鲸：高级地理制图、GIS与空间分析教学、AI Agent自动化服务与精选作品。">
+  <link rel="preconnect" href="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com">
   <title>GIS鲸 — Spatial Stories</title>
   <style>
     :root{--bg:#0a0a0a;--surface:rgba(18,18,18,.66);--white:#f7f7f5;--muted:rgba(247,247,245,.62);--faint:rgba(247,247,245,.16);--blue:#b8dcff;--max:1440px;--ease:cubic-bezier(.16,1,.3,1)}
@@ -86,6 +88,54 @@
     @media(max-width:600px){.folio{padding:42px 20px 24px}.folio-heading{grid-template-columns:1fr;gap:24px;margin-bottom:30px}.folio-heading h2{font-size:34px;margin-top:20px}.folio-intro{justify-self:start;max-width:none}.folio-intro p{display:none}.folio-edition{display:none}.folio-intro small{font-size:11px}.folio-filters{gap:6px}.folio-filters button{font-size:10px;padding:10px 12px}.folio-top{font-size:8px;letter-spacing:.06em;padding-top:0}.folio-scene{grid-template-columns:1fr;gap:38px}.folio-card:nth-of-type(even){padding-top:0}.folio-pick{aspect-ratio:.82;border-radius:18px}.folio-card__meta h3{font-size:22px}.folio-end span:last-child{display:none}.folio-end{margin-top:34px}}
     @media(prefers-reduced-motion:reduce){.folio *, .folio *::before,.folio *::after{transition:none!important;scroll-behavior:auto!important}}
 
+    /* Hero: keep the profession on one line and give the background room. */
+    .hero{min-height:100svh;padding-top:130px;padding-bottom:56px;align-items:center}
+    .hero h1.hero__title{font-size:clamp(42px,5vw,72px);line-height:1.12;letter-spacing:-.045em;margin:20px 0 26px;font-weight:650}
+    .hero__title>span,.hero__title>em{display:block}
+    .hero__title .hero__role{font-size:.72em;letter-spacing:-.035em;margin-top:10px;white-space:nowrap}
+    .hero__english{font-size:clamp(14px,1.35vw,19px);line-height:1.5;max-width:450px}
+    .hero__copy{font-size:14px;line-height:1.85;max-width:470px}
+    @media(max-width:560px){.hero{padding-top:112px;padding-bottom:44px}.hero h1.hero__title{font-size:clamp(36px,10vw,52px);margin:18px 0 24px}.hero__grid{gap:32px}}
+
+    .service-uploaders{position:absolute;z-index:8;left:18px;bottom:10px;display:flex;gap:6px;opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease)}.service-tile:hover .service-uploaders,.service-tile:focus-within .service-uploaders{opacity:1;transform:none}.service-uploaders label{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:24px;padding:0 7px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(5,6,20,.62);backdrop-filter:blur(8px);color:#fff;font-size:9px;cursor:pointer}.service-uploaders label:hover{background:rgba(173,157,255,.8)}.service-uploaders input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.service-tile:has(.service-uploaders) .service-tile__index{right:18px}.service-uploaders label:focus-within{outline:2px solid var(--blue);outline-offset:3px}
+    @media(max-width:560px){.service-uploaders{opacity:1;transform:none;bottom:8px;left:14px}.service-uploaders label{min-width:31px;height:22px;font-size:8px}}
+    .service-tile__layer{background-size:cover;background-position:center;background-repeat:no-repeat}
+    .service-tile__layer--front::after{background:linear-gradient(135deg,rgba(255,255,255,.06),transparent 42%),radial-gradient(circle at 70% 25%,rgba(255,255,255,.16),transparent 24%)}
+    /* Education artwork uses blend depth so pale map canvases do not hide the rear layers. */
+    .service-tile--education .service-tile__layer--back{z-index:1;inset:34px 8px 12px 72px;background-size:contain;opacity:.92;mix-blend-mode:multiply}
+    .service-tile--education .service-tile__layer--mid{z-index:2;inset:18px 32px 10px 30px;background-size:contain;opacity:.94;mix-blend-mode:multiply}
+    .service-tile--education .service-tile__layer--front{z-index:3;inset:4px 58px 25px 8px;background-size:contain;opacity:.96;mix-blend-mode:multiply}
+    .service-tile--education .service-tile__layer--front::after{background:linear-gradient(135deg,rgba(255,255,255,.035),transparent 48%)}    /* AI workflow artwork shared by both service rows. */
+    .service-tile--ai .service-tile__layer--back{background-image:url('assets/services/ai/ai-background.webp');background-size:cover;background-position:center}
+    .service-tile--ai .service-tile__layer--mid{background-image:url('assets/services/ai/ai-mid.webp');background-size:contain;background-position:center;background-repeat:no-repeat}
+    .service-tile--ai .service-tile__layer--front{background-image:url('assets/services/ai/ai-foreground.webp');background-size:cover;background-position:center}
+    /* Portfolio originals retain their map legends and full compositions. */
+    .folio .folio-pick{aspect-ratio:var(--art-ratio,1.5);background:#f6f5f2}
+    .folio .folio-pick img,.folio .folio-orbit{object-fit:contain}
+    .folio .folio-pick:hover img,.folio .folio-pick:focus-visible img{transform:none}
+    .folio .folio-pick:hover::after,.folio .folio-pick:focus-visible::after{border-color:#aaa2ff}
+    .folio .folio-watermark{background:#141425b3;padding:4px 7px;border-radius:4px}
+    .folio .folio-thumb{width:46px;height:34px}
+    .folio .folio-thumb img{object-fit:contain}
+    .folio.is-animated .folio-pick{aspect-ratio:auto}
+
+    .qr-art{overflow:hidden;background:#fff;padding:0;}
+    .qr-art img{display:block;width:100%;height:100%;object-fit:contain;}
+    .modal__card .qr-art{width:min(320px,100%);aspect-ratio:1083/1464;border:0;box-shadow:0 24px 80px rgba(0,0,0,.3)}
+    .qr-stage .qr-art{width:min(320px,72%);aspect-ratio:1083/1464;border:0}
+    .float-panel .qr-art{width:135px;aspect-ratio:1083/1464;border-width:0}
+
+    .modal__card{max-height:calc(100dvh - 44px);overflow-y:auto}
+    .button,.qr-trigger{touch-action:manipulation}
+    @media(max-width:900px){
+      .service-track{width:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;transform:none!important;will-change:auto;padding-block:28px;-webkit-overflow-scrolling:touch}
+      .service-tile{flex:none;scroll-snap-align:center;will-change:auto}
+      .service-tile__layer{background-size:cover}
+      .scene video{filter:none}
+      .modal{backdrop-filter:none}
+      .modal__card{border-radius:20px}
+    }
+    @media(prefers-reduced-motion:reduce){.scene video{filter:none}}
   </style>
 </head>
 <body>
@@ -95,8 +145,8 @@
        Then set frameCountA/B below and keep the folder structure. -->
   <div class="scene" aria-hidden="true">
     <canvas id="canvasA"></canvas><canvas id="canvasB"></canvas>
-    <video id="fallbackA" src="video-a.mp4" muted playsinline webkit-playsinline preload="auto"></video>
-    <video id="fallbackB" src="video-b.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <video id="fallbackA" poster="assets/works/personal/overview.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/A.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <video id="fallbackB" poster="assets/works/personal/land-use.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/B.mp4" muted playsinline webkit-playsinline preload="auto"></video>
     <div class="scene__grain"></div>
   </div>
 
@@ -104,69 +154,57 @@
   <div class="stage-copy" id="stageCopy"><div class="kicker" id="stageKicker">SCROLL / 01</div><h2 id="stageTitle">让空间数据，<br><em>拥有叙事。</em></h2><p id="stageText">从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。</p></div>
 
   <main id="top">
-    <section class="hero"><div class="hero__grid"><div class="reveal"><div class="eyebrow">Spatial data / Cartography / AI workflow</div><h1>GIS鲸 |<br><em>空间数据</em><br>高级地理制图专家</h1><p class="hero__english"><small>GIS WHALE</small>Spatial Data &amp; Advanced Cartography Specialist</p><p class="hero__copy">教学 GIS 遥感专业知识 · 高级定制制图 · 探索 AI 前沿，为您提供三位一体的 GIS 解决方案。</p><div class="actions"><a class="button" href="#work">浏览作品 ↘</a><button class="button button--ghost qr-trigger" type="button">立即定制 / 咨询 ↗</button></div></div><div class="hero__meta reveal"><div><strong>3S</strong><span>遥感 · GIS · GPS</span></div><div><strong>01—∞</strong><span>从数据到故事</span></div></div></div><div class="scroll-hint"><i></i>SCROLL TO EXPLORE</div></section>
+    <section class="hero"><div class="hero__grid"><div class="reveal"><div class="eyebrow">Spatial data / Cartography / AI workflow</div><h1 class="hero__title"><span>GIS鲸 |</span><em>空间数据</em><span class="hero__role">高级地理制图专家</span></h1><p class="hero__english"><small>GIS WHALE</small>Spatial Data &amp; Advanced Cartography Specialist</p><p class="hero__copy">教学 GIS 遥感专业知识 · 高级定制制图 · 探索 AI 前沿，为您提供三位一体的 GIS 解决方案。</p><div class="actions"><a class="button" href="#work">浏览作品 ↘</a><button class="button button--ghost qr-trigger" type="button">立即定制 / 咨询 ↗</button></div></div><div class="hero__meta reveal"><div><strong>3S</strong><span>遥感 · GIS · GPS</span></div><div><strong>01—∞</strong><span>从数据到故事</span></div></div></div><div class="scroll-hint"><i></i>SCROLL TO EXPLORE</div></section>
 
-    <section class="section" id="about"><div class="section-head reveal"><div><div class="kicker">01 / ABOUT</div><h2 class="section-title">把复杂的空间，<br>讲得更清楚。</h2></div><p class="section-note">高校 GIS 专业背景，专注于 3S 技术、遥感与空间数据的视觉表达。</p></div><div class="hairline"></div><div class="about-grid"><div class="reveal"><p class="lead">我是 <span>GIS鲸</span>，让地图成为思考的入口，让数据拥有被看见的方式。</p><p class="body-copy">从研究区概况到空间自相关，从基础地理要素到 Fragstats 景观格局计算，我把严谨的空间分析转译成直观、克制、可以被使用的设计。</p></div><div class="facts reveal"><div class="fact"><span>专业方向</span><strong>GIS / RS / 空间分析</strong></div><div class="fact"><span>工作方式</span><strong>研究 · 设计 · 自动化</strong></div><div class="fact"><span>服务对象</span><strong>高校 / 研究者 / 品牌团队</strong></div></div></div></section>
+    <section class="section" id="about"><div class="section-head reveal"><div><div class="kicker">01 / ABOUT</div><h2 class="section-title">把复杂的空间，<br>讲得更清楚。</h2></div><p class="section-note">高校 GIS 专业背景，专注于 3S 技术、遥感与空间数据的视觉表达。</p></div><div class="hairline"></div><div class="about-grid"><div class="reveal"><p class="lead">我是 <span>GIS鲸</span>，让地图成为思考的入口，让数据拥有被看见的方式。</p><p class="body-copy">融合学术级地图制图、深度空间统计建模与遥感机器学习解译，并前沿整合 AI Agent 驱动的 GIS/CAD 软件自动化，提供从数据挖掘、高精可视化到智能工作流闭环的全流程地理信息服务。</p></div><div class="facts reveal"><div class="fact"><span>专业方向</span><strong>GIS / RS / 空间分析</strong></div><div class="fact"><span>工作方式</span><strong>研究 · 设计 · 自动化</strong></div><div class="fact"><span>服务对象</span><strong>高校科研/企事业单位/学者</strong></div></div></div></section>
 
-        <section class="section services-section" id="services"><div class="section-head reveal"><div><div class="kicker">02 / SERVICES</div><h2 class="section-title">三种方式，<br>让想法落地。</h2></div><p class="section-note">两条反向移动的卡片带形成速度差。靠近一张卡片时，叠放的视觉层会打开，让服务从平面变成空间。</p></div><div class="service-rail" data-service-rail><div class="service-track service-track--forward" data-service-track data-speed=".3"><article class="service-tile service-tile--map reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">01 / MAP DESIGN</span></div><div class="service-tile__copy"><h3>高级<br>地理制图</h3><p>研究区概况、基础地理要素与 GIS 空间分析，建立有层次的视觉秩序。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article><article class="service-tile service-tile--education reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">02 / EDUCATION</span></div><div class="service-tile__copy"><h3>GIS 与<br>空间分析教学</h3><p>精通 ArcGIS / Pro，提供免费数据底图及获取方法，进阶 Python 与基础 CAD。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article><article class="service-tile service-tile--ai reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">03 / AI WORKFLOW</span></div><div class="service-tile__copy"><h3>AI 与<br>自动化辅助</h3><p>把 AI 应用到制图、清洗、分析与汇报中，让重复工作交给流程。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article></div><div class="service-track service-track--reverse" data-service-track data-speed="1" aria-hidden="true"><article class="service-tile service-tile--ai" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">03 / AI WORKFLOW</span></div><div class="service-tile__copy"><h3>AI 与<br>自动化辅助</h3><p>把 AI 应用到制图、清洗、分析与汇报中，让重复工作交给流程。</p></div></article><article class="service-tile service-tile--map" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">01 / MAP DESIGN</span></div><div class="service-tile__copy"><h3>高级<br>地理制图</h3><p>让空间数据拥有清晰的叙事路径。</p></div></article><article class="service-tile service-tile--education" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">02 / EDUCATION</span></div><div class="service-tile__copy"><h3>GIS 与<br>空间分析教学</h3><p>让学习进入可复用的工作流。</p></div></article></div></div></section>
+        <section class="section services-section" id="services"><div class="section-head reveal"><div><div class="kicker">02 / SERVICES</div><h2 class="section-title">三种方式，<br>让想法落地。</h2></div><p class="section-note">用专业解读空间，用品质回应信赖。</p></div><div class="service-rail" data-service-rail><div class="service-track service-track--forward" data-service-track data-speed=".3"><article class="service-tile service-tile--map reveal" data-service-key="map" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back" style="background-image:url('assets/services/map/cartography-background.webp')"></span><span class="service-tile__layer service-tile__layer--mid" style="background-image:url('assets/services/map/cartography-mid.webp')"></span><span class="service-tile__layer service-tile__layer--front" style="background-image:url('assets/services/map/cartography-foreground.webp')"></span><span class="service-tile__index">01 / MAP DESIGN</span><span class="service-uploaders" aria-label="上传高级地理制图卡片图片"><label>图 1<input type="file" accept="image/*" data-service-layer="back" aria-label="替换高级地理制图背景图片"></label><label>图 2<input type="file" accept="image/*" data-service-layer="mid" aria-label="替换高级地理制图中间图片"></label><label>图 3<input type="file" accept="image/*" data-service-layer="front" aria-label="替换高级地理制图前景图片"></label></span></div><div class="service-tile__copy"><h3>高级<br>地理制图</h3><p>研究区概况、基础地理要素与 GIS 空间分析，建立有层次的视觉秩序。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article><article class="service-tile service-tile--education reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back" style="background-image:url('assets/services/education/education-background.webp')"></span><span class="service-tile__layer service-tile__layer--mid" style="background-image:url('assets/services/education/education-mid.webp')"></span><span class="service-tile__layer service-tile__layer--front" style="background-image:url('assets/services/education/education-foreground.webp')"></span><span class="service-tile__index">02 / EDUCATION</span><span class="service-uploaders" aria-label="上传 GIS 与空间分析教学卡片图片"><label>图 1<input type="file" accept="image/*" data-service-layer="back" aria-label="替换 GIS 教学背景图片"></label><label>图 2<input type="file" accept="image/*" data-service-layer="mid" aria-label="替换 GIS 教学中间图片"></label><label>图 3<input type="file" accept="image/*" data-service-layer="front" aria-label="替换 GIS 教学前景图片"></label></span></div><div class="service-tile__copy"><h3>GIS 与<br>空间分析教学</h3><p>精通 ArcGIS / Pro，提供免费数据底图及获取方法，进阶 Python 与基础 CAD。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article><article class="service-tile service-tile--ai reveal" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back"></span><span class="service-tile__layer service-tile__layer--mid"></span><span class="service-tile__layer service-tile__layer--front"></span><span class="service-tile__index">03 / AI WORKFLOW</span><span class="service-uploaders" aria-label="上传 AI 自动化辅助卡片图片"><label>图 1<input type="file" accept="image/*" data-service-layer="back" aria-label="替换 AI 自动化背景图片"></label><label>图 2<input type="file" accept="image/*" data-service-layer="mid" aria-label="替换 AI 自动化中间图片"></label><label>图 3<input type="file" accept="image/*" data-service-layer="front" aria-label="替换 AI 自动化前景图片"></label></span></div><div class="service-tile__copy"><h3>AI 与<br>自动化辅助</h3><p>基于 AI Agent 的地理空间数据与软件操作自动化，让重复工作交给流程。</p><button class="button qr-trigger" type="button">选择此模块下单 ↗</button></div></article></div><div class="service-track service-track--reverse" data-service-track data-speed="1" aria-hidden="true"><article class="service-tile service-tile--ai" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back" style="background-image:url('assets/services/ai/ai-background.webp')"></span><span class="service-tile__layer service-tile__layer--mid" style="background-image:url('assets/services/ai/ai-mid.webp')"></span><span class="service-tile__layer service-tile__layer--front" style="background-image:url('assets/services/ai/ai-foreground.webp')"></span><span class="service-tile__index">03 / AI WORKFLOW</span></div><div class="service-tile__copy"><h3>AI 与<br>自动化辅助</h3><p>基于 AI Agent 的地理空间数据与软件操作自动化，让重复工作交给流程。</p></div></article><article class="service-tile service-tile--map" data-service-key="map" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back" style="background-image:url('assets/services/map/cartography-background.webp')"></span><span class="service-tile__layer service-tile__layer--mid" style="background-image:url('assets/services/map/cartography-mid.webp')"></span><span class="service-tile__layer service-tile__layer--front" style="background-image:url('assets/services/map/cartography-foreground.webp')"></span><span class="service-tile__index">01 / MAP DESIGN</span></div><div class="service-tile__copy"><h3>高级<br>地理制图</h3><p>让空间数据拥有清晰的叙事路径。</p></div></article><article class="service-tile service-tile--education" data-tilt="service"><div class="service-tile__visual"><span class="service-tile__layer service-tile__layer--back" style="background-image:url('assets/services/education/education-background.webp')"></span><span class="service-tile__layer service-tile__layer--mid" style="background-image:url('assets/services/education/education-mid.webp')"></span><span class="service-tile__layer service-tile__layer--front" style="background-image:url('assets/services/education/education-foreground.webp')"></span><span class="service-tile__index">02 / EDUCATION</span></div><div class="service-tile__copy"><h3>GIS 与<br>空间分析教学</h3><p>让学习进入可复用的工作流。</p></div></article></div></div></section>
 
                 <section class="folio" id="work" aria-labelledby="folio-heading">
       <div class="folio-heading reveal">
         <div><p class="kicker">03 / SELECTED WORK</p><h2 id="folio-heading">作品，<br>是方法的回声<span>。</span></h2></div>
-        <div class="folio-intro"><span class="folio-edition">THE VISUAL ARCHIVE / 01—07</span><p>让信息拥有秩序，<br>让每一种表达，都值得停留。</p><small>当前为素材包视觉示例，可替换为你的制图作品。</small></div>
+        <div class="folio-intro"><span class="folio-edition">THE VISUAL ARCHIVE / 01—04</span><p>让信息拥有秩序，<br>让每一种表达，都值得停留。</p></div>
       </div>
       <div class="folio-filters" role="group" aria-label="作品分类">
-        <button type="button" data-filter="all" aria-pressed="true">全部作品 <span>07</span></button>
+        <button type="button" data-filter="all" aria-pressed="true">全部作品 <span>04</span></button>
         <button type="button" data-filter="overview" aria-pressed="false">概况与路线图</button>
         <button type="button" data-filter="elements" aria-pressed="false">基础地理要素</button>
         <button type="button" data-filter="analysis" aria-pressed="false">GIS 空间分析</button>
-        <button type="button" data-filter="fragstats" aria-pressed="false">Fragstats 景观</button>
+        <button type="button" data-filter="agent" aria-pressed="false">Agent自动化</button>
       </div>
       <div class="folio-story">
         <div class="folio-stage">
           <div class="folio-top"><span><i></i> GIS WHALE / VISUAL EXPLORATIONS</span><span class="folio-phase" aria-hidden="true">01 / 汇聚</span><a href="#knowledge" class="folio-skip">继续浏览 ↓</a></div>
           <div class="folio-scene">
             <div class="folio-orbits" aria-hidden="true">
-            <img class="folio-orbit" src="assets/works/4f1a66a9d95d83315887af71c8b8a2e7.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/8a91003ccd3e6116166c89ec314723b1.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/9f1b931cc3271db0b405b2f329d7e89f.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/974cd7f19d214d6febc761ea4aebccc5.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/ab3d8e3a5bdfb4071ec572f1d5a29479.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
-            <img class="folio-orbit" src="assets/works/f533654872a9ad43464cf63eacc68df6.jpg" alt="" width="736" height="1104" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/personal/pearl-river.webp" alt="" width="1000" height="687" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/personal/study-01.webp" alt="" width="1000" height="833" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/personal/study-02.webp" alt="" width="1000" height="833" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/personal/study-03.webp" alt="" width="1000" height="833" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/personal/land-use.webp" alt="" width="1000" height="700" loading="lazy" decoding="async">
+            <img class="folio-orbit" src="assets/works/personal/knowledge.webp" alt="" width="485" height="1000" loading="lazy" decoding="async">
             </div>
             <div class="folio-feature" aria-hidden="true"><span>IN THE DETAILS</span><h3>让细节，<br>被看见。</h3><p>从整体到局部，<br>每一处留白都有意义。</p></div>
-            <article class="folio-card" data-category="overview" data-title="静默的轮廓" data-label="概况与路线图" id="folio-card-1">
-              <button class="folio-pick" type="button" aria-label="查看静默的轮廓"><img src="assets/works/0b2fb36f46e4792dd533c839fb40522d.jpg" alt="逆光中的黑色人物侧影" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
-              <div class="folio-card__meta"><span>视觉示例 / 01</span><h3>静默的轮廓</h3><p>概况与路线图</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换静默的轮廓的图片"></label></div></div>
+            <article class="folio-card" data-category="overview" data-title="概况与路线图" data-label="韶关市经济发展情况与区位展示" id="folio-card-1">
+              <button class="folio-pick" style="--art-ratio:2000/1333" type="button" aria-label="查看概况与路线图"><img src="assets/works/personal/overview.webp" alt="韶关市经济发展情况与区位展示" width="2000" height="1333" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 01</span><h3>概况与路线图</h3><p>韶关市经济发展情况与区位展示</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换概况与路线图的图片"></label></div></div>
             </article>
-            <article class="folio-card" data-category="elements" data-title="构图的重心" data-label="基础地理要素" id="folio-card-2">
-              <button class="folio-pick" type="button" aria-label="查看构图的重心"><img src="assets/works/8c39242f2a8e172655ca7a6d7bce9c36.jpg" alt="橙色圆形与蓝色方形衬托的人物海报" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
-              <div class="folio-card__meta"><span>视觉示例 / 02</span><h3>构图的重心</h3><p>基础地理要素</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换构图的重心的图片"></label></div></div>
+            <article class="folio-card" data-category="elements" data-title="基础地理要素" data-label="地理要素分布、平均中心与标准差椭圆" id="folio-card-2">
+              <button class="folio-pick" style="--art-ratio:2000/1616" type="button" aria-label="查看基础地理要素"><img src="assets/works/personal/elements.webp" alt="地理要素分布、平均中心与标准差椭圆" width="2000" height="1616" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 02</span><h3>基础地理要素</h3><p>地理要素分布、平均中心与标准差椭圆</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换基础地理要素的图片"></label></div></div>
             </article>
-            <article class="folio-card" data-category="fragstats" data-title="流动的色彩" data-label="Fragstats 景观" id="folio-card-3">
-              <button class="folio-pick" type="button" aria-label="查看流动的色彩"><img src="assets/works/f9f81e59b9371e45f8b751a279ef73d6.jpg" alt="Porte 艺术海报，蓝紫与橙色花形交叠" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
-              <div class="folio-card__meta"><span>视觉示例 / 03</span><h3>流动的色彩</h3><p>Fragstats 景观</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换流动的色彩的图片"></label></div></div>
+            <article class="folio-card" data-category="analysis" data-title="GIS 空间分析" data-label="空间自相关报表与聚集模式" id="folio-card-3">
+              <button class="folio-pick" style="--art-ratio:755/697" type="button" aria-label="查看GIS 空间分析"><img src="assets/works/personal/analysis.webp" alt="空间自相关报表与聚集模式" width="755" height="697" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 03</span><h3>GIS 空间分析</h3><p>空间自相关报表与聚集模式</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换GIS 空间分析的图片"></label></div></div>
             </article>
-            <article class="folio-card" data-category="analysis" data-title="向前的张力" data-label="GIS 空间分析" id="folio-card-4">
-              <button class="folio-pick" type="button" aria-label="查看向前的张力"><img src="assets/works/39f74daf93c80c42b3dcc50e7db12e5e.jpg" alt="橙色背景中的运动鞋与动态光线" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
-              <div class="folio-card__meta"><span>视觉示例 / 04</span><h3>向前的张力</h3><p>GIS 空间分析</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换向前的张力的图片"></label></div></div>
-            </article>
-            <article class="folio-card" data-category="overview" data-title="山水之间" data-label="概况与路线图" id="folio-card-5">
-              <button class="folio-pick" type="button" aria-label="查看山水之间"><img src="assets/works/39c46d9254d411ac6e4db84d47b3f5cb.jpg" alt="青绿色山水与悬浮展示台的概念视觉" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
-              <div class="folio-card__meta"><span>视觉示例 / 05</span><h3>山水之间</h3><p>概况与路线图</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换山水之间的图片"></label></div></div>
-            </article>
-            <article class="folio-card" data-category="elements" data-title="光的切面" data-label="基础地理要素" id="folio-card-6">
-              <button class="folio-pick" type="button" aria-label="查看光的切面"><img src="assets/works/e51aa87e017e93815a46fe648577a039.jpg" alt="黄色背景与佩戴圆形眼镜的人物剪影" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
-              <div class="folio-card__meta"><span>视觉示例 / 06</span><h3>光的切面</h3><p>基础地理要素</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换光的切面的图片"></label></div></div>
-            </article>
-            <article class="folio-card" data-category="analysis" data-title="风的形状" data-label="GIS 空间分析" id="folio-card-7">
-              <button class="folio-pick" type="button" aria-label="查看风的形状"><img src="assets/works/d92d71dd4135e4ee57afdd3fd6bcc35a.jpg" alt="橙色织物掠过人物侧脸的时尚视觉" width="736" height="1104" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / VISUAL STUDY</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
-              <div class="folio-card__meta"><span>视觉示例 / 07</span><h3>风的形状</h3><p>GIS 空间分析</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换风的形状的图片"></label></div></div>
+            <article class="folio-card" data-category="agent" data-title="Agent自动化" data-label="AI Agent 驱动的 GIS 数据处理工作流" id="folio-card-4">
+              <button class="folio-pick" style="--art-ratio:1376/768" type="button" aria-label="查看Agent自动化"><img src="assets/works/personal/agent.webp" alt="AI Agent 驱动的 GIS 数据处理工作流" width="1376" height="768" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
+              <div class="folio-card__meta"><span>精选作品 / 04</span><h3>Agent自动化</h3><p>AI Agent 驱动的 GIS 数据处理工作流</p><div class="folio-card__actions"><button class="folio-cta qr-trigger" type="button">定制同款 ↗</button><label class="folio-upload">替换图片<input type="file" accept="image/*" aria-label="替换Agent自动化的图片"></label></div></div>
             </article>
           </div>
           <div class="folio-controls">
             <div class="folio-thumbs" role="group" aria-label="选择重点作品"></div>
-            <div class="folio-inspector"><div><span class="folio-count">01 / 07</span><h3 class="folio-current-title">静默的轮廓</h3><p class="folio-current-label">视觉示例 / 概况与路线图</p></div><div class="folio-control-actions"><label class="folio-upload">替换当前图片<input type="file" accept="image/*" aria-label="替换当前作品图片"></label><button class="folio-cta qr-trigger" type="button">定制同款 <span>↗</span></button></div></div>
+            <div class="folio-inspector"><div><span class="folio-count">01 / 04</span><h3 class="folio-current-title">概况与路线图</h3><p class="folio-current-label">韶关市经济发展情况与区位展示</p></div><div class="folio-control-actions"><label class="folio-upload">替换当前图片<input type="file" accept="image/*" aria-label="替换当前作品图片"></label><button class="folio-cta qr-trigger" type="button">定制同款 <span>↗</span></button></div></div>
           </div>
           <div class="folio-progress" aria-hidden="true"><span></span></div>
         </div>
@@ -175,17 +213,18 @@
       <p class="folio-feedback" role="status" aria-live="polite"></p>
     </section>
 
-    <section class="section" id="knowledge"><div class="knowledge"><div class="reveal"><div class="kicker">04 / KNOWLEDGE BASE</div><h2 class="section-title">把经验，<br>分享出去。</h2><p class="section-note" style="margin-top:28px">持续整理 GIS、遥感与空间数据工作中的方法与工具，给每一次学习一个可以打开的入口。</p><button class="button qr-trigger" style="margin-top:30px" type="button">扫码免费获取资源包 ↗</button></div><div class="resources reveal"><a class="resource" href="#"><div class="resource__main"><span class="resource__number">01</span><div><h3>ArcMap / GIS Pro 零基础教程</h3><p>从界面、数据加载到第一张专题图</p></div></div><span class="resource__arrow">↗</span></a><a class="resource" href="#"><div class="resource__main"><span class="resource__number">02</span><div><h3>数据源获取指南</h3><p>公开底图、遥感影像与边界数据索引</p></div></div><span class="resource__arrow">↗</span></a><a class="resource" href="#"><div class="resource__main"><span class="resource__number">03</span><div><h3>Python 进阶脚本分享</h3><p>批处理、空间连接与自动化出图</p></div></div><span class="resource__arrow">↗</span></a></div></div></section>
+    <section class="section" id="knowledge"><div class="knowledge"><div class="reveal"><div class="kicker">04 / KNOWLEDGE BASE</div><h2 class="section-title">把经验，<br>分享出去。</h2><p class="section-note" style="margin-top:28px">持续整理 GIS、遥感与空间数据工作中的方法与工具，给每一次学习一个可以打开的入口。</p><button class="button qr-trigger" style="margin-top:30px" type="button">扫码免费获取资源包 ↗</button></div><div class="resources reveal"><a class="resource" href="#"><div class="resource__main"><span class="resource__number">01</span><div><h3>ArcMap / GIS Pro 零基础教程</h3><p>从界面、数据加载到第一张专题图</p></div></div><span class="resource__arrow">↗</span></a><a class="resource" href="#"><div class="resource__main"><span class="resource__number">02</span><div><h3>数据源获取指南</h3><p>公开底图、遥感影像与边界数据索引</p></div></div><span class="resource__arrow">↗</span></a><a class="resource" href="#"><div class="resource__main"><span class="resource__number">03</span><div><h3>AI Agent 地理空间自动化实践</h3><p>地理空间数据处理、GIS/CAD 软件操作与智能工作流</p></div></div><span class="resource__arrow">↗</span></a></div></div></section>
 
-    <footer class="footer" id="contact"><div class="footer-grid"><div class="reveal"><div class="kicker">05 / CONTACT</div><h2>一起把<br><span>地图做好。</span></h2><p class="footer-copy">如果你正在寻找一张更准确、更有叙事力的地图，或者想把 GIS 工作流变得更高效，欢迎扫码添加微信。</p><div class="actions"><button class="button qr-trigger" type="button">扫码添加微信下单 ↗</button><button class="button button--ghost" id="copyWechat" type="button">一键复制微信号</button></div><div class="copy-status" id="copyStatus"></div></div><div class="qr-stage reveal"><div class="qr-art"><span>WECHAT<br>GIS鲸</span></div></div><div class="footer-bottom"><span>© 2026 GIS鲸 Spatial Studio</span><span>Made for spatial stories</span></div></div></footer>
+    <footer class="footer" id="contact"><div class="footer-grid"><div class="reveal"><div class="kicker">05 / CONTACT</div><h2>一起把<br><span>地图做好。</span></h2><p class="footer-copy">如果你正在寻找一张更准确、更有叙事力的地图，或者想把 GIS 工作流变得更高效，欢迎扫码添加微信。</p><div class="actions"><button class="button qr-trigger" type="button">扫码添加微信下单 ↗</button><button class="button button--ghost" id="copyPhone" type="button">一键复制电话号码</button></div><div class="copy-status" id="copyStatus" role="status" aria-live="polite"></div></div><div class="qr-stage reveal"><div class="qr-art"><img src="assets/contact/wechat-qr.webp" alt="GIS鲸个人微信二维码" width="1083" height="1464" loading="eager" decoding="async"></div></div><div class="footer-bottom"><span>© GIS鲸 Spatial Studio</span><span>Made for spatial stories</span></div></div></footer>
   </main>
 
-  <div class="float-qr"><button type="button" aria-label="打开微信二维码">✦</button><div class="float-panel"><div class="qr-art"><span>WECHAT<br>GIS鲸</span></div><p>悬停查看二维码<br>点击即可咨询定制</p></div></div>
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal__close" type="button" aria-label="关闭">×</button><div class="modal__card"><h2 id="modalTitle">添加 GIS鲸 微信</h2><p>扫码沟通项目需求，获取定制报价与资源包。</p><div class="qr-art"><span>WECHAT<br>GIS鲸</span></div><button class="button modal-close" type="button">我知道了</button></div></div>
+  <div class="float-qr"><button type="button" aria-label="打开微信二维码">✦</button><div class="float-panel"><div class="qr-art"><img src="assets/contact/wechat-qr.webp" alt="GIS鲸个人微信二维码" width="1083" height="1464" loading="eager" decoding="async"></div><p>悬停查看二维码<br>点击即可咨询定制</p></div></div>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal__close" type="button" aria-label="关闭">×</button><div class="modal__card"><h2 id="modalTitle">添加 GIS鲸 微信</h2><p>扫码沟通项目需求，获取定制报价与资源包。</p><div class="qr-art"><img src="assets/contact/wechat-qr.webp" alt="GIS鲸个人微信二维码" width="1083" height="1464" loading="eager" decoding="async"></div><button class="button modal-close" type="button">我知道了</button></div></div>
 
   <script>
     (()=>{
       const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mobileVideo=matchMedia('(max-width:900px), (pointer:coarse)').matches;
       const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
       const lerp=(a,b,t)=>a+(b-a)*t;
       const canvasA=document.querySelector('#canvasA'),canvasB=document.querySelector('#canvasB'),ctxA=canvasA.getContext('2d',{alpha:false}),ctxB=canvasB.getContext('2d',{alpha:false});
@@ -201,13 +240,73 @@
       if(config.frameCountA)sequences.push(new FrameSequence(canvasA,ctxA,config.frameCountA,config.framePathA));
       if(config.frameCountB)sequences.push(new FrameSequence(canvasB,ctxB,config.frameCountB,config.framePathB));
       let framesAvailable=false;
-      Promise.all(sequences.map(s=>s.warm())).then(results=>{framesAvailable=results.length===2&&results.every(Boolean);if(!framesAvailable){videoA.classList.add('is-visible');videoA.play().catch(()=>{});}});
-      const setVideo=(video,t)=>{if(!Number.isFinite(video.duration))return;const target=clamp(t,0,video.duration-.03);if(Math.abs(video.currentTime-target)>.045){try{video.currentTime=target}catch(_){}}};
-      function drawScene(progress){const cross=clamp((progress-.47)/.08),a=clamp(progress/.5),b=clamp((progress-.5)/.5);if(framesAvailable){const sa=sequences[0],sb=sequences[1];sa.draw(Math.round(a*(sa.count-1)));sb.draw(Math.round(b*(sb.count-1)));canvasA.style.opacity=String(1-cross);canvasB.style.opacity=String(cross);videoA.classList.remove('is-visible');videoB.classList.remove('is-visible')}else{setVideo(videoA,a*(videoA.duration||1));setVideo(videoB,b*(videoB.duration||1));videoA.style.opacity=String(1-cross);videoB.style.opacity=String(cross);if(progress>.02){videoA.pause();videoB.pause()}}}
+      Promise.all(sequences.map(s=>s.warm())).then(results=>{framesAvailable=results.length===2&&results.every(Boolean);if(!framesAvailable){videoA.classList.add('is-visible');if(!reduced&&!mobileVideo)videoA.play().catch(()=>{});}});
+      // Keep only one decoder seek in flight per video, even during a fast fling.
+      const seekTargets=new Map();
+      const flushSeek=video=>{
+        const wanted=seekTargets.get(video);
+        if(!Number.isFinite(wanted)||!Number.isFinite(video.duration)||video.readyState<2||video.seeking)return;
+        const time=clamp(wanted,0,video.duration-.03);
+        if(Math.abs(video.currentTime-time)>.08){try{video.currentTime=time;}catch(_){}}
+      };
+      const setVideo=(video,time)=>{seekTargets.set(video,time);flushSeek(video);};
+      [videoA,videoB].forEach(video=>{
+        video.addEventListener('seeked',()=>requestAnimationFrame(()=>flushSeek(video)));
+        video.addEventListener('loadeddata',()=>{flushSeek(video);if(!raf)raf=requestAnimationFrame(render);});
+      });
+      if(reduced){[videoA,videoB].forEach(video=>{video.pause();video.removeAttribute('src');video.load();});}
+      else if(mobileVideo){videoA.preload='metadata';videoB.preload='none';}
+      let mobilePhase=-1;
+      const playMobile=progress=>{
+        const next=progress<=.002?0:progress<.5?1:progress<.998?2:3;
+        if(next===mobilePhase)return;
+        mobilePhase=next;
+        videoA.pause();videoB.pause();
+        if(next===1)videoA.play().catch(()=>{});
+        else if(next===2)videoB.play().catch(()=>{});
+        else if(next===0)setVideo(videoA,0);
+        else setVideo(videoB,videoB.duration-.03);
+      };
+      document.addEventListener('visibilitychange',()=>{
+        if(document.hidden){videoA.pause();videoB.pause();}
+        else if(mobileVideo&&!reduced){mobilePhase=-1;playMobile(getProgress());}
+      });
+      function drawScene(progress){const cross=clamp((progress-.47)/.08),a=clamp(progress/.5),b=clamp((progress-.5)/.5);if(framesAvailable){const sa=sequences[0],sb=sequences[1];sa.draw(Math.round(a*(sa.count-1)));sb.draw(Math.round(b*(sb.count-1)));canvasA.style.opacity=String(1-cross);canvasB.style.opacity=String(cross);videoA.classList.remove('is-visible');videoB.classList.remove('is-visible')}else{if(!reduced){if(mobileVideo){if(progress>.35&&videoB.preload==='none'){videoB.preload='auto';videoB.load();}playMobile(progress);}else{setVideo(videoA,a*(videoA.duration||1));setVideo(videoB,b*(videoB.duration||1));}}videoA.style.opacity=String(1-cross);videoB.style.opacity=String(cross);if(!mobileVideo&&progress>.02){videoA.pause();videoB.pause()}}}
       let target=0,current=0,raf=0;const getProgress=()=>clamp(scrollY/(document.documentElement.scrollHeight-innerHeight));function render(){current=reduced?target:lerp(current,target,.13);drawScene(current);document.querySelector('#chrome').classList.toggle('is-scrolled',current>.02);document.querySelector('#stageCopy').classList.toggle('is-visible',current>.035 && current<.105);const second=current>=.5;document.querySelector('#stageKicker').textContent=second?'SCROLL / 02':'SCROLL / 01';document.querySelector('#stageTitle').innerHTML=second?'让创意，<br><em>真正落地。</em>':'让空间数据，<br><em>拥有叙事。</em>';document.querySelector('#stageText').textContent=second?'继续向下，查看服务、案例与可复用的 GIS 知识库。':'从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。';if(Math.abs(target-current)>.001)raf=requestAnimationFrame(render);else raf=0}addEventListener('scroll',()=>{target=getProgress();if(!raf)raf=requestAnimationFrame(render)},{passive:true});addEventListener('resize',()=>{sequences.forEach(s=>s.draw(0));target=getProgress();if(!raf)raf=requestAnimationFrame(render)},{passive:true});target=getProgress();raf=requestAnimationFrame(render);
       const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-in')}),{threshold:.12,rootMargin:'0px 0px -8%'});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       const modal=document.querySelector('#modal'),open=()=>{modal.classList.add('is-open');document.body.style.overflow='hidden'},close=()=>{modal.classList.remove('is-open');document.body.style.overflow=''};document.querySelectorAll('.qr-trigger').forEach(b=>b.addEventListener('click',open));document.querySelectorAll('.modal__close,.modal-close').forEach(b=>b.addEventListener('click',close));modal.addEventListener('click',e=>{if(e.target===modal)close()});addEventListener('keydown',e=>{if(e.key==='Escape')close()});document.querySelector('.float-qr>button').addEventListener('click',e=>e.currentTarget.parentElement.classList.toggle('is-open'));
-      const id='YOUR_WECHAT_ID';document.querySelector('#copyWechat').addEventListener('click',async()=>{const status=document.querySelector('#copyStatus');if(id==='YOUR_WECHAT_ID'){status.textContent='请先在代码中替换真实微信号';return}try{await navigator.clipboard.writeText(id);status.textContent='微信号已复制：'+id}catch(_){status.textContent='请手动添加微信：'+id}});
+      const serviceObjectUrls = new Set();
+      document.querySelectorAll('.service-track--forward .service-tile .service-uploaders input').forEach((input) => input.addEventListener('change', (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        const card = event.target.closest('.service-tile');
+        const key = card?.dataset.serviceKey;
+        const layerName = event.target.dataset.serviceLayer;
+        const url = URL.createObjectURL(file);
+        document.querySelectorAll(`.service-tile[data-service-key="${key}"] .service-tile__layer--${layerName}`).forEach((layer) => {
+          const old = layer.dataset.objectUrl;
+          layer.style.backgroundImage = `url("${url}")`;
+          layer.dataset.objectUrl = url;
+          if (old && old !== url) { URL.revokeObjectURL(old); serviceObjectUrls.delete(old); }
+        });
+        serviceObjectUrls.add(url);
+        event.target.value = '';
+      }));
+      addEventListener('pagehide', () => serviceObjectUrls.forEach((url) => URL.revokeObjectURL(url)), { once: true });
+      const phone='15728230896';
+      document.querySelector('#copyPhone').addEventListener('click',async()=>{
+        const status=document.querySelector('#copyStatus');
+        let copied=false;
+        try{await navigator.clipboard.writeText(phone);copied=true;}catch(_){
+          const input=document.createElement('textarea');
+          input.value=phone;input.readOnly=true;
+          input.style.cssText='position:fixed;left:-9999px;top:0';
+          document.body.append(input);input.select();
+          try{copied=document.execCommand('copy');}catch(_){}
+          input.remove();document.querySelector('#copyPhone').focus({preventScroll:true});
+        }
+        status.textContent=copied?'电话号码已复制：'+phone:'复制未成功，请手动复制：'+phone;
+      });
     })();
   </script>
     <script>
@@ -222,7 +321,7 @@
       const request = () => { if (!frame && !document.hidden && !reduced.matches) frame = requestAnimationFrame(draw); };
       function draw() {
         frame = 0;
-        if (scrollDirty && rail) {
+        if (scrollDirty && rail && innerWidth>900) {
           const rect = rail.getBoundingClientRect();
           const progress = Math.min(1,Math.max(0,(innerHeight-rect.top)/(innerHeight+rect.height)));
           tracks.forEach(track => track.style.setProperty('--track-x', `${(progress-.5)*360*Number(track.dataset.speed)*(track.classList.contains('service-track--reverse')?1:-1)}px`));
@@ -286,7 +385,7 @@
       function updateSelection() {
         counter.textContent=`${String(visible.indexOf(selected)+1).padStart(2,'0')} / ${String(visible.length).padStart(2,'0')}`;
         title.textContent=selected.dataset.title;
-        label.textContent=`视觉示例 / ${selected.dataset.label}`;
+        label.textContent=selected.dataset.label;
         cards.forEach((card,i)=>{thumbs[i].hidden=card.hidden;thumbs[i].setAttribute('aria-pressed',String(card===selected));card.style.zIndex=card===selected?'20':String(i+1);});
       }
       function select(card,showDetail=false) {
@@ -302,8 +401,13 @@
         const r=story.getBoundingClientRect();
         width=stage.clientWidth;height=scene.clientHeight;
         start=r.top+scrollY-84;distance=Math.max(1,story.offsetHeight-stage.offsetHeight);
-        const cardHeight=Math.min(400,Math.max(210,height*.81));
-        stage.style.setProperty('--card-h',cardHeight+'px');stage.style.setProperty('--card-w',cardHeight*.76+'px');
+        [...cards,...orbits].forEach(element=>{
+          const image=element.matches('img')?element:element.querySelector('img');
+          const ratio=(image.naturalWidth||Number(image.getAttribute('width')))/(image.naturalHeight||Number(image.getAttribute('height')));
+          const cardHeight=Math.min(height*.76,360,width*.42/ratio);
+          element.style.setProperty('--card-h',cardHeight+'px');
+          element.style.setProperty('--card-w',cardHeight*ratio+'px');
+        });
         needsMeasure=false;
       }
       // Every boundary shares the same pose. Reversing scroll traces exactly the same path.
@@ -364,7 +468,7 @@
         cards.forEach(card=>{
           card.removeAttribute('style');
           const button=card.querySelector('.folio-pick');button.tabIndex=animated?-1:0;
-          button.setAttribute('aria-label',animated?`查看${card.dataset.title}`:`${card.dataset.title}，视觉示例`);
+          button.setAttribute('aria-label',animated?`查看${card.dataset.title}`:`${card.dataset.title}，作品展示`);
         });
         if(!animated)scene.removeAttribute('aria-hidden');
         needsMeasure=true;updateSelection();request();
@@ -391,8 +495,9 @@
         visible=cards.filter(card=>!card.hidden);
         if(!visible.includes(selected))selected=visible[0];
         positions.clear();needsMeasure=true;updateSelection();request();
-        feedback.textContent=`${button.textContent.trim()}：${visible.length} 件视觉示例`;
+        feedback.textContent=`${button.textContent.trim()}：${visible.length} 件作品`;
       },{signal}));
+      root.querySelectorAll('img').forEach(img=>img.addEventListener('load',()=>{needsMeasure=true;request();},{signal}));
       root.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>img.closest('.folio-card')?.classList.add('has-image-error'),{signal}));
       root.querySelectorAll('input[type="file"]').forEach(input=>input.addEventListener('change',async()=>{
         const file=input.files?.[0];if(!file)return;
@@ -402,7 +507,9 @@
         try{await candidate.decode();}catch(_){URL.revokeObjectURL(url);objectUrls.delete(url);feedback.textContent='这张图片暂时无法读取，请选择 JPG、PNG 或 WebP 图片。';input.value='';return;}
         if(disposed){URL.revokeObjectURL(url);return;}
         const old=image.dataset.objectUrl;
-        image.src=url;image.dataset.objectUrl=url;image.alt=`${card.dataset.title}，用户替换的图片`;
+        image.width=candidate.naturalWidth;image.height=candidate.naturalHeight;
+        card.querySelector('.folio-pick').style.setProperty('--art-ratio',candidate.naturalWidth+'/'+candidate.naturalHeight);
+        needsMeasure=true;image.src=url;image.dataset.objectUrl=url;image.alt=`${card.dataset.title}，用户替换的图片`;
         thumbs[cards.indexOf(card)].querySelector('img').src=url;
         card.classList.remove('has-image-error');
         if(old){URL.revokeObjectURL(old);objectUrls.delete(old);}
@@ -424,4 +531,3 @@
 
 </body>
 </html>
-

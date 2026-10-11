@@ -1,0 +1,36 @@
+node_modules/
+.tools/
+test-results/
+playwright-report/
+artifacts/
+
+# Media assets kept locally
+*.mp4
+*.mov
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# Published portfolio image assets
+!assets/
+!assets/services/
+!assets/services/map/
+!assets/services/map/*.jpg
+!assets/services/map/*.png
+!assets/services/map/*.webp
+
+!assets/services/education/
+!assets/services/education/*.webp
+
+
+!assets/services/ai/
+!assets/services/ai/*.webp
+
+# Published original portfolio artwork
+!assets/works/personal/
+!assets/works/personal/*.webp
+
+# Published contact assets
+!assets/contact/
+!assets/contact/*.webp
