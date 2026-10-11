@@ -38,3 +38,8 @@ artifacts/
 # Opening video frames used while the OSS video loads
 !assets/scene/
 !assets/scene/*.webp
+
+# Scroll-driven background frames
+!assets/scene/frames/
+!assets/scene/frames/**/
+!assets/scene/frames/**/*.webp

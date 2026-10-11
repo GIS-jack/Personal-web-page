@@ -203,14 +203,13 @@
   </style>
 </head>
 <body>
-  <!-- Canvas is the preferred path. Generate frames with:
-       ffmpeg -i A.mp4 -vf "fps=24,scale=1920:-2" -q:v 3 frames/a/frame-%04d.webp
-       ffmpeg -i B.mp4 -vf "fps=24,scale=1920:-2" -q:v 3 frames/b/frame-%04d.webp
-       Then set frameCountA/B below and keep the folder structure. -->
+  <!-- Background: 24 fps WebP sequences, wide 1440x810 / portrait 540x960.
+       The timeline follows the work stage, knowledge section and contact footer.
+       MP4 sources load only if the opening sequence cannot be read. -->
   <div class="scene" aria-hidden="true">
     <canvas id="canvasA"></canvas><canvas id="canvasB"></canvas>
-    <video id="fallbackA" poster="assets/scene/poster-a.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/A.mp4" muted playsinline webkit-playsinline preload="auto"></video>
-    <video id="fallbackB" poster="assets/scene/poster-b.webp" src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/B.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <video class="is-visible" id="fallbackA" poster="assets/scene/poster-a.webp" data-src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/A.mp4" muted playsinline webkit-playsinline preload="auto"></video>
+    <video id="fallbackB" poster="assets/scene/poster-b.webp" data-src="https://gis-whale-media-2026.oss-cn-shenzhen.aliyuncs.com/videos/B.mp4" muted playsinline webkit-playsinline preload="auto"></video>
     <div class="scene__grain"></div>
   </div>
 
@@ -312,71 +311,154 @@
 
   <script>
     (()=>{
-      const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const mobileVideo=matchMedia('(max-width:900px), (pointer:coarse)').matches;
+      const motion=matchMedia('(prefers-reduced-motion: reduce)');
+      const portrait=matchMedia('(max-width:600px) and (orientation:portrait)');
       const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
-      const lerp=(a,b,t)=>a+(b-a)*t;
-      const canvasA=document.querySelector('#canvasA'),canvasB=document.querySelector('#canvasB'),ctxA=canvasA.getContext('2d',{alpha:false}),ctxB=canvasB.getContext('2d',{alpha:false});
+      const scene=document.querySelector('.scene'),main=document.querySelector('main');
       const videoA=document.querySelector('#fallbackA'),videoB=document.querySelector('#fallbackB');
-      const config={frameCountA:0,frameCountB:0,framePathA:'frames/a/frame-',framePathB:'frames/b/frame-',extension:'.webp',pad:4};
-      const sequences=[];
-      class FrameSequence{constructor(canvas,ctx,count,path){this.canvas=canvas;this.ctx=ctx;this.count=count;this.path=path;this.frames=new Map();this.loading=new Map();this.ready=false}
-        url(i){return this.path+String(i+1).padStart(config.pad,'0')+config.extension}
-        load(i){if(this.frames.has(i))return Promise.resolve(this.frames.get(i));if(this.loading.has(i))return this.loading.get(i);const p=new Promise((resolve,reject)=>{const img=new Image();img.decoding='async';img.onload=()=>{this.frames.set(i,img);this.loading.delete(i);resolve(img)};img.onerror=()=>{this.loading.delete(i);reject(new Error('missing frame'))};img.src=this.url(i)});this.loading.set(i,p);return p}
-        draw(i){const img=this.frames.get(clamp(i,0,this.count-1));if(!img)return false;const cw=this.canvas.width=innerWidth*devicePixelRatio,ch=this.canvas.height=innerHeight*devicePixelRatio,scale=Math.max(cw/img.naturalWidth,ch/img.naturalHeight),w=img.naturalWidth*scale,h=img.naturalHeight*scale;this.ctx.clearRect(0,0,cw,ch);this.ctx.drawImage(img,(cw-w)/2,(ch-h)/2,w,h);this.canvas.classList.add('is-ready');return true}
-        async warm(){if(!this.count)return false;try{await Promise.all([this.load(0),this.load(this.count-1),this.load(Math.floor(this.count/2))]);this.ready=true;this.draw(0);return true}catch(_){return false}}
+      const chrome=document.querySelector('#chrome'),copy=document.querySelector('#stageCopy');
+      const kicker=document.querySelector('#stageKicker'),title=document.querySelector('#stageTitle'),text=document.querySelector('#stageText');
+      const events=new AbortController(),signal=events.signal;
+      let raf=0,lastTime=0,current=0,anchors=[],maxScroll=1,measureDirty=true,disposed=false,fallback=false,seekTimer=0,secondStage=null;
+      const smooth=v=>{const t=clamp(v);return t*t*(3-2*t);};
+      function request(){if(!raf&&!disposed&&!document.hidden)raf=requestAnimationFrame(render);}
+      // Only a small decoded window lives in memory. A fling prioritises its latest target.
+      class FrameSequence {
+        constructor(canvas,count,clip){
+          this.canvas=canvas;this.ctx=canvas.getContext('2d',{alpha:false});this.count=count;this.clip=clip;
+          this.frames=new Map();this.loading=new Set();this.failed=new Set();this.version=0;this.wanted=0;this.direction=1;this.drawn=-1;this.dirty=true;
+          canvas.dataset.frames=count;this.reset();
+        }
+        reset(){
+          this.version++;this.frames.forEach(image=>image.close?.());this.frames.clear();this.loading.clear();this.failed.clear();
+          this.profile=portrait.matches?'portrait':'wide';this.limit=portrait.matches?12:18;this.dirty=true;
+        }
+        resize(width,height){this.width=width;this.height=height;if(this.canvas.width!==width||this.canvas.height!==height)this.dirty=true;}
+        pump(){
+          if(disposed||fallback||document.hidden)return;
+          const offsets=motion.matches?[0]:[0,1,2,3,4,5,-1,-2];
+          for(const offset of offsets){
+            if(this.loading.size>=4)break;
+            const index=clamp(this.wanted+offset*this.direction,0,this.count-1);
+            if(this.frames.has(index)||this.loading.has(index)||this.failed.has(index))continue;
+            this.load(index);
+          }
+        }
+        load(index){
+          const version=this.version,img=new Image();this.loading.add(index);img.decoding='async';
+          if(index===this.wanted)img.fetchPriority='high';
+          img.onload=async()=>{
+            let image=img;
+            if(typeof createImageBitmap==='function'){try{image=await createImageBitmap(img);}catch(_){}}
+            if(version!==this.version||disposed||fallback){image.close?.();return;}
+            this.loading.delete(index);this.frames.set(index,image);
+            while(this.frames.size>this.limit){
+              const oldest=[...this.frames.keys()].find(i=>i!==this.wanted&&i!==this.drawn);
+              if(oldest===undefined)break;this.frames.get(oldest).close?.();this.frames.delete(oldest);
+            }
+            if(index===this.wanted||this.drawn<0)request();this.pump();
+          };
+          img.onerror=()=>{
+            if(version!==this.version||disposed||fallback)return;
+            this.loading.delete(index);this.failed.add(index);
+            if(index===0)useFallback();else{request();this.pump();}
+          };
+          img.src=`assets/scene/frames/${this.profile}/${this.clip}/frame-${String(index+1).padStart(4,'0')}.webp`;
+        }
+        draw(index){
+          index=clamp(Math.round(index),0,this.count-1);
+          if(index!==this.wanted){this.direction=index>this.wanted?1:-1;this.wanted=index;}
+          this.pump();
+          const image=this.frames.get(index);
+          // Keep the previous painted frame until the requested frame has decoded.
+          if(!image)return this.drawn>=0;
+          if(this.drawn===index&&!this.dirty)return true;
+          this.frames.delete(index);this.frames.set(index,image);
+          const width=this.width,height=this.height;
+          if(this.canvas.width!==width||this.canvas.height!==height){this.canvas.width=width;this.canvas.height=height;}
+          const scale=Math.max(width/image.width,height/image.height);
+          this.ctx.drawImage(image,(width-image.width*scale)/2,(height-image.height*scale)/2,image.width*scale,image.height*scale);
+          this.drawn=index;this.dirty=false;this.canvas.dataset.frame=index;this.canvas.dataset.profile=this.profile;this.canvas.classList.add('is-ready');return true;
+        }
+        destroy(){this.version++;this.frames.forEach(image=>image.close?.());this.frames.clear();}
       }
-      if(config.frameCountA)sequences.push(new FrameSequence(canvasA,ctxA,config.frameCountA,config.framePathA));
-      if(config.frameCountB)sequences.push(new FrameSequence(canvasB,ctxB,config.frameCountB,config.framePathB));
-      let framesAvailable=false;
-      Promise.all(sequences.map(s=>s.warm())).then(results=>{framesAvailable=results.length===2&&results.every(Boolean);if(!framesAvailable){videoA.classList.add('is-visible');if(!reduced&&!mobileVideo)videoA.play().catch(()=>{});}});
-      // Keep only one decoder seek in flight per video, even during a fast fling.
-      const seekTargets=new Map();
-      const flushSeek=video=>{
-        const wanted=seekTargets.get(video);
-        if(!Number.isFinite(wanted)||!Number.isFinite(video.duration)||video.readyState<2||video.seeking)return;
-        const time=clamp(wanted,0,video.duration-.03);
-        if(Math.abs(video.currentTime-time)>.08){try{video.currentTime=time;}catch(_){}}
-      };
-      const setVideo=(video,time)=>{seekTargets.set(video,time);flushSeek(video);};
-      [videoA,videoB].forEach(video=>{
-        video.addEventListener('seeked',()=>requestAnimationFrame(()=>flushSeek(video)));
-        video.addEventListener('loadeddata',()=>{flushSeek(video);if(!raf)raf=requestAnimationFrame(render);});
-      });
-      if(reduced){[videoA,videoB].forEach(video=>{video.pause();video.removeAttribute('src');video.load();});}
-      else if(mobileVideo){videoA.preload='auto';videoB.preload='none';}
-      let mobilePhase=-1;
-      const playMobile=progress=>{
-        const next=progress<=.002?0:progress<.5?1:progress<.998?2:3;
-        if(next===mobilePhase)return;
-        mobilePhase=next;
-        videoA.pause();videoB.pause();
-        if(next===1)videoA.play().catch(()=>{});
-        else if(next===2)videoB.play().catch(()=>{});
-        else if(next===0)setVideo(videoA,0);
-        else setVideo(videoB,videoB.duration-.03);
-      };
-      // Decode the opening frame before the first scroll; the poster is that same video frame.
-      const primeFirstFrame=()=>{
-        if(reduced||getProgress()>.002)return;
-        videoA.muted=true;
-        videoA.play().then(()=>{
-          const hold=()=>{if(getProgress()<=.002){videoA.pause();setVideo(videoA,.001);}};
-          if(videoA.requestVideoFrameCallback)videoA.requestVideoFrameCallback(hold);
-          else hold();
-        }).catch(()=>{});
-      };
-      if(mobileVideo)requestAnimationFrame(primeFirstFrame);
-      document.addEventListener('pointerdown',()=>{
-        if(mobileVideo&&!reduced){mobilePhase=-1;playMobile(getProgress());primeFirstFrame();}
-      },{once:true,passive:true});
-      videoB.addEventListener('loadedmetadata',()=>{if(mobileVideo&&!reduced&&getProgress()>=.998){mobilePhase=-1;playMobile(getProgress());}});
-      document.addEventListener('visibilitychange',()=>{
-        if(document.hidden){videoA.pause();videoB.pause();}
-        else if(mobileVideo&&!reduced){mobilePhase=-1;playMobile(getProgress());}
-      });
-      function drawScene(progress){const cross=clamp((progress-.47)/.08),a=clamp(progress/.5),b=clamp((progress-.5)/.5);if(framesAvailable){const sa=sequences[0],sb=sequences[1];sa.draw(Math.round(a*(sa.count-1)));sb.draw(Math.round(b*(sb.count-1)));canvasA.style.opacity=String(1-cross);canvasB.style.opacity=String(cross);videoA.classList.remove('is-visible');videoB.classList.remove('is-visible')}else{if(!reduced){if(mobileVideo){if(progress>.35&&videoB.preload==='none'){videoB.preload='auto';videoB.load();}playMobile(progress);}else{setVideo(videoA,a*(videoA.duration||1));setVideo(videoB,b*(videoB.duration||1));}}videoA.style.opacity=String(1-cross);videoB.style.opacity=String(cross);if(!mobileVideo&&progress>.02){videoA.pause();videoB.pause()}}}
-      let target=0,current=0,raf=0;const getProgress=()=>clamp(scrollY/(document.documentElement.scrollHeight-innerHeight));function render(){current=reduced?target:lerp(current,target,.13);drawScene(current);document.querySelector('#chrome').classList.toggle('is-scrolled',current>.02);document.querySelector('#stageCopy').classList.toggle('is-visible',current>.035 && current<.105);const second=current>=.5;document.querySelector('#stageKicker').textContent=second?'SCROLL / 02':'SCROLL / 01';document.querySelector('#stageTitle').innerHTML=second?'让创意，<br><em>真正落地。</em>':'让空间数据，<br><em>拥有叙事。</em>';document.querySelector('#stageText').textContent=second?'继续向下，查看服务、案例与可复用的 GIS 知识库。':'从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。';if(Math.abs(target-current)>.001)raf=requestAnimationFrame(render);else raf=0}addEventListener('scroll',()=>{target=getProgress();if(!raf)raf=requestAnimationFrame(render)},{passive:true});addEventListener('resize',()=>{sequences.forEach(s=>s.draw(0));target=getProgress();if(!raf)raf=requestAnimationFrame(render)},{passive:true});target=getProgress();raf=requestAnimationFrame(render);
+      const sequences=[new FrameSequence(document.querySelector('#canvasA'),317,'a'),new FrameSequence(document.querySelector('#canvasB'),240,'b')];
+      function measure(){
+        maxScroll=Math.max(1,document.documentElement.scrollHeight-innerHeight);
+        const top=element=>element.getBoundingClientRect().top+scrollY;
+        const work=document.querySelector('#work'),story=work.querySelector('.folio-story'),stage=work.querySelector('.folio-stage');
+        const sectionStart=id=>{const el=document.querySelector(id);return top(el)+parseFloat(getComputedStyle(el).paddingTop)-innerHeight*.3;};
+        const handoff=top(story)+Math.max(0,story.offsetHeight-stage.offsetHeight)*.5-(parseFloat(getComputedStyle(stage).top)||0);
+        const stops=[[0,0],[top(work)-innerHeight*.2,.38],[handoff,.5],[sectionStart('#knowledge'),.77],[sectionStart('#contact'),.90],[maxScroll,1]];
+        anchors=[];
+        stops.forEach(([y,p])=>{y=clamp(y,0,maxScroll);if(!anchors.length||y>anchors.at(-1)[0])anchors.push([y,p]);});
+        anchors[anchors.length-1]=[maxScroll,1];
+        const density=Math.min(devicePixelRatio||1,portrait.matches?1.25:1.5,1600/innerWidth,1200/innerHeight);
+        sequences.forEach(sequence=>sequence.resize(Math.round(innerWidth*density),Math.round(innerHeight*density)));
+        measureDirty=false;
+      }
+      function getProgress(){
+        const y=clamp(scrollY,0,maxScroll);
+        for(let i=1;i<anchors.length;i++){const [end,p]=anchors[i],[start,previous]=anchors[i-1];if(y<=end)return previous+(p-previous)*(y-start)/(end-start);}
+        return 1;
+      }
+      // MP4 is an availability fallback, with paused, serial, rate-limited seeks.
+      const lastSeek=new Map();
+      function useFallback(){
+        if(fallback||disposed)return;fallback=true;scene.dataset.renderer='video';sequences.forEach(sequence=>sequence.destroy());
+        if(!motion.matches)[videoA,videoB].forEach(video=>{video.src=video.dataset.src;video.load();});request();
+      }
+      function seek(video,time,now){
+        if(!Number.isFinite(video.duration)||video.readyState<2||video.seeking)return;
+        time=clamp(time,0,Math.max(0,video.duration-.04));
+        if(Math.abs(time-video.currentTime)<.06)return;
+        if(now-(lastSeek.get(video)||-Infinity)>=150){lastSeek.set(video,now);video.currentTime=time;}
+        else if(!seekTimer)seekTimer=setTimeout(()=>{seekTimer=0;request();},150);
+      }
+      function render(now){
+        raf=0;if(disposed||document.hidden)return;
+        if(measureDirty)measure();
+        const target=getProgress(),alpha=1-Math.exp(-Math.min(64,lastTime?now-lastTime:16.7)/110);lastTime=now;
+        current+= (target-current)*alpha;if(Math.abs(target-current)<.0002)current=target;
+        const progress=motion.matches?0:current,cross=smooth((progress-.47)/.06);
+        if(!fallback){
+          const readyA=sequences[0].draw(clamp(progress/.5)*(sequences[0].count-1));
+          const readyB=!motion.matches&&sequences[1].draw(clamp((progress-.5)/.5)*(sequences[1].count-1));
+          const blend=readyB?cross:0;
+          sequences[0].canvas.style.opacity=readyA?1-blend:0;sequences[1].canvas.style.opacity=readyB?blend:0;
+          videoA.style.opacity=readyA?0:1;videoB.style.opacity=0;
+        }else{
+          sequences.forEach(sequence=>sequence.canvas.style.opacity=0);
+          videoA.style.opacity=1-cross;videoB.style.opacity=cross;
+          if(!motion.matches){if(cross<1)seek(videoA,clamp(progress/.5)*videoA.duration,now);if(cross>0)seek(videoB,clamp((progress-.5)/.5)*videoB.duration,now);}
+        }
+        chrome.classList.toggle('is-scrolled',current>.02);copy.classList.toggle('is-visible',!motion.matches&&current>.035&&current<.105);
+        const second=current>=.5;
+        if(second!==secondStage){
+          secondStage=second;kicker.textContent=second?'SCROLL / 02':'SCROLL / 01';
+          title.innerHTML=second?'让创意，<br><em>真正落地。</em>':'让空间数据，<br><em>拥有叙事。</em>';
+          text.textContent=second?'继续向下，查看服务、案例与可复用的 GIS 知识库。':'从遥感、制图到自动化工作流，把复杂空间信息变成清晰可读的视觉语言。';
+        }
+        if(current!==target)request();else lastTime=0;
+      }
+      const layout=new ResizeObserver(()=>{measureDirty=true;request();});layout.observe(main);
+      addEventListener('scroll',request,{passive:true,signal});
+      addEventListener('resize',()=>{measureDirty=true;request();},{passive:true,signal});
+      portrait.addEventListener('change',()=>{sequences.forEach(sequence=>sequence.reset());measureDirty=true;request();},{signal});
+      motion.addEventListener('change',()=>{
+        [videoA,videoB].forEach(video=>video.pause());
+        if(fallback&&!motion.matches&&!videoA.getAttribute('src'))[videoA,videoB].forEach(video=>{video.src=video.dataset.src;video.load();});
+        measureDirty=true;request();
+      },{signal});
+      [videoA,videoB].forEach(video=>['loadeddata','seeked'].forEach(event=>video.addEventListener(event,request,{signal})));
+      document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(raf);raf=0;lastTime=0;clearTimeout(seekTimer);seekTimer=0;if(!document.hidden){measureDirty=true;request();}},{signal});
+      addEventListener('pagehide',event=>{
+        cancelAnimationFrame(raf);raf=0;clearTimeout(seekTimer);seekTimer=0;
+        if(!event.persisted){disposed=true;events.abort();layout.disconnect();sequences.forEach(sequence=>sequence.destroy());}
+      },{signal});
+      addEventListener('pageshow',()=>{lastTime=0;measureDirty=true;request();},{signal});
+      document.fonts?.ready.then(()=>{measureDirty=true;request();});
+      scene.dataset.renderer='sequence';request();
       const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('is-in')}),{threshold:.12,rootMargin:'0px 0px -8%'});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       const modal=document.querySelector('#modal'),open=()=>{modal.classList.add('is-open');document.body.style.overflow='hidden'},close=()=>{modal.classList.remove('is-open');document.body.style.overflow=''};document.querySelectorAll('.qr-trigger').forEach(b=>b.addEventListener('click',open));document.querySelectorAll('.modal__close,.modal-close').forEach(b=>b.addEventListener('click',close));modal.addEventListener('click',e=>{if(e.target===modal)close()});addEventListener('keydown',e=>{if(e.key==='Escape')close()});document.querySelector('.float-qr>button').addEventListener('click',e=>e.currentTarget.parentElement.classList.toggle('is-open'));
       const serviceObjectUrls = new Set();
