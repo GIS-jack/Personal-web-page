@@ -65,28 +65,38 @@
     .footer h2{font-size:clamp(50px,6.8vw,104px);line-height:.9;max-width:560px}
     @media(max-width:900px){h1{font-size:clamp(44px,8vw,82px)}.section-title{font-size:clamp(36px,7vw,62px)}}
     @media(max-width:560px){h1{font-size:clamp(42px,12.2vw,66px);line-height:.96}.section-title{font-size:clamp(34px,10.5vw,52px)}.footer h2{font-size:clamp(48px,14vw,72px)}}
-    /* 03 — static gallery first; the motion stage is a progressive enhancement. */
+    /* 03 — one set of artworks travels through corridor, fan, cascade and detail. */
     .folio{--folio-ink:#f8f7ff;--folio-dim:#a6a6bd;position:relative;color:var(--folio-ink);max-width:1440px;width:calc(100% - 32px);margin:50px auto 0;padding:86px clamp(24px,5vw,76px) 36px;background:#101118;border-radius:40px;scroll-margin-top:90px}
-    .folio [hidden]{display:none!important}.folio button,.folio a,.folio label{touch-action:manipulation}.folio button:focus-visible,.folio a:focus-visible,.folio label:focus-within{outline:2px solid #c9ccff;outline-offset:5px}
-    .folio-heading{display:grid;grid-template-columns:1.2fr 1fr;align-items:end;gap:70px;margin-bottom:48px}.folio-heading h2{font-size:clamp(34px,4.6vw,66px);line-height:1.23;letter-spacing:-.055em;font-weight:600;margin:26px 0 0}.folio-heading h2>span{color:#9d94ff}.folio-heading .kicker{margin:0;color:#aca9ef;font-size:10px;letter-spacing:.2em}.folio-intro{justify-self:end;max-width:320px}.folio-edition{font-size:9px;letter-spacing:.15em;color:#adaacc}.folio-intro p{font-size:17px;line-height:1.85;margin:16px 0}.folio-intro small{font-size:11px;line-height:1.7;color:var(--folio-dim)}
+    .folio [hidden]{display:none!important}.folio button,.folio a,.folio label{touch-action:manipulation}.folio button:focus-visible,.folio a:focus-visible,.folio label:focus-within{outline:2px solid #c9ccff;outline-offset:4px}
+    .folio-heading{display:grid;grid-template-columns:1.2fr 1fr;align-items:end;gap:70px;margin-bottom:48px}.folio-heading h2{font-size:clamp(34px,4.6vw,66px);line-height:1.23;letter-spacing:-.055em;font-weight:600;margin:26px 0 0}.folio-heading h2>span{color:#9d94ff}.folio-heading .kicker{margin:0;color:#aca9ef;font-size:10px;letter-spacing:.2em}.folio-intro{justify-self:end;max-width:320px}.folio-edition{font-size:9px;letter-spacing:.15em;color:#adaacc}.folio-intro p{font-size:17px;line-height:1.85;margin:16px 0}
     .folio-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}.folio-filters button{background:#1d1e2a;border:1px solid transparent;border-radius:99px;font-size:11px;color:#c3c2d2;padding:12px 16px;transition:background .18s,color .18s}.folio-filters button span{font-size:9px;opacity:.65;margin-left:8px}.folio-filters button[aria-pressed="true"]{background:#dddcff;color:#292249}.folio-filters button:hover{border-color:#767092}
-    .folio-stage{position:relative}.folio-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:9px;letter-spacing:.12em;color:#b8b6cb;padding:24px 0}.folio-top>span:first-child{display:flex;gap:8px;align-items:center}.folio-top i{width:5px;height:5px;border-radius:100%;background:#aaa2ff}.folio-phase{display:none}.folio-skip{letter-spacing:.03em;color:#d8d8ee}.folio-skip:hover{color:#fff}
-    .folio-scene{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 30px}.folio-card{min-width:0;margin:0;position:relative}.folio-card:nth-of-type(even){padding-top:70px}.folio-pick{position:relative;display:block;width:100%;aspect-ratio:.83;padding:0;background:#252531;border-radius:22px;overflow:hidden;text-align:left}.folio-pick img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .22s ease}.folio-pick:hover img,.folio-pick:focus-visible img{transform:scale(1.035)}.folio-pick:active{transform:scale(.987)}.folio-pick::after{content:"";position:absolute;inset:0;border:1px solid #ffffff17;border-radius:inherit;pointer-events:none}.folio-watermark{position:absolute;left:16px;bottom:14px;font-size:8px;letter-spacing:.12em;color:#ffffffbd;text-shadow:0 1px 8px #000}.folio-pick__arrow{position:absolute;right:14px;bottom:12px;background:#1a192aa6;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;color:#fff}
-    .folio-card__meta{padding-top:18px}.folio-card__meta>span{font-size:9px;color:#aca7dc;letter-spacing:.14em}.folio-card__meta h3{font-size:23px;font-weight:500;letter-spacing:-.04em;margin:10px 0}.folio-card__meta p{font-size:11px;color:var(--folio-dim);margin:0}.folio-card__actions{display:flex;gap:18px;align-items:center;margin-top:20px}.folio-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;padding:13px 20px;border-radius:99px;background:linear-gradient(110deg,#728dfb,#a185ed);font-size:12px;color:#fff;transition:transform .18s,opacity .18s}.folio-cta:hover{transform:translateY(-2px);opacity:.9}.folio-cta:active{transform:scale(.97)}.folio-upload{position:relative;display:inline-flex;align-items:center;min-height:40px;font-size:11px;color:#b4b2c7;cursor:pointer;border-radius:6px}.folio-upload:hover{color:#fff}.folio-upload input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
-    .folio-feature,.folio-controls,.folio-progress{display:none}.folio-end{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #ffffff12;margin-top:48px;padding-top:23px;font-size:11px;color:#b3b0c3}.folio-end span:last-child{font-size:8px;letter-spacing:.16em}.folio-end{position:relative;z-index:1}.folio-feedback{font-size:11px;color:#c8c7f6;margin:12px 0 0;min-height:16px}
-    .folio.is-animated .folio-story{height:calc(100svh + 260vh);position:relative}
-    .folio.is-animated .folio-stage{position:sticky;top:84px;height:calc(100svh - 104px);min-height:470px;max-height:900px;overflow:clip;border-radius:28px;background:radial-gradient(ellipse at 45% 38%,#32274680,transparent 60%),#151620}
-    .folio.is-animated .folio-top{position:absolute;inset:0 26px auto;z-index:5}.folio.is-animated .folio-phase{display:block;color:#c8c1ef}.folio.is-animated .folio-scene{position:absolute;inset:52px 0 154px;display:block;perspective:1800px}
-    .folio.is-animated .folio-card{position:absolute;left:50%;top:46%;width:var(--card-w,224px);height:var(--card-h,298px);padding:0;transform:translate(-50%,-50%);opacity:0;pointer-events:none}
-    .folio.is-animated .folio-pick{width:100%;height:100%;aspect-ratio:auto;border-radius:16px;box-shadow:0 16px 36px #0003;pointer-events:auto}.folio.is-animated .folio-card__meta{display:none}.folio.is-animated .folio-watermark{font-size:6px;bottom:10px;left:10px}.folio.is-animated .folio-pick__arrow{width:24px;height:24px;font-size:12px}
+    .folio-stage{position:relative}.folio-top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:9px;letter-spacing:.12em;color:#b8b6cb;padding:24px 0}.folio-top>span:first-child{display:flex;gap:8px;align-items:center}.folio-top i{width:5px;height:5px;border-radius:100%;background:#aaa2ff}.folio-phase,.folio-chapters{display:none}.folio-skip{letter-spacing:.03em;color:#d8d8ee}
+    .folio-scene{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 30px}.folio-card{min-width:0;margin:0;position:relative}.folio-card:nth-of-type(even){padding-top:70px}.folio-pick{position:relative;display:block;width:100%;aspect-ratio:var(--art-ratio,1.5);padding:0;background:#f6f5f2;border-radius:22px;overflow:hidden;text-align:left;transition:box-shadow .2s}.folio-pick img{display:block;width:100%;height:100%;object-fit:contain}.folio-pick::after{content:"";position:absolute;inset:0;border:1px solid #ffffff20;border-radius:inherit;pointer-events:none}.folio-pick:hover::after,.folio-pick:focus-visible::after{border-color:#c9bdff}.folio-watermark{position:absolute;left:12px;bottom:12px;font-size:8px;letter-spacing:.12em;color:#ffffffbd;background:#141425b3;padding:4px 7px;border-radius:4px}.folio-pick__arrow{position:absolute;right:12px;bottom:12px;background:#1a192aa6;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;color:#fff}
+    .folio-card__meta{padding-top:18px}.folio-card__meta>span{font-size:9px;color:#aca7dc;letter-spacing:.14em}.folio-card__meta h3{font-size:23px;font-weight:500;letter-spacing:-.04em;margin:10px 0}.folio-card__meta p{font-size:11px;color:var(--folio-dim);margin:0}.folio-card__actions{display:flex;gap:18px;align-items:center;margin-top:20px}.folio-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;min-height:44px;padding:13px 20px;border-radius:99px;background:linear-gradient(110deg,#728dfb,#a185ed);font-size:12px;color:#fff;transition:transform .18s,opacity .18s}.folio-cta:hover{transform:translateY(-2px)}.folio-cta:active{transform:scale(.97)}.folio-upload{position:relative;display:inline-flex;align-items:center;min-height:40px;font-size:11px;color:#b4b2c7;cursor:pointer;border-radius:6px}.folio-upload input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+    .folio-feature,.folio-controls,.folio-progress,.folio-aperture{display:none}.folio-end{position:relative;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #ffffff12;margin-top:40px;padding-top:23px;font-size:11px;color:#b3b0c3}.folio-end span:last-child{font-size:8px;letter-spacing:.16em}.folio-feedback{font-size:11px;color:#c8c7f6;margin:12px 0 0;min-height:16px}
+    .folio.is-animated .folio-story{height:calc(100svh + 330svh);position:relative}
+    .folio.is-animated .folio-stage{position:sticky;top:84px;height:calc(100svh - 106px);min-height:0;max-height:960px;overflow:clip;isolation:isolate;border-radius:28px;background:radial-gradient(ellipse at 50% 40%,#2d2b4580,transparent 68%),#14151e}
+    .folio.is-animated .folio-top{position:absolute;inset:0 28px auto;z-index:25;padding:18px 0}.folio.is-animated .folio-phase{display:block;font-size:10px;color:#d2c8f3}
+    .folio.is-animated .folio-chapters{display:flex;position:absolute;top:52px;left:50%;transform:translateX(-50%);z-index:25;gap:22px;white-space:nowrap}.folio-chapters button{min-height:40px;background:none;padding:0 2px 8px;color:#817d96;font-size:10px;border-bottom:1px solid transparent;transition:color .2s}.folio-chapters button[aria-current="step"]{color:#e1d9ff;border-bottom-color:#b8a6ff}
+    .folio.is-animated .folio-scene{position:absolute;inset:110px 0 166px;display:block;perspective:1200px;touch-action:pan-y pinch-zoom}
+    .folio.is-animated .folio-card{position:absolute;left:50%;top:50%;width:var(--card-w,260px);height:var(--card-h,200px);padding:0;transform:translate(-50%,-50%);opacity:0;pointer-events:none}
+    .folio.is-animated .folio-pick{width:100%;height:100%;aspect-ratio:auto;border-radius:14px;box-shadow:0 16px 40px #05050c42;pointer-events:auto;transition:transform .22s cubic-bezier(.16,1,.3,1),box-shadow .22s}
+    .folio.is-animated .folio-card__meta,.folio.is-animated .folio-watermark,.folio.is-animated .folio-pick__arrow{display:none}
+    @media(hover:hover) and (pointer:fine){.folio.is-animated .folio-pick:hover{transform:translateY(-8px);box-shadow:0 24px 48px #05050c55}}
     .folio.is-animated.is-near .folio-card{will-change:transform,opacity}
-    .folio.is-animated .folio-feature{display:block;position:absolute;left:7%;top:50%;width:30%;transform:translateY(-50%);opacity:0;pointer-events:none}.folio-feature>span{font-size:9px;letter-spacing:.2em;color:#b4a7eb}.folio-feature h3{font-size:clamp(28px,3.1vw,48px);line-height:1.3;font-weight:500;letter-spacing:-.055em;margin:20px 0}.folio-feature p{font-size:12px;line-height:1.9;color:#b5b1c6}
-    .folio.is-animated .folio-controls{display:block;position:absolute;left:28px;right:28px;bottom:24px;z-index:6}.folio-thumbs{display:flex;gap:7px;justify-content:center;margin-bottom:14px}.folio-thumb{padding:3px;flex:none;width:29px;height:37px;border-radius:7px;background:transparent;opacity:.5;transition:opacity .18s,transform .18s;border:1px solid transparent}.folio-thumb img{width:100%;height:100%;object-fit:cover;border-radius:4px}.folio-thumb[aria-pressed="true"]{opacity:1;border-color:#b8acff;transform:translateY(-3px)}.folio-thumb:hover{opacity:1;transform:translateY(-3px)}
-    .folio-inspector{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #ffffff12;padding-top:17px}.folio-inspector>div:first-child{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:baseline}.folio-count{font-size:10px;color:#b2a8dc;font-variant-numeric:tabular-nums}.folio-current-title{font-size:20px;font-weight:500;letter-spacing:-.04em;margin:0}.folio-current-label{grid-column:2;font-size:10px;color:#aba7bb;margin:0}.folio-control-actions{display:flex;align-items:center;gap:22px}.folio.is-animated .folio-progress{display:block;position:absolute;bottom:0;left:0;right:0;height:2px;background:#ffffff08}.folio-progress>span{display:block;height:100%;background:linear-gradient(90deg,#7897ff,#b39aff);transform-origin:left;transform:scaleX(0)}
-    .folio-card.has-image-error .folio-pick::before{content:"图片暂不可用 · 可重新替换";position:absolute;inset:0;display:grid;place-items:center;color:#c7c4da;font-size:12px}
-    @media(max-width:899px){.folio{width:calc(100% - 24px);border-radius:28px;padding:58px 24px 25px}.folio-heading{gap:28px;grid-template-columns:1fr 1fr}.folio-intro p{font-size:14px}.folio-intro small{font-size:10px}.folio-heading h2{font-size:clamp(30px,4.8vw,44px)}.folio-card:nth-of-type(even){padding-top:32px}}
-    @media(max-width:600px){.folio{padding:42px 20px 24px}.folio-heading{grid-template-columns:1fr;gap:24px;margin-bottom:30px}.folio-heading h2{font-size:34px;margin-top:20px}.folio-intro{justify-self:start;max-width:none}.folio-intro p{display:none}.folio-edition{display:none}.folio-intro small{font-size:11px}.folio-filters{gap:6px}.folio-filters button{font-size:10px;padding:10px 12px}.folio-top{font-size:8px;letter-spacing:.06em;padding-top:0}.folio-scene{grid-template-columns:1fr;gap:38px}.folio-card:nth-of-type(even){padding-top:0}.folio-pick{aspect-ratio:.82;border-radius:18px}.folio-card__meta h3{font-size:22px}.folio-end span:last-child{display:none}.folio-end{margin-top:34px}}
-    @media(prefers-reduced-motion:reduce){.folio *, .folio *::before,.folio *::after{transition:none!important;scroll-behavior:auto!important}}
+    .folio.is-animated .folio-aperture{display:block;position:absolute;top:50%;left:50%;width:15%;height:2px;background:#aabaff;box-shadow:0 0 30px #a594ff80;pointer-events:none;transform:translate(-50%,-50%)}
+    .folio.is-animated .folio-feature{display:block;position:absolute;left:7%;top:50%;width:28%;opacity:0;pointer-events:none}.folio-feature>span{font-size:9px;letter-spacing:.2em;color:#aaa4d2}.folio-feature h3{font-size:clamp(27px,3vw,44px);line-height:1.3;font-weight:500;letter-spacing:-.055em;margin:20px 0}.folio-feature p{font-size:12px;line-height:1.9;color:#aaa6be}
+    .folio.is-animated .folio-controls{display:block;position:absolute;left:28px;right:28px;bottom:24px;z-index:25}.folio-picker{display:flex;align-items:center;gap:14px;max-width:670px;margin:0 auto 15px}.folio-thumbs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding:5px 2px;touch-action:pan-x;flex:1;min-width:0;justify-content:safe center}.folio-thumbs::-webkit-scrollbar{display:none}.folio-thumb{padding:3px;flex:none;width:46px;height:42px;border-radius:8px;background:transparent;opacity:.48;border:1px solid transparent;transition:opacity .18s,transform .18s}.folio-thumb img{width:100%;height:100%;object-fit:contain;border-radius:4px}.folio-thumb[aria-pressed="true"]{opacity:1;border-color:#b8acff;transform:translateY(-3px)}.folio-thumb:hover{opacity:1}.folio-step{width:40px;height:40px;flex:none;border-radius:50%;background:#ffffff07;border:1px solid #ffffff12;color:#c9c4df}.folio-step:active{background:#ffffff1a}
+    .folio-inspector{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #ffffff12;padding-top:15px}.folio-inspector>div:first-child{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:baseline}.folio-count{font-size:10px;color:#b2a8dc;font-variant-numeric:tabular-nums}.folio-current-title{font-size:20px;font-weight:500;letter-spacing:-.04em;margin:0}.folio-current-label{grid-column:2;font-size:10px;color:#aba7bb;margin:0}.folio-control-actions{display:flex;align-items:center;gap:22px}.folio-detail{padding:0;background:none;color:#c9c5ff;font-size:11px;min-height:44px}
+    .folio.is-animated .folio-progress{display:block;position:absolute;bottom:0;left:0;right:0;height:2px;background:#ffffff08}.folio-progress>span{display:block;height:100%;background:linear-gradient(90deg,#7897ff,#b39aff);transform-origin:left;transform:scaleX(0)}
+    .folio-card.has-image-error .folio-pick::before{content:"图片暂不可用 · 可重新替换";position:absolute;inset:0;display:grid;place-items:center;color:#353047;font-size:12px}
+    @media(max-width:900px){
+      .folio{width:calc(100% - 24px);border-radius:28px;padding:58px 20px 25px}.folio-heading{gap:28px;grid-template-columns:1fr 1fr}.folio-heading h2{font-size:clamp(30px,4.8vw,44px)}.folio-intro p{font-size:14px}.folio-card:nth-of-type(even){padding-top:32px}
+      .folio.is-animated{padding-inline:12px}.folio.is-animated .folio-stage{top:78px;height:calc(100svh - 100px);border-radius:22px}.folio.is-animated .folio-story{height:calc(100svh + 290svh)}.folio.is-animated .folio-top{inset:0 18px auto;font-size:8px}.folio.is-animated .folio-top>span:first-child{display:none}.folio.is-animated .folio-phase{margin-right:auto;font-size:10px}.folio.is-animated .folio-chapters{top:44px;gap:22px}.folio.is-animated .folio-scene{inset:94px 0 184px;perspective:900px}.folio.is-animated .folio-pick{border-radius:12px;box-shadow:0 10px 24px #0003}.folio.is-animated .folio-controls{left:16px;right:16px;bottom:16px}.folio-picker{gap:6px;margin-bottom:8px}.folio-step{width:34px;height:42px}.folio-thumb{width:44px;height:42px}.folio-inspector{display:block;padding-top:10px}.folio-current-title{font-size:18px}.folio-current-label{font-size:10px;line-height:1.5}.folio-control-actions{margin-top:8px;justify-content:space-between;gap:12px;padding-right:52px}.folio-control-actions .folio-upload{display:none}.folio-control-actions .folio-cta{padding:10px 15px;font-size:11px}.folio.is-animated .folio-feature{left:0;right:0;top:auto;bottom:4px;width:auto;text-align:center;transform:none!important}.folio-feature>span{font-size:8px}.folio-feature h3,.folio-feature p{display:none}
+    }
+    @media(max-width:600px){.folio-heading{grid-template-columns:1fr;gap:24px;margin-bottom:30px}.folio-heading h2{font-size:34px;margin-top:20px}.folio-intro{display:none}.folio-filters{gap:6px}.folio-filters button{font-size:10px;padding:10px 12px}.folio-scene{grid-template-columns:1fr;gap:38px}.folio-card:nth-of-type(even){padding-top:0}.folio-end span:last-child{display:none}}
+    @media(max-height:600px){.folio.is-animated .folio-stage{top:70px;height:calc(100svh - 84px)}.folio.is-animated .folio-scene{inset:62px 0 100px}.folio.is-animated .folio-chapters{top:28px}.folio.is-animated .folio-top{padding:10px 0}.folio-chapters button{min-height:30px;padding-bottom:3px}.folio.is-animated .folio-controls{bottom:10px}.folio-picker{margin-bottom:0}.folio-thumb{height:28px;width:38px}.folio-step{height:30px}.folio-inspector{display:flex;padding-top:5px}.folio-current-label{display:none}.folio-current-title{font-size:14px}.folio-control-actions{margin:0;padding-right:50px;gap:12px}.folio-control-actions .folio-upload,.folio-control-actions .folio-cta{display:none}.folio.is-animated .folio-feature{display:none}}
+    @media(prefers-reduced-motion:reduce){.folio *,.folio *::before,.folio *::after{transition:none!important;scroll-behavior:auto!important}}
 
     /* Hero: keep the profession on one line and give the background room. */
     .hero{min-height:100svh;padding-top:130px;padding-bottom:56px;align-items:center}
@@ -109,16 +119,6 @@
     .service-tile--ai .service-tile__layer--back{background-image:url('assets/services/ai/ai-background.webp');background-size:cover;background-position:center}
     .service-tile--ai .service-tile__layer--mid{background-image:url('assets/services/ai/ai-mid.webp');background-size:contain;background-position:center;background-repeat:no-repeat}
     .service-tile--ai .service-tile__layer--front{background-image:url('assets/services/ai/ai-foreground.webp');background-size:cover;background-position:center}
-    /* Portfolio originals retain their map legends and full compositions. */
-    .folio .folio-pick{aspect-ratio:var(--art-ratio,1.5);background:#f6f5f2}
-    .folio .folio-pick img{object-fit:contain}
-    .folio .folio-pick:hover img,.folio .folio-pick:focus-visible img{transform:none}
-    .folio .folio-pick:hover::after,.folio .folio-pick:focus-visible::after{border-color:#aaa2ff}
-    .folio .folio-watermark{background:#141425b3;padding:4px 7px;border-radius:4px}
-    .folio .folio-thumb{width:46px;height:34px}
-    .folio .folio-thumb img{object-fit:contain}
-    .folio.is-animated .folio-pick{aspect-ratio:auto}
-
     .qr-art{overflow:hidden;background:#fff;padding:0;}
     .qr-art img{display:block;width:100%;height:100%;object-fit:contain;}
     .modal__card .qr-art{width:min(320px,100%);aspect-ratio:1083/1464;border:0;box-shadow:0 24px 80px rgba(0,0,0,.3)}
@@ -134,10 +134,6 @@
     .service-tile.is-open .service-tile__layer--back{transform:translate3d(-34px,18px,-24px) rotate(-14deg)}
     .service-tile.is-open .service-tile__layer--mid{transform:translate3d(28px,8px,-10px) rotate(10deg)}
     .service-tile.is-open .service-tile__layer--front{transform:translate3d(0,-10px,18px) rotate(1deg)}
-    .folio-thumbs{justify-content:flex-start;overflow-x:auto;scrollbar-width:none;padding:5px 2px;touch-action:pan-x;margin-inline:auto;max-width:max-content}
-    .folio-thumbs::-webkit-scrollbar{display:none}
-    .folio-detail{padding:0;background:none;color:#c9c5ff;font-size:11px;min-height:40px}
-    .folio.is-animated .folio-card{top:50%}
     .art-viewer{position:fixed;inset:0;z-index:60;margin:0;padding:20px;background:#0c0d14;color:#fff;border:0;width:100%;height:100dvh;max-width:none;max-height:none}
     .art-viewer::backdrop{background:#0c0d14}
     .art-viewer:not([open]){display:none}
@@ -157,38 +153,7 @@
       .scene video{filter:none}
       .modal{backdrop-filter:none}
       .modal__card{border-radius:20px}
-      .folio.is-animated{padding-inline:12px}
-      .folio.is-animated .folio-stage{top:76px;height:calc(100svh - 92px);min-height:0;border-radius:22px}
-      .folio.is-animated .folio-story{height:calc(100svh + 280svh)}
-      .folio.is-animated .folio-top{inset:0 14px auto;padding:18px 0;font-size:8px}
-      .folio.is-animated .folio-top>span:first-child{display:none}
-      .folio.is-animated .folio-phase{margin-right:auto;font-size:11px;letter-spacing:.1em}
-      .folio.is-animated .folio-scene{inset:52px 0 184px;perspective:900px}
-      .folio.is-animated .folio-pick{border-radius:10px;box-shadow:0 8px 18px #0003}
-      .folio.is-animated .folio-watermark,.folio.is-animated .folio-pick__arrow{display:none}
-      .folio.is-animated .folio-controls{left:14px;right:14px;bottom:20px}
-      .folio-inspector{display:block;padding-top:12px}
-      .folio-current-title{font-size:19px}
-      .folio-current-label{font-size:10px}
-      .folio-control-actions{margin-top:10px;justify-content:space-between;gap:12px;padding-right:52px}
-      .folio-control-actions .folio-upload{display:none}
-      .folio-control-actions .folio-cta{padding:11px 15px;font-size:11px}
-      .folio.is-animated .folio-feature{left:0;right:0;top:auto;bottom:3px;width:auto;text-align:center;transform:none!important}
-      .folio-feature>span{font-size:8px}
-      .folio-feature h3,.folio-feature p{display:none}
       .art-viewer{padding:18px 14px max(18px,env(safe-area-inset-bottom))}
-    }
-    @media(max-height:600px){
-      .folio.is-animated .folio-stage{top:64px;height:calc(100svh - 76px);min-height:0}
-      .folio.is-animated .folio-scene{inset:42px 0 128px}
-      .folio.is-animated .folio-controls{bottom:12px}
-      .folio-thumbs{margin-bottom:6px}
-      .folio .folio-thumb{height:24px;width:34px}
-      .folio-inspector{padding-top:8px}
-      .folio-current-label{display:none}
-      .folio-current-title{font-size:16px}
-      .folio-control-actions{margin-top:4px}
-      .folio.is-animated .folio-feature{display:none}
     }
     @media(prefers-reduced-motion:reduce){.scene video{filter:none}.service-track{width:100%;overflow-x:auto;transform:none!important;touch-action:pan-x pan-y}.service-tile[data-rail-copy]{display:none}}
   </style>
@@ -230,7 +195,8 @@
       <div class="folio-story">
         <div class="folio-stage">
           <div class="folio-top"><span><i></i> GIS WHALE / VISUAL EXPLORATIONS</span><span class="folio-phase" aria-hidden="true">01 / 汇聚</span><a href="#knowledge" class="folio-skip">继续浏览 ↓</a></div>
-          <div class="folio-scene">
+          <nav class="folio-chapters" aria-label="作品叙事阶段"><button type="button" data-phase="0" aria-current="step">汇聚</button><button type="button" data-phase="1">展开</button><button type="button" data-phase="2">重组</button><button type="button" data-phase="3">细看</button></nav>
+          <div class="folio-scene"><div class="folio-aperture" aria-hidden="true"></div>
             <div class="folio-feature" aria-hidden="true"><span>IN THE DETAILS</span><h3>让细节，<br>被看见。</h3><p>从整体到局部，<br>每一处留白都有意义。</p></div>
             <article class="folio-card" data-category="overview" data-title="概况与路线图" data-label="韶关市经济发展情况与区位展示" id="folio-card-1">
               <button class="folio-pick" style="--art-ratio:2000/1333" type="button" aria-label="查看概况与路线图"><img src="assets/works/personal/overview.webp" alt="韶关市经济发展情况与区位展示" width="2000" height="1333" loading="lazy" decoding="async"><span class="folio-watermark">GIS WHALE / SELECTED WORK</span><span class="folio-pick__arrow" aria-hidden="true">↗</span></button>
@@ -274,7 +240,7 @@
             </article>
           </div>
           <div class="folio-controls">
-            <div class="folio-thumbs" role="group" aria-label="横滑选择全部作品"></div>
+            <div class="folio-picker"><button class="folio-step folio-prev" type="button" aria-label="上一张作品">←</button><div class="folio-thumbs" role="group" aria-label="横滑选择全部作品"></div><button class="folio-step folio-next" type="button" aria-label="下一张作品">→</button></div>
             <div class="folio-inspector"><div><span class="folio-count">01 / 10</span><h3 class="folio-current-title">概况与路线图</h3><p class="folio-current-label">韶关市经济发展情况与区位展示</p></div><div class="folio-control-actions"><label class="folio-upload">替换当前图片<input type="file" accept="image/*" aria-label="替换当前作品图片"></label><button class="folio-detail" type="button">放大细看 ＋</button><button class="folio-cta qr-trigger" type="button">定制同款 <span>↗</span></button></div></div>
           </div>
           <div class="folio-progress" aria-hidden="true"><span></span></div>
@@ -506,6 +472,9 @@
       const phase = root.querySelector('.folio-phase'), progressBar = root.querySelector('.folio-progress>span');
       const feedback = root.querySelector('.folio-feedback');
       const media = matchMedia('(prefers-reduced-motion:no-preference)');
+      const compact = matchMedia('(max-width:900px)');
+      const chapters=[...root.querySelectorAll('[data-phase]')], aperture=root.querySelector('.folio-aperture');
+      const phaseStops=[.07,.39,.68,.96];
       const reduced = matchMedia('(prefers-reduced-motion:reduce)');
       const events = new AbortController(), signal = events.signal;
       const clamp = v => Math.min(1,Math.max(0,v));
@@ -513,7 +482,7 @@
       const mix = (a,b,t) => a.map((v,i)=>v+(b[i]-v)*t);
       let visible = cards.slice(), selected = cards[0], animated = false, near = false, disposed = false;
       let frame = 0, previousTime = 0, needsMeasure = true, start = 0, distance = 1, width = 1, height = 1;
-      let progress = 0, featureOpacity = 0;
+      let progress = 0, featureOpacity = 0, activePhase=-1, gesture=null, suppressClick=false;
       const positions = new Map(), sizes = new Map(), objectUrls = new Set();
       const viewer=document.querySelector('.art-viewer'), viewerImage=viewer.querySelector('img'), viewerTitle=viewer.querySelector('h2');
       const viewerCanvas=viewer.querySelector('.art-viewer__image'), zoomButton=viewer.querySelector('.art-viewer__zoom');
@@ -523,6 +492,7 @@
         viewerImage.src=image.src;viewerImage.alt=image.alt;viewerTitle.textContent=selected.dataset.title;
         viewerCanvas.classList.remove('is-zoomed');zoomButton.textContent='放大 ＋';zoomButton.setAttribute('aria-pressed','false');
         if(!viewer.open){viewerFocus=document.activeElement;viewer.showModal();document.body.style.overflow='hidden';}
+        viewerCanvas.scrollTo(0,0);
       }
       viewer.querySelector('.art-viewer__close').addEventListener('click',()=>viewer.close(),{signal});
       viewer.addEventListener('close',()=>{document.body.style.overflow='';viewerFocus?.focus({preventScroll:true});},{signal});
@@ -540,8 +510,9 @@
         button.type='button';button.className='folio-thumb';button.setAttribute('aria-label',`查看作品 ${i+1}：${card.dataset.title}`);
         const image=document.createElement('img');image.src=card.querySelector('img').getAttribute('src');image.alt='';image.decoding='async';
         button.append(image);thumbnails.append(button);
-        button.addEventListener('click',()=>select(card,true),{signal});
+        button.addEventListener('click',()=>select(card),{signal});
         card.querySelector('.folio-pick').addEventListener('click',()=>{
+          if(suppressClick){suppressClick=false;return;}
           if(animated&&progress<.9)select(card,true);else{select(card);showArtwork();}
         },{signal});
         return button;
@@ -550,54 +521,102 @@
         counter.textContent=`${String(visible.indexOf(selected)+1).padStart(2,'0')} / ${String(visible.length).padStart(2,'0')}`;
         title.textContent=selected.dataset.title;
         label.textContent=selected.dataset.label;
-        cards.forEach((card,i)=>{thumbs[i].hidden=card.hidden;thumbs[i].setAttribute('aria-pressed',String(card===selected));card.style.zIndex=card===selected?'20':String(i+1);});
+        cards.forEach((card,i)=>{
+          thumbs[i].hidden=card.hidden;thumbs[i].setAttribute('aria-pressed',String(card===selected));
+          card.style.zIndex=card===selected?'20':String(10-Math.abs(visible.indexOf(card)-visible.indexOf(selected)));
+        });
+        const thumb=thumbs[cards.indexOf(selected)];
+        if(animated){
+          const left=thumb.offsetLeft-thumbnails.offsetLeft,right=left+thumb.offsetWidth;
+          if(left<thumbnails.scrollLeft||right>thumbnails.scrollLeft+thumbnails.clientWidth)thumbnails.scrollTo({left:left-thumbnails.clientWidth/2+thumb.offsetWidth/2,behavior:'auto'});
+        }
+      }
+      function goToPhase(index){
+        if(!animated)return;
+        if(needsMeasure)measure();
+        window.scrollTo({top:start+distance*phaseStops[index],behavior:'smooth'});
       }
       function select(card,showDetail=false) {
         selected=card;updateSelection();
-        if (showDetail && animated) {
-          measure();
-          // Explicit navigation only. Wheel and touch scrolling always remain native.
-          window.scrollTo({top:start+distance*.96,behavior:'smooth'});
-        }
+        if(showDetail)goToPhase(3);
         request();
       }
+      function step(direction){select(visible[(visible.indexOf(selected)+direction+visible.length)%visible.length]);}
+      chapters.forEach((button,i)=>button.addEventListener('click',()=>goToPhase(i),{signal}));
+      root.querySelector('.folio-prev').addEventListener('click',()=>step(-1),{signal});
+      root.querySelector('.folio-next').addEventListener('click',()=>step(1),{signal});
+      scene.addEventListener('pointerdown',e=>{
+        if(!animated||e.pointerType==='mouse'||e.button!==0)return;
+        suppressClick=false;gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dragging:false};
+      },{signal});
+      scene.addEventListener('pointermove',e=>{
+        if(!gesture||e.pointerId!==gesture.id)return;
+        const dx=e.clientX-gesture.x,dy=e.clientY-gesture.y;
+        if(!gesture.dragging&&Math.abs(dx)>12&&Math.abs(dx)>Math.abs(dy)*1.3){gesture.dragging=true;scene.setPointerCapture(e.pointerId);}
+        if(gesture.dragging){gesture.dx=dx;request();}
+      },{signal});
+      function releaseGesture(e){
+        if(!gesture||e.pointerId!==gesture.id)return;
+        const {dx,dragging}=gesture;gesture=null;
+        suppressClick=dragging;
+        if(e.type==='pointerup'&&dragging&&Math.abs(dx)>45)step(dx<0?1:-1);
+        request();
+      }
+      scene.addEventListener('pointerup',releaseGesture,{signal});
+      scene.addEventListener('pointercancel',releaseGesture,{signal});
+      thumbnails.addEventListener('keydown',e=>{
+        if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+        e.preventDefault();step(e.key==='ArrowRight'?1:-1);thumbs[cards.indexOf(selected)].focus({preventScroll:true});
+      },{signal});
       function measure() {
         const r=story.getBoundingClientRect();
         width=stage.clientWidth;height=scene.clientHeight;
-        const mobile=innerWidth<=900,columns=Math.min(mobile?3:5,visible.length),rows=Math.ceil(visible.length/columns);
         start=r.top+scrollY-parseFloat(getComputedStyle(stage).top);distance=Math.max(1,story.offsetHeight-stage.offsetHeight);
+        // Measure only on resize, image load or filter changes. Frames write transforms only.
         const dimensions=cards.map(element=>{
           const image=element.querySelector('img');
           const ratio=(image.naturalWidth||Number(image.getAttribute('width')))/(image.naturalHeight||Number(image.getAttribute('height')));
-          const cardHeight=Math.min(height/rows*.78,300,width*(mobile?.27:.18)/ratio);
+          const cardHeight=Math.min(height*(compact.matches?.66:.52),330,width*(compact.matches?.73:.23)/ratio);
           return {element,cardHeight,cardWidth:cardHeight*ratio};
         });
         dimensions.forEach(({element,cardHeight,cardWidth})=>{
-          element.style.setProperty('--card-h',cardHeight+'px');
-          element.style.setProperty('--card-w',cardWidth+'px');
+          element.style.setProperty('--card-h',cardHeight+'px');element.style.setProperty('--card-w',cardWidth+'px');
           sizes.set(element,{width:cardWidth,height:cardHeight});
         });
         needsMeasure=false;
       }
-      // Every boundary shares the same pose. Reversing scroll traces exactly the same path.
+      // Match the source's center stream → fan → collapse → diagonal → featured choreography.
+      // All boundaries share poses so a reverse scroll follows exactly the same path.
       function cardPose(card,i,p) {
-        const c=visible.length===1?.5:i/(visible.length-1),d=c-.5,chosen=card===selected,mobile=innerWidth<=900;
-        const columns=Math.min(mobile?3:5,visible.length),rows=Math.ceil(visible.length/columns);
-        const column=i%columns-(columns-1)/2,row=Math.floor(i/columns)-(rows-1)/2;
-        const angle=i*2.4,relative=i-visible.indexOf(selected);
-        const stack=[chosen?0:Math.sin(angle)*width*.19,chosen?0:Math.cos(angle)*height*.19,chosen?1.5:.78,chosen?0:relative*3,0,chosen?1:.62];
-        const fan=[column*width/(columns+.35),row*height/(rows+.4),.93,column*2.5,0,1];
-        const cascade=[column*width/(columns+.5),row*height/(rows+.6)+column*height*.045,.88,column*7,0,1];
+        const count=visible.length,chosen=card===selected,mobile=compact.matches;
+        let relative=i-visible.indexOf(selected);
+        if(relative>count/2)relative-=count;
+        if(relative<-count/2)relative+=count;
+        const spread=Math.max(1,Math.ceil((count-1)/2)),d=relative/spread;
+        const side=i%2===0?-1:1,travel=.12+Math.floor(i/2)/Math.max(1,Math.ceil(count/2))*.64+clamp(p/.14)*.2;
+        const corridor=[side*width*(mobile?.52:.48)*travel,(i%3-1)*height*.045,.18+travel*.93,-side*(7+travel*26),side*18,.9];
+        const stack=[relative*3,Math.abs(relative)*2,chosen?1:.94,relative*1.3,0,1];
+        const fan=mobile
+          ?[relative*width*.49,Math.abs(relative)*height*.06,chosen?1:.82,relative*12,-relative*6,Math.abs(relative)>2?0:1]
+          :[d*width*.32,Math.pow(d,2)*height*.08,1,d*20,-d*5,1];
+        const cascade=mobile
+          ?[relative*width*.32,relative*height*.25,chosen?1:.83,relative*9,0,Math.abs(relative)>2?0:1]
+          :[d*width*.28,d*height*.18,.96,d*17,0,1];
         const size=sizes.get(card)||{width:1,height:1};
-        const detailScale=Math.min(width*(mobile?.88:.45)/size.width,height*.82/size.height);
-        const end=[mobile?0:width*.235,0,chosen?detailScale:.7,0,0,chosen?1:0];
-        if(p<.12)return stack;
-        if(p<.36)return mix(stack,fan,smooth((p-.12)/.24));
-        if(p<.44)return fan;
-        if(p<.55)return mix(fan,stack,smooth((p-.44)/.11));
-        if(p<.74)return mix(stack,cascade,smooth((p-.55)/.19));
-        if(p<.94)return mix(cascade,end,smooth((p-.74)/.2));
-        return end;
+        const detailScale=Math.min(width*(mobile?.9:.49)/size.width,height*.89/size.height);
+        const end=[mobile?0:width*.21,0,chosen?detailScale:.72,0,0,chosen?1:0];
+        let pose;
+        if(p<.14)pose=corridor;
+        else if(p<.23)pose=mix(corridor,stack,smooth((p-.14)/.09));
+        else if(p<.36)pose=mix(stack,fan,smooth((p-.23)/.13));
+        else if(p<.43)pose=fan;
+        else if(p<.51)pose=mix(fan,stack,smooth((p-.43)/.08));
+        else if(p<.68)pose=mix(stack,cascade,smooth((p-.51)/.17));
+        else if(p<.76)pose=cascade;
+        else if(p<.94)pose=mix(cascade,end,smooth((p-.76)/.18));
+        else pose=end;
+        if(gesture?.dragging&&p>.23)pose[0]+=gesture.dx*.65;
+        return pose;
       }
       function paint(element,pose,alpha) {
         const old=positions.get(element)||pose;
@@ -608,7 +627,12 @@
         const [x,y,scale,rotate,rotateY,opacity]=next;
         element.style.transform=`translate(-50%,-50%) translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) rotate(${rotate.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
         element.style.opacity=opacity.toFixed(3);
-        element.style.visibility=opacity<.005?'hidden':'visible';
+        const interactive=opacity>.08;
+        element.style.visibility=interactive?'visible':'hidden';
+        const button=element.querySelector('.folio-pick');
+        button.tabIndex=interactive?0:-1;
+        button.style.pointerEvents=interactive?'auto':'none';
+        element.setAttribute('aria-hidden',String(!interactive));
         return moving;
       }
       function draw(time) {
@@ -619,23 +643,27 @@
         progress=clamp((scrollY-start)/distance);
         let moving=false;
         visible.forEach((card,i)=>{moving=paint(card,cardPose(card,i,progress),alpha)||moving;});
+        aperture.style.opacity=String((1-smooth((progress-.13)/.1))*.65);
         const targetOpacity=smooth((progress-.82)/.12);
         featureOpacity+=(targetOpacity-featureOpacity)*alpha;
         if(Math.abs(targetOpacity-featureOpacity)>.002)moving=true;else featureOpacity=targetOpacity;
         feature.style.opacity=featureOpacity;feature.style.transform=`translateY(calc(-50% + ${(1-featureOpacity)*14}px))`;
         progressBar.style.transform=`scaleX(${progress})`;
-        const phaseText=progress<.25?'01 / 汇聚':progress<.55?'02 / 展开':progress<.84?'03 / 重组':'04 / 细看';
-        if(phase.textContent!==phaseText)phase.textContent=phaseText;
+        const nextPhase=progress<.23?0:progress<.51?1:progress<.83?2:3;
+        if(activePhase!==nextPhase){
+          activePhase=nextPhase;phase.textContent=['01 / 汇聚','02 / 展开','03 / 重组','04 / 细看'][activePhase];
+          chapters.forEach((button,i)=>{if(i===activePhase)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');});
+        }
         if(moving)request();else previousTime=0;
       }
       function request() {if(!frame&&animated&&near&&!document.hidden&&!disposed)frame=requestAnimationFrame(draw);}
       function configure() {
-        cancelAnimationFrame(frame);frame=0;previousTime=0;positions.clear();
+        cancelAnimationFrame(frame);frame=0;previousTime=0;positions.clear();activePhase=-1;
         animated=media.matches;root.classList.toggle('is-animated',animated);
         scene.removeAttribute('aria-hidden');
         cards.forEach(card=>{
-          card.removeAttribute('style');
-          const button=card.querySelector('.folio-pick');button.tabIndex=0;
+          card.removeAttribute('style');card.removeAttribute('aria-hidden');
+          const button=card.querySelector('.folio-pick');button.tabIndex=0;button.style.pointerEvents='';
           button.setAttribute('aria-label',animated?`查看${card.dataset.title}`:`${card.dataset.title}，作品展示`);
         });
         needsMeasure=true;updateSelection();request();
@@ -653,6 +681,7 @@
       addEventListener('scroll',request,{passive:true,signal});
       addEventListener('resize',()=>{needsMeasure=true;request();},{passive:true,signal});
       media.addEventListener('change',configure,{signal});
+      compact.addEventListener('change',()=>{needsMeasure=true;request();},{signal});
       document.fonts?.ready.then(()=>{needsMeasure=true;request();});
       document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else{needsMeasure=true;request();}},{signal});
       filters.forEach(button=>button.addEventListener('click',()=>{
@@ -661,7 +690,7 @@
         cards.forEach(card=>card.hidden=filter!=='all'&&card.dataset.category!==filter);
         visible=cards.filter(card=>!card.hidden);
         if(!visible.includes(selected))selected=visible[0];
-        positions.clear();needsMeasure=true;updateSelection();request();
+        needsMeasure=true;updateSelection();request();
         feedback.textContent=`${button.textContent.trim()}：${visible.length} 件作品`;
       },{signal}));
       root.querySelectorAll('img').forEach(img=>img.addEventListener('load',()=>{needsMeasure=true;request();},{signal}));
@@ -687,7 +716,7 @@
         if(viewer.open){viewer.close();document.body.style.overflow='';}
         objectUrls.forEach(url=>URL.revokeObjectURL(url));
         root.classList.remove('is-animated','is-near');scene.removeAttribute('aria-hidden');
-        cards.forEach(card=>{card.removeAttribute('style');card.querySelector('.folio-pick').tabIndex=0;});
+        cards.forEach(card=>{card.removeAttribute('style');card.removeAttribute('aria-hidden');const button=card.querySelector('.folio-pick');button.tabIndex=0;button.style.pointerEvents='';});
       }
       // For embedding in another app: root.dispatchEvent(new Event('folio:destroy')).
       root.addEventListener('folio:destroy',destroy,{once:true,signal});
